@@ -1,0 +1,15 @@
+@import "variable";
+
+.ui-cell.ui-cell-warn {
+    .ui-label.form-item-title {
+        color: $form-warn-color;
+    }
+}
+
+.ui-cell {
+    .ui-label.form-item-title {
+        font-size: 15px;
+        width: 4em;
+        color: $form-item-title-color;
+    }
+}

@@ -1,0 +1,22 @@
+<div ng-if="context.menuShow" class="menu">
+
+    <div ng-if="context.show" class="home-menu-bg" ng-click="context.onClickMenu()"></div>
+
+    <div class="home-menu">
+        <div class="menu-button" ng-click="context.onClickMenu()">
+            <img class="menu-icon-{{context.show}}" src="core/menu/img/home-menu-icon.png">
+        </div>
+
+        <div ng-if="context.show" class="menu-home" ng-click="context.onClickHome()">
+            <span class="menu-text">首页</span>
+            <img class="menu-sub-icon" src="core/menu/img/menu-home-icon.png">
+        </div>
+
+        <div ng-if="context.show" class="menu-message" ng-click="context.onClickMessage()">
+            <span class="menu-text">消息</span>
+            <img class="menu-sub-icon" src="core/menu/img/menu-message-icon.png">
+        </div>
+
+    </div>
+
+</div>

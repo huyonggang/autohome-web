@@ -1,0 +1,7 @@
+<div class="core-component toast" ng-class="{success:'success',error:'error',alert:'alert'}[context.toast.class]" ng-if="context.show">
+    <div class="ui-mask-transparent"></div>
+    <div class="ui-toast">
+        <img class="ui-icon-toast" ng-src="{{context.toast.img}}">
+        <div class="ui-toast-content">{{context.content}}</div>
+    </div>
+</div>

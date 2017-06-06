@@ -1,0 +1,9 @@
+<div class="navigation-company-create">
+    <div class="company-holder">
+        <div class="title">新建团队</div>
+            <div class="company-name-title">团队名称</div>
+            <input class="company-name" placeholder="请输入团队名称" ng-model="companyName">
+        <div class="set-company-holder" ng-click="context.onCompanyCreate({companyName:companyName})">确定</div>
+    </div>
+    <div class='mask' ng-click="context.onClickMask()"></div>
+</div>

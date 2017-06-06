@@ -1,0 +1,21 @@
+<div class="navigation-company-list">
+    <div class="company-holder">
+        <div class="title m-default">团队切换</div>
+        <div class="company-list-holder">
+            <img class="forward"  ng-src="{{context.imgSrcPrefix}}/icon-creat-company-left.png" ng-click="context.swipeLeft()"/>
+            <div class="scroll">
+                <div class="company-item-holder task-holder" style="width: {{context.scrollWidth}};">
+                    <div class="item"  ng-repeat="item in context.items" ng-click="context.onCheckedOrg(item)">
+                        <img ondragstart='false' class="company-avatar"  ng-src="{{item.orgRootLogo}}"/>
+                        <label class="company-name" ng-class="{'select':item.selected,'normal':!item.selected}">{{item.name}}
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <img class="backward"  ng-src="{{context.imgSrcPrefix}}/icon-creat-company-right.png" ng-click="context.swipeRight()"/>
+        </div>
+        <div class="set-company-holder m-link" ng-click="context.onCompanyChoose({item:context.orgRootItem})">确定</div>
+    </div>
+    <div class='mask' ng-click="context.onClickMask()"></div>
+    <toast type="context.toast.type" show="context.toast.show" path="context.toast.path" duration="context.toast.duration" content="context.toast.content"></toast>
+</div>

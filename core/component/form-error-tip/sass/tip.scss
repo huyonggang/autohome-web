@@ -1,0 +1,11 @@
+.form-error-tip.core-component {
+    position: fixed;
+    z-index: 100;
+    .ui-toptips {
+        display: block;
+    }
+
+    .ng-hide {
+        display: none;
+    }
+}

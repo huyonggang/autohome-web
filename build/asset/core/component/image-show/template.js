@@ -1,0 +1,1 @@
+angular.module("templates").run(["$templateCache", function($templateCache) {$templateCache.put("core/navigation/image-show.html","<div class=\"image-show-holder \" ng-click=\"onClickImg()\">\n    <img class=\"image animated fadeInDown\" ng-src=\"{{context.imageUrl}}\" >\n</div>");}]);

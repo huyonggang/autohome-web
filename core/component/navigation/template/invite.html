@@ -1,0 +1,11 @@
+<div class="invite">
+    <div class="company-holder">
+        <div class="title">邀请他人加入团队</div>
+        <div class="company-name-title">扫码二维码加入团队</div>
+        <div class="img-holder">
+            <img style="height: 180px;width: 180px;" ng-src="{{context.barcodeSrc}}">
+        </div>
+    </div>
+    <div class='mask' ng-click="context.onClickMask()"></div>
+    <toast type="context.toast.type" show="context.toast.show" path="context.toast.path" duration="context.toast.duration" content="context.toast.content"></toast>
+</div>

@@ -1,0 +1,108 @@
+<div class="component-process-menu task-holder">
+
+    <div class="menu-sub-title m-link" href="javascript:;" ng-click="onClickProcessMenu()">
+        <div class="process-menu-other-holder">
+            <span class="defaule-title" style="font-weight: 500">流程设置</span>
+            <img class="icon-right" src="asset/core/component/setting-bar/img/icon-bottom.png">
+        </div>
+    </div>
+
+    <div class="menu-sub-title-holder" ng-show="context.showIndex||$state.includes('setting.index')">
+        <div ng-repeat="item in defaultItems" class="menu-sub-other-title m-link"
+             ng-class="{'checked-true':item.isChecked&&$state.includes('setting.index')}"
+             ng-click="onClickMenu(item,0)">
+            <div class="apv-menu-holder">
+                <!--<img class="menu-icon" ng-src="{{item.icon}}"/>-->
+                <span class="menu-title">{{item.title}}审批流程</span>
+            </div>
+        </div>
+        <div class="menu-sub-other-title m-link" ng-click="onClickSystemAPv()">
+            <div class="apv-menu-other-holder">
+                <!--<img class="menu-icon" ng-src="process-setting/img/icon-system.png"/>-->
+                <span class="menu-title">系统审批</span>
+                <img class="icon-bottom" src="asset/core/component/setting-bar/img/icon-bottom.png">
+            </div>
+        </div>
+        <div ng-show="context.showNormal" ng-repeat="item in menuItems" class="menu-sub-title m-link "
+             ng-class="{'checked-true':item.isChecked&&$state.includes('setting.index')}"
+             ng-click="onClickMenu(item,1)">
+            <div class="apv-menu-holder">
+                <img class="menu-icon" ng-src="{{item.icon}}"/>
+                <span class="menu-title">{{item.title}}</span>
+            </div>
+        </div>
+        <div class="menu-sub-other-title m-link" ng-click="onClickCustomApv()" ng-if="moduleList.length > 0">
+            <div class="apv-menu-other-holder">
+                <!--<img class="menu-icon" ng-src="process-setting/img/icon-module.png"/>-->
+                <span class="menu-title">自定义审批</span>
+                <img class="icon-bottom" src="asset/core/component/setting-bar/img/icon-bottom.png">
+            </div>
+        </div>
+        <div ng-show="context.showModule" ng-repeat="item in moduleList" class="menu-sub-title m-link checked-{{item.isChecked}}" ng-click="onClickMenu(item,2)">
+            <div class="apv-menu-holder">
+                <img class="menu-icon" ng-src="{{item.img}}"/>
+                <span class="menu-title">{{item.title}}</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="menu-sub-title menu-default m-link" href="javascript:;"
+         ng-class="{'checked-true':$state.includes('setting.auth')}" ng-click="onClickAuth()">
+        <div class="process-menu-holder">
+            <span class="defaule-title" style="font-weight: 500">权限设置</span>
+        </div>
+    </div>
+    <div class="menu-sub-title menu-default m-link" href="javascript:;"
+         ng-click="onClickModule()">
+        <div class="process-menu-other-holder">
+            <span class="defaule-title" style="font-weight: 500">板块设置</span>
+            <img class="icon-right" src="asset/core/component/setting-bar/img/icon-bottom.png">
+        </div>
+    </div>
+
+    <div ng-show="context.showSpecial||$state.includes('setting.trip-reimb')||$state.includes('setting.card')||$state.includes('setting.module')" class="menu-sub-title-holder" ng-click="onClickModule()">
+        <div class="menu-sub-other-title m-link menu-default">
+            <div class="apv-menu-other-holder">
+                <!--<img class="menu-icon" ng-src="process-setting/img/icon-system.png"/>-->
+                <span class="menu-title">系统审批</span>
+                <img class="icon-bottom" src="asset/core/component/setting-bar/img/icon-bottom.png">
+            </div>
+        </div>
+        <div class="menu-sub-title m-link menu-default" ng-class="{'checked-true':context.isContractChecked&&$state.includes('setting.module')}" ng-click="onClickContract()">
+            <div class="apv-menu-holder">
+                <img class="menu-icon" ng-src="process-setting/img/icon-process-contract.png"/>
+                <span class="menu-title">合同</span>
+            </div>
+        </div>
+        <div class="menu-sub-title m-link menu-default" ng-class="{'checked-true':context.isTrainChecked&&$state.includes('setting.module')}"
+             ng-click="onClickTrain()">
+            <div class="apv-menu-holder">
+                <img class="menu-icon" ng-src="process-setting/img/icon-process-train.png"/>
+                <span class="menu-title">培训</span>
+            </div>
+        </div>
+        <div class="menu-sub-title m-link menu-default" ui-sref="setting.card" ng-class="{'checked-true':context.isCardChekced&&$state.includes('setting.card')}"
+             ng-click="onClickCard()">
+            <div class="apv-menu-holder">
+                <img class="menu-icon" ng-src="process-setting/img/icon-process-card.png"/>
+                <span class="menu-title">名片</span>
+            </div>
+        </div>
+        <div class="menu-sub-title m-link menu-default" ui-sref="setting.trip-reimb" ng-class="{'checked-true':$state.includes('setting.trip-reimb')}">
+            <div class="apv-menu-holder">
+                <img class="menu-icon" ng-src="process-setting/img/icon-process-trip-reimb.png"/>
+                <span class="menu-title">差旅费</span>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="menu-sub-title menu-default m-link" ui-sref="setting.moduleList" href="javascript:;"
+         ng-class="{'checked-true':$state.includes('setting.moduleList')}"
+         ng-click="onClickModuleList()">
+        <div class="process-menu-holder">
+            <span class="defaule-title" style="font-weight: 500">自定义审批设置</span>
+        </div>
+    </div>
+</div>

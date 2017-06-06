@@ -1,0 +1,35 @@
+.exit{
+    position: absolute;
+    width: 90px;
+    top: 36px;
+    left: 90px;
+    height: auto;
+    line-height: 30px;
+    color: #616161;
+    background: #FFFFFF;
+    border-radius: 2px;
+    border: 1px solid #EEEEEE;
+    transition: opacity 0.1s ease-in;
+
+    .status {
+        height: 24px;
+        line-height: 24px;
+        font-size: 14px;
+        color: #616161;
+        padding-left: 8px;
+    }
+
+    .status:hover {
+        background: #EFEFEF;
+    }
+}
+
+.exitShow{
+    opacity: 1;
+    cursor: hand;
+}
+
+.exitHide{
+    opacity: 0;
+    cursor: default;
+}

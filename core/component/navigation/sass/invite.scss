@@ -1,0 +1,54 @@
+.invite {
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  z-index: 100;
+  height: 100%;
+  width: 100%;
+  .mask {
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    z-index: 105;
+    height: 100%;
+    width: 100%;
+    background: #333333;
+    opacity: 0.6;
+  }
+  .company-holder {
+    position: absolute;
+    border-radius: 5px;
+    left: 50%;
+    top: 50%;
+    width: 440px;
+    height: 308px;
+    margin-left: -220px;
+    margin-top: -128px;
+    background: #FFFFFF;
+    z-index: 110;
+    .title {
+      height: 50px;
+      text-align: center;
+      line-height: 50px;
+      color: #616161;
+      font-size: 14px;
+    }
+
+    .company-name-title{
+      margin-left: 27px;
+      font-size: 12px;
+      color: #616161;
+    }
+
+    .img-holder{
+      margin-top: 20px;
+      height: 181px;
+      width: 440px;
+      text-align: center;
+      img{
+        height: 181px;
+        width: 181px;
+      }
+    }
+  }
+}

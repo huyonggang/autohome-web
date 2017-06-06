@@ -1,0 +1,109 @@
+@import "variable";
+
+html {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    width: 100%;
+    height: 100%;
+    background: $bgColor;
+    margin: 0;
+}
+
+#wrapper {
+    height: 100%;
+    width: 100%;
+}
+
+* {
+    //-moz-user-select: none; /*火狐*/
+    //-webkit-user-select: none; /*webkit浏览器*/
+    //-ms-user-select: none; /*IE10*/
+    //-khtml-user-select: none; /*早期浏览器*/
+    //user-select: none;
+
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-touch-callout: none;
+    font-family: "Helvetica Neue", Helvetica, "Nimbus Sans L", Arial, "Liberation Sans", "PingFang SC", "Hiragino Sans GB", "Source Han Sans CN", "Source Han Sans SC", "Microsoft YaHei", "Wenquanyi Micro Hei", "WenQuanYi Zen Hei", "ST Heiti", SimHei, "WenQuanYi Zen Hei Sharp", sans-serif;
+    //margin: 0;
+    padding: 0;
+    z-index: auto;
+    outline: none;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    //-webkit-appearance: none;
+    //-moz-appearance: none;
+    -webkit-font-smoothing: antialiased;
+    white-space: nowrap;
+}
+
+a {
+    text-decoration: none;
+}
+
+ul, li {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    vertical-align: baseline;
+}
+
+@mixin clear($size) {
+    clear: both;
+    height: $size;
+    font-size: 0;
+    float: none;
+    overflow: hidden;
+}
+
+.clear-0 {
+    @include clear(0px);
+}
+
+.checkbox {
+    margin-left: 3px;
+}
+
+/**============================
+    prompt_browser css
+   ============================ **/
+.prompt_browser {
+
+    background: rgba(0, 0, 0, .6);
+    background: #000;
+    opacity: 0;
+    height: 50px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    line-height: 50px;
+    color: #fff;
+    z-index: 99999;
+    text-align: center;
+
+    a {
+        color: #fff;
+        text-decoration: underline;
+    }
+    a:hover {
+        color: #2ECC71;
+    }
+}
+
+.show-prompt {
+    opacity: 0.6;
+}
+
+
+//文字超过div换行
+.content-auto {
+    overflow: hidden;
+    word-break: break-all;
+    word-wrap: break-word;
+    white-space: normal;
+    vertical-align: top;
+}

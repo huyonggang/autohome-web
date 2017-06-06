@@ -1,0 +1,100 @@
+.navigation-company-list {
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    z-index: 100;
+    height: 100%;
+    width: 100%;
+    .mask {
+        position: fixed;
+        left: 0px;
+        top: 0px;
+        z-index: 105;
+        height: 100%;
+        width: 100%;
+        background: #333333;
+        opacity: 0.6;
+    }
+    .company-holder {
+        position: absolute;
+        border-radius: 5px;
+        left: 50%;
+        top: 50%;
+        width: 440px;
+        height: 256px;
+        margin-left: -220px;
+        margin-top: -128px;
+        background: #FFFFFF;
+        z-index: 110;
+        .title {
+            height: 80px;
+            text-align: center;
+            line-height: 80px;
+            color: #616161;
+            font-size: 14px;
+            width: 100%;
+        }
+        .company-list-holder {
+            .forward {
+                margin-top: 20px;
+                margin-left: 20px;
+                position: absolute;
+                height: 19px;
+                width: 10px;
+            }
+            .backward {
+                float: right;
+                margin-top: -82px;
+                margin-right: 20px;
+                height: 19px;
+                width: 10px;
+            }
+            .scroll {
+                overflow-x: scroll;
+                overflow-y: hidden;
+                margin-left: 45px;
+                height: 100px;
+                width: 350px;
+                .company-item-holder {
+                    height: 100px;
+
+                    .item {
+                        display: inline-block;
+                        text-align: center;
+                        .company-avatar {
+                            display: block;
+                            height: 44px;
+                            width: 44px;
+                            margin: 5px 37px 10px;
+                            border-radius: 50%;
+                            box-shadow: 0 0 4px rgba(0, 0, 0, 0.25);
+                        }
+                        .select {
+                            color: #616161;
+                        }
+                        .normal {
+                            color: #C6C6C6;
+                        }
+                        .company-name {
+                            font-size: 12px;
+                        }
+                    }
+
+                }
+
+            }
+        }
+        .set-company-holder {
+            width: 60px;
+            height: 26px;
+            margin-left: 350px;
+            margin-top: 25px;
+            background: #0A9908;
+            border-radius: 2px;
+            text-align: center;
+            line-height: 26px;
+            font-size: 14px;
+            color: #FFFFFF;
+        }
+    }
+}

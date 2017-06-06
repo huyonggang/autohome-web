@@ -1,0 +1,504 @@
+.nav {
+    position: absolute;
+    left:0;
+    right: 0;
+    z-index: 80;
+    .holder {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        height: 100%;
+        width: 100%;
+        background-color: black;
+        opacity: 0.5;
+        z-index: 99;
+    }
+    .top-nav {
+        position: absolute;
+        height: 80px;
+        width: 100%;
+        left: 0;
+        right: 0;
+        top: 0;
+        border-bottom: 1px solid #F4F4F4;
+        background-color: #FFFFFF;
+        z-index: 90;
+        .top-nav-img {
+            height: 80px;
+
+            .right-btn-icon {
+                position:absolute;
+                width: 18px;
+                height: 14px;
+                z-index: 99999;
+                top: 33px;
+                left: 20px;
+            }
+
+            .right-navigation-name {
+                position:absolute;
+                color: #465670;
+                font-size: 16px;
+                top: 0;
+                left: 48px;
+                height: 80px;
+                line-height: 80px;
+                vertical-align: top;
+            }
+
+            .user-name {
+                position: absolute;
+                height: 80px;
+                line-height: 80px;
+                right: 110px;
+            }
+
+            .exit{
+                position: absolute;
+                width: 80px;
+                top: 50px;
+                left: auto;
+                right: 10px;
+                height: 32px;
+                text-align: center;
+                line-height: 30px;
+                color: #616161;
+                background: #FFFFFF;
+                border-radius: 2px;
+                border: 1px solid #EEEEEE;
+                transition: opacity 0.1s ease-in;
+                z-index: 500;
+            }
+            
+            .exit:hover {
+                color: #0A9908;
+            }
+
+            .exitShow{
+                opacity: 1;
+            }
+
+            .exitHide{
+                opacity: 0;
+                display: none;
+            }
+
+            .change-company{
+                top:0;
+                height: 80px;
+                line-height: 80px;
+                float: right;
+                margin-right: 20px;
+                right: 50px;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                a {
+                    color:#808A95;
+                }
+            }
+            .left-nav-btn {
+                height: 60px;
+                line-height: 60px;
+                position: relative;
+                margin-bottom: 5px;
+                display: inline-block;
+                padding: 0 8px;
+
+                .menu-link {
+                    color: #808A95;
+                    font-size: 18px;
+                    margin-right: 3px;
+                }
+            }
+            .left-nav-btn.active .menu-link {
+                color: #2ECC71;
+            }
+            .left-nav-btn:hover .menu-link {
+                color: #2ECC71;
+            }
+            .logo {
+                position: relative;
+                height: 61px;
+                line-height: 61px;
+                display: inline-block;
+                margin-left: 16px;
+                float: left;
+                img {
+                    width: 138px;
+                    height: 19px;
+                    line-height: 61px;
+                    margin-top: 20px;
+                }
+            }
+            .left-nav-oa {
+                color: #263442;
+                font-size: 20px;
+                font-weight: 800;
+                margin-top: 11px;
+                position: relative;
+                height: 40px;
+                line-height: 36px;
+                display: inline-block;
+                margin-left: 3px;
+                float: left;
+            }
+            .line {
+                margin-left: 16px;
+                width: 1px;
+                height: 16px;
+                background: #D8D8D8;
+                display: inline-block;
+                margin-bottom: -2px;
+            }
+            .btn-create-home {
+                color: #FFFFFF;
+            }
+            .btn-admin-administration {
+                color: #2ECC71;
+            }
+            .btn-fin-finance {
+                color: #2ECC71;
+            }
+            .btn-work-work {
+                color: #2ECC71;
+            }
+            .btn-frame-framework {
+                color: #2ECC71;
+            }
+            .active {
+                color: #2ECC71;
+            }
+            .btn-process-process {
+                color: #2ECC71;
+            }
+            .icon-home {
+                margin-left: 32px;
+                margin-top: 23px;
+            }
+            .icon-line {
+                float: right;
+                margin-right: 14px;
+                margin-top: 20px;
+                width: 3px;
+                height: 21px;
+            }
+            .icon-about {
+                float: right;
+                margin-right: 20px;
+                right: 10px;
+                margin-top: 26px;
+                width: 28px;
+                height: 28px;
+                border-radius: 50%;
+            }
+            .icon-setting {
+                float: right;
+                margin-right: 20px;
+                right: 120px;
+                margin-top: 31px;
+                width: 19px;
+                height: 19px;
+            }
+            .icon-notify {
+                float: right;
+                margin-right: 20px;
+                right: 160px;
+                margin-top: 30px;
+                width: 18px;
+                height: 20px;
+            }
+        }
+    }
+    .top-tile {
+        position: fixed;
+        height: 59px;
+        width: 100%;
+        left: 0px;
+        right: 0px;
+        top: 61px;
+        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.06);
+        background-color: #FFFFFF;
+        z-index: 80;
+
+        .top-nav-text {
+            color: #0A9908;
+            font-size: 18px;
+            font-weight: 700;
+            margin-left: 51px;
+            margin-top: 25px;
+        }
+    }
+
+    .left-nav-hide {
+        left: -120px;
+        animation: menu-hide 0.2s;
+        animation-fill-mode: forwards;
+    }
+
+    .left-nav-show {
+        left: 0px;
+        animation: menu-show 0.2s;
+        animation-fill-mode: forwards;
+    }
+
+    @keyframes menu-show {
+        from {
+            left: -120px;
+        }
+        to {
+            left: 0px;
+        }
+    }
+
+    @keyframes menu-hide {
+        from {
+            left: 0px;
+        }
+        to {
+            left: -120px;
+        }
+    }
+
+    .left-nav {
+        position: fixed;
+        top: 0px;
+        left: -120px;
+        width: 120px;
+        bottom: 0px;
+        background-color: #FFFFFF;
+        z-index: 100;
+        .back {
+            margin-left: 33px;
+            margin-top: 18px;
+            height: 24px;
+            width: 24px;
+        }
+    }
+
+    .right-nav {
+        position: fixed;
+        top: 61px;
+        right: -175px;
+        width: 175px;
+        bottom: 0px;
+        border-left: 1px solid #F4F4F4;
+        background-color: #FFFFFF;
+        z-index: 99;
+        .company-holder {
+            position: relative;
+            text-align: center;
+            .icon {
+                margin-top: 24px;
+                width: 44px;
+                height: 44px;
+                border-radius: 50%;
+            }
+            .company {
+                margin-top: 13px;
+                font-size: 12px;
+                color: #616161;
+            }
+        }
+
+        .btn-home-true {
+            background-color: #04BE02;
+            .title-btn {
+                color: #FFFFFF;
+            }
+        }
+
+        .btn-home-false {
+            background-color: #FFFFFF;
+            .title-btn {
+                color: #616161;
+            }
+        }
+
+        .btn-create-true {
+            background-color: #04BE02;
+            .title-btn {
+                color: #FFFFFF;
+            }
+        }
+
+        .btn-create-false {
+            background-color: #FFFFFF;
+            .title-btn {
+                color: #616161;
+            }
+        }
+
+        .btn-admin-true {
+            background-color: #04BE02;
+            .title-btn {
+                color: #FFFFFF;
+            }
+        }
+
+        .btn-admin-false {
+            background-color: #FFFFFF;
+            .title-btn {
+                color: #616161;
+            }
+        }
+
+        .btn-fin-true {
+            background-color: #04BE02;
+            .title-btn {
+                color: #FFFFFF;
+            }
+        }
+
+        .btn-fin-false {
+            background-color: #FFFFFF;
+            .title-btn {
+                color: #616161;
+            }
+        }
+
+        .right-nav-btn {
+            height: 39px;
+            line-height: 39px;
+            position: relative;
+            font-size: 12px;
+            color: #616161;
+            .icon-btn {
+                height: 13px;
+                width: 13px;
+                float: left;
+                margin-top: 13px;
+                margin-left: 20px;
+            }
+            .title-btn {
+                float: left;
+                margin-left: 25px;
+            }
+        }
+        .line {
+            position: relative;
+            height: 1px;
+            width: 150px;
+            margin-left: 12px;
+            background: #F5F5F5;
+            margin-top: 25px;
+        }
+        .user-holder {
+            margin-top: 39px;
+            position: relative;
+            margin-bottom: 10px;
+            .user-title {
+                color: #C6C6C6;
+                font-size: 12px;
+                margin-left: 20px;
+            }
+            .user-message-holder {
+                margin-top: 25px;
+                margin-bottom: 25px;
+                .user-icon {
+                    margin-left: 20px;
+                    width: 29px;
+                    height: 29px;
+                    border-radius: 50%;
+                    float: left;
+                }
+                .user-message {
+                    margin-left: 16px;
+                    display: inline-block;
+                    .user-name {
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        max-width: 48px;
+                        font-size: 14px;
+                        color: #616161;
+                        display: inline-block;
+                        margin-top: 7px;
+                    }
+                    .user-admin {
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        font-size: 8px;
+                        color: #C6C6C6;
+                        margin-top: 2px;
+                        display: inline-block;
+                    }
+                }
+
+            }
+            .account {
+                position: relative;
+                font-size: 12px;
+                color: #616161;
+                margin-top: 35px;
+                .phone-title {
+                    margin-left: 20px;
+                    display: inline-block;
+                }
+                .phone {
+                    display: inline-block;
+                }
+            }
+            .wei {
+                position: relative;
+                font-size: 12px;
+                color: #616161;
+                margin-top: 25px;
+                .wei-title {
+                    margin-left: 20px;
+                    display: inline-block;
+                }
+                .wei-name {
+                    display: inline-block;
+                }
+            }
+        }
+        .exit {
+            position: fixed;
+            width: 174px;
+            float: right;
+            bottom: 0;
+            height: 42px;
+            line-height: 42px;
+            background: #F56969;
+            text-align: center;
+            color: #FFFFFF;
+            font-size: 14px;
+        }
+    }
+
+    @keyframes right-menu-show {
+        from {
+            right: -175px;
+        }
+        to {
+            right: 0px;
+        }
+    }
+
+    @keyframes right-menu-hide {
+        from {
+            right: 0px;
+        }
+        to {
+            right: -175px;
+        }
+    }
+
+    .right-nav-show {
+        right: 0px;
+        animation: right-menu-show 0.2s;
+        animation-fill-mode: forwards;
+    }
+
+    .right-nav-hideRight {
+        right: -175px;
+    }
+
+    .right-nav-hide {
+        right: -175px;
+        animation: right-menu-hide 0.2s;
+        animation-fill-mode: forwards;
+    }
+}

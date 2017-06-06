@@ -1,0 +1,13 @@
+<div  class="core-directive core-directive-context-menu">
+    <div class="contextmenu-node" style="left: {{left}}px; top: {{top}}px;"
+         ng-show="visible"
+          style="width:200px;height: 300px;">
+        <div class="clickItem" ng-repeat="item in options" ng-class="{mouseEnter:'mouseEnter'}[mouseEvent2]"
+             ng-mouseenter="mouseEvent2='mouseEnter'" ng-mouseleave="mouseEvent2='mouseLeave'" ng-click="onChooseItem(item.type)">
+            {{item.name}}
+        </div>
+    </div>
+    <div class="body">
+        <ng-transclude></ng-transclude>
+    </div>
+</div>

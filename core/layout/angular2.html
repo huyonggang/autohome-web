@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="Description" content="@desc"/>
+    <meta name="Keywords" content="@keywords"/>
+    <title>@title</title>
+
+    <base href="@base-url">
+
+    <script src="js/lib/angular.bundle.js"></script>
+    <script src="@app-init-js"></script>
+
+    <!--
+    <script>
+        System.config({
+            packages: {
+                reimbursement: {
+                    format: 'register',
+                    defaultExtension: '@js-extension'
+                }
+            }
+        });
+        System.import('@boot-module').then(null,
+                console.error.bind(console)
+        );
+    </script>
+    -->
+</head>
+<body>
+<app>Loading...</app>
+</body>
+</html>

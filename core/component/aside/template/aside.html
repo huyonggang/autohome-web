@@ -1,0 +1,11 @@
+<div class="aside" ng-class="{'all-aside':context.isShowAll}">
+    <div class="logo-holder m-link" ng-click="onClickLogo()">
+    </div>
+    <div class="item-holder m-link" ng-repeat="item in itemList"
+         ng-class="{'active':$state.includes(item.stateUiSref)||$state.includes(item.stateUiSref1)||$state.includes(item.stateUiSref2)}"
+         ng-click="onClickItem(item.state)">
+        <img ng-show="!($state.includes(item.stateUiSref)||$state.includes(item.stateUiSref1)||$state.includes(item.stateUiSref2))" class="item-img" ng-src="{{item.img}}">
+        <img ng-show="$state.includes(item.stateUiSref)||$state.includes(item.stateUiSref1)||$state.includes(item.stateUiSref2)" class="item-img" ng-src="{{item.heightLight}}">
+        <div ng-show="context.isShowAll" class="item-title">{{item.title}}</div>
+    </div>
+</div>

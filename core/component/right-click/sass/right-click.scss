@@ -1,0 +1,24 @@
+.core-directive {
+  .contextmenu-node{
+    position: fixed;
+    background: white;
+    border: 1px solid #EEEEEE;
+    margin: 5px 10px;
+    z-index: 200;
+    .clickItem {
+      list-style-type:none;
+      padding:5px 10px;
+      border: 1px solid #EEEEEE;
+      font-size: 14px;
+      line-height: 26px;
+      height: auto;
+      color: #C6C6C6;
+
+      background: #FFFFFF;
+    }
+    .mouseEnter{
+      background: #D8D8D8;
+    }
+  }
+
+}

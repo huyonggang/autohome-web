@@ -1,0 +1,53 @@
+<div>
+
+    <div>
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>提现卡号</th>
+                <th>提现银行</th>
+                <th>持卡人姓名</th>
+                <th>提现金额</th>
+                <th>提现状态</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="item in itemList">
+                <td>{{$index+1}}</td>
+                <td><span class="line">{{item.bankcard}}</span></td>
+                <td><span class="line">{{item.bankname}}</span></td>
+                <td><span class="line">{{item.name}}</span></td>
+                <td><span class="line">{{item.money}}</span></td>
+                <td><span class="line">{{item.status}}</span></td>
+                <td>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            操作 <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a ng-click="rechargeSuccess()">提现成功</a></li>
+                            <li><a ng-click="rechargeError()">提现失败</a></li>
+                        </ul>
+                    </div>
+                </td>
+
+            </tr>
+
+            </tbody>
+        </table>
+    </div>
+
+    <div>
+
+        <nav aria-label="...">
+            <ul class="pager">
+                <li><a href="">上一页</a></li>
+                <li><a href="">下一页</a></li>
+            </ul>
+        </nav>
+
+    </div>
+
+</div>

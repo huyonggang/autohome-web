@@ -1,0 +1,42 @@
+<div class="navigation-bar task-holder" ng-if="$state.includes('item.*')||$state.includes('finance.*')||$state.includes('module.index')">
+
+    <div class="home-bar m-link" ng-click="isShowAdmin = !isShowAdmin" ng-init="isShowAdmin = false">
+        行政审批
+        <img class="icon-bottom" src="asset/core/component/setting-bar/img/icon-bottom.png">
+    </div>
+    <div ng-show="isShowAdmin || $state.includes('administration.*')">
+        <div class="bar" ng-repeat="item in itemsAdmin" ui-sref="{{ item.stateUiSref }}" href="javascript:;"
+             ng-class="{ 'active': $state.includes(item.stateUiSref) || ($first && $state.includes(item.state)) }">
+            <div class="apv-menu-holder m-link">
+                <img class="menu-icon" ng-src="{{item.icon}}"/>
+                <span class="menu-title">{{item.title}}</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="home-bar m-link" ng-click="isShowFin = !isShowFin" ng-init="isShowFin = false">
+        财务审批
+        <img class="icon-bottom" src="asset/core/component/setting-bar/img/icon-bottom.png">
+    </div>
+    <div ng-show="isShowFin || $state.includes('finance.*')">
+        <div class="bar" ng-repeat="item in itemsFin" ui-sref="{{ item.stateUiSref }}" href="javascript:;"
+             ng-class="{ 'active': $state.includes(item.stateUiSref) || ($first && $state.includes(item.state)) }">
+            <div class="apv-menu-holder m-link">
+                <img class="menu-icon" ng-src="{{item.icon}}"/>
+                <span class="menu-title">{{item.title}}</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="home-bar m-link" ng-click="isShowMudule = !isShowMudule" ng-init="isShowMudule = false">
+        自定义审批
+        <img ng-if="moduleList.length>1" class="icon-bottom" src="asset/core/component/setting-bar/img/icon-bottom.png">
+    </div>
+    <div ng-show="isShowMudule || $state.includes('module.index')" ui-sref="module.index({index:$index})" ng-repeat="item in moduleList" class="bar m-link"
+         ng-class="{ 'active': $stateParams.index==$index || ($first && $state.includes(item.state)) }">
+        <div class="apv-menu-holder">
+            <img class="menu-icon" ng-src="{{item.icon}}"/>
+            <span class="menu-title">{{item.name}}</span>
+        </div>
+    </div>
+</div>

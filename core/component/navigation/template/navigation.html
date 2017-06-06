@@ -1,0 +1,41 @@
+<div class="nav" ng-if="!navigation">
+
+    <create-company ng-if="selectCreateCompany"
+                    on-click-mask="onClickMask()"
+                    on-company-create="onClickCompanyCreate(companyName)">
+    </create-company>
+
+    <invite ng-if="invite" on-click-mask="onClickMask()"></invite>
+
+    <div ng-if="false"
+         ng-if="status=='show'"
+         class="holder"
+         ng-click="onClickMenu()">
+    </div>
+
+    <div ng-if="rightFun == 'show'" class="holder" ng-click="onClickRightMenu()"></div>
+
+    <div class="top-nav">
+        <div class="top-nav-img">
+
+            <img class="right-btn-icon m-link" ng-click="context.app.settings.asideFolded = !context.app.settings.asideFolded" ng-src="{{ imgSrcPrefix }}/icon-navigation-right.png">
+            <div class="right-navigation-name m-default" ng-click="context.app.settings.asideFolded = !context.app.settings.asideFolded" ng-show="$state.includes('admin.user')">用户管理</div>
+            <div class="right-navigation-name m-default" ng-click="context.app.settings.asideFolded = !context.app.settings.asideFolded" ng-show="$state.includes('admin.user-detail')">用户详情</div>
+
+            <div class="right-navigation-name m-default" ng-click="context.app.settings.asideFolded = !context.app.settings.asideFolded" ng-show="$state.includes('admin.merchant')">商户管理</div>
+            <div class="right-navigation-name m-default" ng-click="context.app.settings.asideFolded = !context.app.settings.asideFolded" ng-show="$state.includes('admin.merchant-detail')">商户管理</div>
+            <div class="right-navigation-name m-default" ng-click="context.app.settings.asideFolded = !context.app.settings.asideFolded" ng-show="$state.includes('admin.recharge')">充值管理</div>
+            <!--<div class="right-navigation-name m-default" ng-click="context.app.settings.asideFolded = !context.app.settings.asideFolded" ng-show="$state.includes('admin.withdraw')">提现管理</div>-->
+            <div class="right-navigation-name m-default" ng-click="context.app.settings.asideFolded = !context.app.settings.asideFolded" ng-show="$state.includes('admin.discount')">折扣管理</div>
+            <div class="right-navigation-name m-default" ng-click="context.app.settings.asideFolded = !context.app.settings.asideFolded" ng-show="$state.includes('admin.advertising')">广告管理</div>
+            <div class="right-navigation-name m-default" ng-click="context.app.settings.asideFolded = !context.app.settings.asideFolded" ng-show="$state.includes('admin.oil-manager')">油价管理</div>
+            <div class="right-navigation-name m-default" ng-click="context.app.settings.asideFolded = !context.app.settings.asideFolded" ng-show="$state.includes('admin.invoice')">发票管理</div>
+
+
+        </div>
+    </div>
+
+
+
+
+</div>

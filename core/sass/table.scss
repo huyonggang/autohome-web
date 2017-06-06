@@ -1,0 +1,218 @@
+.table-holder{
+  position: absolute;
+  left: 190px;
+  right: 0;
+  overflow: auto;
+  margin-top: 126px;
+  top: 0;
+  bottom: 0;
+  table {
+    border-collapse: collapse;
+    min-width: 1088px;
+  }
+  .table-title{
+    background: #FCFCFC;
+    border-bottom: 1px solid rgba(238,238,238,0.6);
+    color: #616161;
+    font-size: 14px;
+
+    .table-item{
+    }
+  }
+
+  .table-item-holder:nth-child(2n){
+    background: #FFFFFF;
+  }
+
+  .table-item-holder:nth-child(2n+1){
+    background: #F8F8F8;
+  }
+
+  .table-item-holder{
+    min-width: 1024px;
+  }
+
+  .table-item-holder:hover{
+    background: #E7E7E7;
+  }
+
+  .table-checkbox{
+    text-align: center;
+    width: 50px;
+  }
+  .table-name{
+    min-width: 80px;
+  }
+  .table-time{
+    min-width: 120px;
+  }
+  .table-leave-type{
+    min-width: 120px;
+  }
+  .table-leave-reason {
+    min-width: 170px;
+    padding-right: 40px;
+  }
+  .table-apvUser{
+    width: 140px;
+  }
+  .table-status{
+    width: 140px;
+  }
+  .table-operate{
+    width: 140px;
+    min-width: 100px;
+  }
+  .table-stamp-type {
+    min-width: 140px;
+  }
+  .table-stamp-file {
+    min-width: 170px;
+    padding-right: 40px;
+  }
+  .table-target {
+    min-width: 170px;
+    padding-right: 40px;
+  }
+  .table-money {
+    min-width: 120px;
+  }
+  .table-event {
+    min-width: 170px;
+    padding-right: 40px;
+  }
+  .table-reason {
+    min-width: 170px;
+    padding-right: 40px;
+  }
+  .table-remark {
+    min-width: 170px;
+    padding-right: 40px;
+  }
+  .table-days {
+    min-width: 100px;
+  }
+  .table-trip-type {
+    min-width: 140px;
+  }
+  .table-department {
+    min-width: 120px;
+  }
+  .table-journal-name {
+    min-width: 120px;
+  }
+  .table-journal {
+    min-width: 160px;
+  }
+  .table-journal-receiveUser {
+    min-width: 160px;
+  }
+  .table-place {
+    min-width: 170px;
+    padding-right: 40px;
+  }
+  .table-company {
+    min-width: 170px;
+    padding-right: 40px;
+  }
+  .table-apv-name{
+    width: 300px;
+  }
+  .table-apv-desc{
+    width: 400px;
+  }
+  .table-theme {
+    min-width: 150px;
+    padding-right: 40px;
+  }
+
+  .table-item{
+    color: #616161;
+    font-size: 14px;
+    text-align:left;
+    height: 45px;
+    max-width: 150px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .permit-btn{
+    float: left;
+    display: inline-block;
+    width: 50px;
+    height: 25px;
+    line-height: 25px;
+    text-align: center;
+    color: #FFFFFF;
+    background-color: #0A9908;
+    font-size: 12px;
+    border-radius: 4px;
+  }
+
+  .reject-btn{
+    float: left;
+    margin-left: 12px;
+    display: inline-block;
+    width: 50px;
+    height: 25px;
+    line-height: 25px;
+    text-align: center;
+    color: #FFFFFF;
+    background-color: #F56969;
+    font-size: 12px;
+    border-radius: 4px;
+  }
+
+  .wait-approve{
+    color:#EA9B17;
+  }
+
+  .complete{
+    color:#0A9908;
+  }
+
+  .reject,.cancel{
+    color:#EE3333;
+  }
+
+  .check {
+    color: #616161;
+    height: 45px;
+    font-size: 14px;
+
+    .check-all {
+      color: #C6C6C6;
+    }
+
+    .delete-button {
+      margin-left: 39px;
+      color: #616161;
+    }
+  }
+}
+
+.table-holder::-webkit-scrollbar {
+  height: 7px;
+  width: 7px;
+}
+
+.table-holder::-webkit-scrollbar-button {
+  height: 0;
+  width: 0;
+  display: block;
+}
+
+.table-holder::-webkit-scrollbar-track
+{
+  border-radius: 10px;
+}
+
+.table-holder::-webkit-scrollbar-track-piece {
+  background: rgba(0, 0, 0, .15);
+}
+
+.table-holder::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, .5);
+  border-radius: 10px;
+}
