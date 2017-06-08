@@ -22,21 +22,1323 @@ angular.module("templates").run(["$templateCache", function($templateCache) {$te
 $templateCache.put("admin-home/discount.html","\n<head>\n\n\n\n</head>\n\n<div>\n\n    <div class=\"bs-example\">\n        <button style=\"margin-top:30px;margin-left: 10px;margin-bottom: 10px\" data-toggle=\"modal\" ng-click=\"showAddDialog()\" data-target=\"#add\" type=\"submit\" class=\"btn btn-sm btn-primary\">\n            添加\n        </button>\n        <table class=\"table table-hover\">\n            <thead>\n            <tr>\n                <th>#</th>\n                <th>公司名称</th>\n                <th>折扣</th>\n                <th>操作</th>\n\n            </tr>\n            </thead>\n            <tbody>\n            <tr ng-repeat=\"item in itemList\">\n                <td>{{$index+1}}</td>\n                <td><span >{{item.oilcardname}}</span></td>\n                <td><span >{{item.discount}}</span></td>\n                <td>\n                    <button ng-click=\"onSelect(item)\" class=\"btn btn-success\" data-toggle=\"modal\" data-target=\"#update\" type=\"submit\">修改</button>\n                    <button ng-click=\"onDelete(item)\" class=\"btn btn-danger\" type=\"submit\">删除</button>\n                </td>\n\n            </tr>\n\n            </tbody>\n        </table>\n\n\n\n        <div class=\"modal inmodal fade\" id=\"update\" tabindex=\"-1\" role=\"dialog\"  aria-hidden=\"true\">\n            <div class=\"modal-dialog modal-sm\">\n                <div class=\"modal-content\">\n                    <div class=\"modal-header\">\n                        <button type=\"button\" class=\"close\" data-dismiss=\"modal\"><span aria-hidden=\"true\">&times;</span><span class=\"sr-only\">Close</span></button>\n                        <h4 class=\"modal-title\">{{title}}</h4>\n                    </div>\n                    <div class=\"modal-body\">\n                        <div class=\"form-group\">\n                            <label for=\"discount\">折扣</label>\n                            <input  ng-model=\"discount\" class=\"form-control\" id=\"discount\" placeholder=\"请输入折扣\">\n                        </div>\n                    </div>\n                    <div class=\"modal-footer\">\n                        <button type=\"button\" class=\"btn btn-white\" data-dismiss=\"modal\">关闭</button>\n                        <button type=\"button\" ng-click=\"onUpdate()\"  data-dismiss=\"modal\" class=\"btn btn-primary\">更新</button>\n                    </div>\n                </div>\n            </div>\n        </div>\n\n        <div class=\"modal inmodal fade\" id=\"add\" tabindex=\"-1\" role=\"dialog\"  aria-hidden=\"true\" >\n            <div class=\"modal-dialog modal-sm\">\n                <div class=\"modal-content\">\n                    <div class=\"modal-header\">\n                        <button type=\"button\" class=\"close\" data-dismiss=\"modal\"><span aria-hidden=\"true\">&times;</span><span class=\"sr-only\">Close</span></button>\n                        <h4 class=\"modal-title\">折扣添加</h4>\n                    </div>\n                    <div class=\"modal-body\">\n                        <div class=\"form-group\">\n                            <label for=\"exampleInputEmail1\">公司名称</label>\n                            <input ng-model=\"company\" class=\"form-control\" id=\"exampleInputEmail1\" placeholder=\"请输入公司名称\">\n                        </div>\n                        <div class=\"form-group\">\n                            <label for=\"exampleInputPassword1\">折扣</label>\n                            <input  ng-model=\"discount\" class=\"form-control\" id=\"exampleInputPassword1\" placeholder=\"请输入折扣\">\n                        </div>\n                    </div>\n                    <div class=\"modal-footer\">\n                        <button type=\"button\" class=\"btn btn-white\" data-dismiss=\"modal\">关闭</button>\n                        <button type=\"button\" ng-click=\"onAdd()\" data-dismiss=\"modal\" class=\"btn btn-primary\">保存</button>\n                    </div>\n                </div>\n            </div>\n        </div>\n    </div>\n\n</div>");
 $templateCache.put("admin-home/home.html","<div class=\"admin-home task-holder\">\n    <div class=\"admin-holder task-holder\">\n        <div class=\"message-holder holder\">\n            <div class=\"message-user-holder\">\n                <div class=\"user-title m-default\">个人信息</div>\n                <div class=\"user-holder\">\n                    <img class=\"user-img m-default\" ng-src=\"{{user.avatar}}\">\n                    <div class=\"name m-default\">{{user.name}}</div>\n                </div>\n                <span class=\"org-holder m-default\">\n                    所在部门: {{user.orgName}}\n                </span>\n                <span ng-if=\"false\" class=\"email-holder m-default\">\n                    邮箱：{{user.email}}\n                </span>\n                <div class=\"phone m-default\">手机: {{user.phone}}</div>\n            </div>\n            <div class=\"message-company-holder\">\n                <div class=\"company-title m-default\">公司信息</div>\n                <div class=\"company-name m-default\">{{company.name}}</div>\n                <div class=\"company-desc m-default\">{{company.desc}}</div>\n                <div class=\"company-email m-default\">创始人:{{company.user.name}}</div>\n                <div class=\"company-web m-default\">网址:{{company.url}}</div>\n            </div>\n        </div>\n\n\n        <div class=\"data-holder holder\">\n            <div class=\"data-title m-default\">数据统计</div>\n            <div class=\"data-num-holder\">\n                <div class=\"leave-data-holder data m-link\" ng-click=\"onClickLeave()\">\n                    <div class=\"title\">本月请假数据分析(同比上月)</div>\n                    <div class=\"number\">\n                        <span class=\"data-span\">{{leaveStat.num}}天</span>\n                        <div ng-if=\"leaveStat.showLeaveStatContrast\" class=\"contrast-holder\">\n                            <img ng-if=\"leaveStat.down\" class=\"contrast-icon\" src=\"admin-home/img/icon-data-down.png\">\n                            <img ng-if=\"leaveStat.up\" class=\"contrast-icon\" src=\"admin-home/img/icon-data-up.png\">\n                            <div class=\"contrast\">{{leaveStat.leaveStatContrast}}%</div>\n                        </div>\n\n                    </div>\n\n                </div>\n                <div class=\"reimb-data-holder data m-link\" ng-click=\"onClickReimb()\">\n                    <div class=\"title\">本月报销数据分析(同比上月)</div>\n                    <div class=\"number\">\n                        <span class=\"data-span\">{{reimbStat.num}}元</span>\n                        <div ng-if=\"reimbStat.showReimbStatContrast\" class=\"contrast-holder\">\n                            <img ng-if=\"reimbStat.down\" class=\"contrast-icon\" src=\"admin-home/img/icon-data-down.png\">\n                            <img ng-if=\"reimbStat.up\" class=\"contrast-icon\" src=\"admin-home/img/icon-data-up.png\">\n                            <div class=\"contrast\">{{reimbStat.reimbStatContrast}}%</div>\n                        </div>\n                    </div>\n                </div>\n                <div class=\"trip-data-holder data m-link\" ng-click=\"onClickTrip()\">\n                    <div class=\"title\">本月外勤数据分析(同比上月)</div>\n                    <div class=\"number\">\n                        <span class=\"data-span\">{{tripStat.num}}天</span>\n                        <div ng-if=\"tripStat.showTripStatContrast\" class=\"contrast-holder\">\n                            <img ng-if=\"tripStat.down\" class=\"contrast-icon\" src=\"admin-home/img/icon-data-down.png\">\n                            <img ng-if=\"tripStat.up\" class=\"contrast-icon\" src=\"admin-home/img/icon-data-up.png\">\n                            <div class=\"contrast\">{{tripStat.tripStatContrast}}%</div>\n                        </div>\n                    </div>\n                </div>\n            </div>\n            <chart class=\"chart-holder\"></chart>\n        </div>\n\n        <div class=\"apv-holder holder\" ng-if=\"apvList.length>0\">\n            <div class=\"apv-title m-default\">最近待审批</div>\n            <div class=\"table-holder m-default\">\n                <table cellspacing=\"0\" align=\"left\" width=\"100%\">\n                    <tr class=\"table-title\">\n                        <th class=\"table-item\" style=\"width: 50px\"></th>\n                        <th class=\"table-item table-name\">审批类型</th>\n                        <th class=\"table-item table-name\">审核人</th>\n                        <th class=\"table-item table-name\">审批状态</th>\n                        <th class=\"table-item table-time\">提交时间</th>\n                        <th class=\"table-item table-time\">操作</th>\n                    </tr>\n                    <tr class=\"table-item-holder  m-link\" ng-repeat=\"item in apvList\"\n                        ng-click=\"onClickCell($index)\">\n                        <td class=\"table-checkbox\" style=\"width: 50px\"></td>\n                        <td class=\"table-item table-name\">{{item.name}}</td>\n                        <td class=\"table-item table-name\">{{item.userName}}</td>\n                        <td class=\"table-item table-name\">{{item.status}}</td>\n                        <td class=\"table-item table-time\">{{item.creatTime}}</td>\n                        <td class=\"table-item table-time\">\n                            <div class=\"permit-btn\"\n                                 ng-click=\"onClickPermit(item.orgId, item.id, true,item.type ,$event)\">同意\n                            </div>\n                            <div class=\"reject-btn\"\n                                 ng-click=\"onClickReject(item.orgId, item.id, true,item.type ,$event )\">拒绝\n                            </div>\n                        </td>\n                    </tr>\n                </table>\n            </div>\n        </div>\n\n        <div class=\"notify-holder holder\" ng-show=\"isShowNotify\">\n            <div class=\"notify\">\n                <div class=\"notify-title\">消息列表</div>\n                <div class=\"notify-list\">\n                    <notify-list is-show-notify=\"isShowNotify\" on-click-detail=\"onClickDetail(item)\"></notify-list>\n                </div>\n            </div>\n        </div>\n    </div>\n\n    <div class=\"detail\" ng-if=\"showDetail\">\n        <div class=\"ui-mask\" ng-click=\"onClickBackground()\">\n            <div class=\"detail-scroll-holder\">\n                <div class=\"detail-holder animated\" ng-click=\"onClickDetail($event)\" ng-class=\"{\'fadeInDown\': showDetail}\">\n                    <leave ng-if=\"clickItem.apv_type == 1\" class=\"leave\" leave=\"clickItem\" on-click-btn=\"onClickBtn(status, orgId, itemId, \'1\')\"></leave>\n                    <pay ng-if=\"clickItem.apv_type == 2\" class=\"leave\" pay=\"clickItem\" on-click-btn=\"onClickBtn(status, orgId, itemId, \'2\')\"></pay>\n                    <reimb ng-if=\"clickItem.apv_type == 3\" class=\"leave\" reimb=\"clickItem\" on-click-btn=\"onClickBtn(status, orgId, itemId, \'3\')\"></reimb>\n                    <business ng-if=\"clickItem.apv_type == 5\" class=\"leave\" business=\"clickItem\" on-click-btn=\"onClickBtn(status, orgId, itemId, \'5\')\"></business>\n                    <imprest ng-if=\"clickItem.apv_type == 6\" class=\"leave\" imprest=\"clickItem\" on-click-btn=\"onClickBtn(status, orgId, itemId, \'6\')\"></imprest>\n                    <goods ng-if=\"clickItem.apv_type == 8\" class=\"leave\" goods=\"clickItem\" on-click-btn=\"onClickBtn(status, orgId, itemId, \'8\')\"></goods>\n                    <stamp ng-if=\"clickItem.apv_type == 9\" class=\"leave\" stamp=\"clickItem\" on-click-btn=\"onClickBtn(status, orgId, itemId, \'9\')\"></stamp>\n                    <car ng-if=\"clickItem.apv_type == 10\" class=\"leave\" car=\"clickItem\" on-click-btn=\"onClickBtn(status, orgId, itemId, \'10\')\"></car>\n                    <card ng-if=\"clickItem.apv_type == 11\" class=\"leave\" card=\"clickItem\" on-click-btn=\"onClickBtn(status, orgId, itemId, \'11\')\"></card>\n                    <contract ng-if=\"clickItem.apv_type == 12\" class=\"leave\" contract=\"clickItem\" on-click-btn=\"onClickBtn(status, orgId, itemId, \'12\')\"></contract>\n                    <train ng-if=\"clickItem.apv_type == 13\" class=\"leave\" train=\"clickItem\" on-click-btn=\"onClickBtn(status, orgId, itemId, \'13\')\"></train>\n                    <report ng-if=\"clickItem.apv_type == 14\" class=\"leave\" report=\"clickItem\" on-click-btn=\"onClickBtn(status, orgId, itemId, \'14\')\"></report>\n                    <trip-reimb ng-if=\"clickItem.apv_type == 15\" class=\"leave\" reimb=\"clickItem\" on-click-btn=\"onClickBtn(status, orgId, itemId, \'15\')\"></trip-reimb>\n                    <module-detail ng-if=\"clickItem.apv_type == 999\" class=\"leave\" module-detail=\"clickItem\" on-click-btn=\"onClickBtn(status, orgId, itemId, \'999\')\"></module-detail>\n                </div>\n            </div>\n        </div>\n    </div>\n</div>");
 $templateCache.put("admin-home/invoice.html","<div>\n\n    <div class=\"ibox\">\n        <div class=\"ibox-title\">\n            <h5>发票管理</h5>\n        </div>\n        <div class=\"ibox-content\">\n            <div  class=\"btn-group\" role=\"group\" aria-label=\"...\">\n                <button ng-click=\"check0()\" type=\"button\" class=\"btn btn-default\">未开</button>\n                <button ng-click=\"check1()\"type=\"button\" class=\"btn btn-default\">已开</button>\n                <button ng-click=\"check2()\"type=\"button\" class=\"btn btn-default\">拒开</button>\n            </div>\n            <table class=\"table table-hover\">\n                <thead>\n                <tr>\n                    <th>#</th>\n                    <th>公司抬头</th>\n                    <th>发票金额</th>\n                    <th>收件人</th>\n                    <th>联系电话</th>\n                    <th>详细地址</th>\n                    <th>状态</th>\n\n                </tr>\n                </thead>\n                <tbody>\n                <tr ng-repeat=\"item in itemList\">\n                    <td>{{$index+1}}</td>\n                    <td>{{item.invoiceheader}}</td>\n                    <td>{{item.invoicevalue}}</td>\n                    <td>{{item.name}}</td>\n                    <td>{{item.phone}}</td>\n                    <td>{{item.address}}</td>\n                    <td>{{item.status}}</td>\n                    <td class=\"text-navy\"><i class=\"fa fa-level-up\"></i></td>\n                    <td ng-show=\"group\">\n                        <div class=\"btn-group\">\n                            <button type=\"button\" class=\"btn btn-default dropdown-toggle\" data-toggle=\"dropdown\"\n                                    aria-haspopup=\"true\" aria-expanded=\"false\">\n                                操作 <span class=\"caret\"></span>\n                            </button>\n                            <ul class=\"dropdown-menu\">\n                                <li><a ng-click=\"rechargeSuccess(item)\">已开</a></li>\n                                <li><a ng-click=\"rechargeError(item)\">拒开</a></li>\n                            </ul>\n                        </div>\n                    </td>\n                </tr>\n\n                </tbody>\n            </table>\n        </div>\n\n        <div>\n            <nav aria-label=\"...\">\n                <ul class=\"pager\">\n                    <li><a ng-click=\"last()\">上一页</a></li>\n                    <li><a ng-click=\"next()\">下一页</a></li>\n                </ul>\n            </nav>\n\n        </div>\n\n    </div>\n</div>");
-$templateCache.put("admin-home/merchant-detail.html","<div class=\"wrapper wrapper-content animated fadeInRight\">\n    <div class=\"ibox\">\n        <div class=\"ibox-title\">\n            <h5>基本信息</h5>\n        </div>\n        <div class=\"ibox-content\">\n            <form class=\"form-horizontal\">\n            <div class=\"form-group\">\n                <label class=\"col-md-1 control-label\">商户名称:</label>\n                <div class=\"col-sm-10\">\n                    <p class=\"form-control-static\">{{name}}</p>\n                </div>\n            </div>\n\n            <div class=\"form-group\">\n                <label class=\"col-md-1 control-label\">联系方式:</label>\n                <div class=\"col-md-10\">\n                    <p class=\"form-control-static\">{{plate}}</p>\n                </div>\n            </div>\n\n            <div class=\"form-group\">\n                <label class=\"col-md-1 control-label\">商户地址:</label>\n                <div class=\"col-md-10\">\n                    <p class=\"form-control-static\">{{address}}</p>\n                </div>\n            </div>\n\n\n            </form>\n\n        </div>\n    </div>\n\n\n\n    <div class=\"ibox\">\n        <div class=\"ibox-title\">\n            <h5>商品信息</h5>\n        </div>\n        <div class=\"ibox-content\">\n            <table class=\"ibox table table-hover\">\n                <caption>商品信息</caption>\n                <thead>\n                <tr>\n                    <th>#</th>\n                    <th>油号名称</th>\n                    <th>挂牌价</th>th>\n                    <th>优惠后价格</th>\n                    <th>其他优惠信息</th>\n\n                </tr>\n                </thead>\n                <tbody>\n                <tr ng-repeat=\"item in goods\">\n                    <td>{{$index+1}}</td>\n                    <td>{{item.gname}}</td>\n                    <td>{{item.goriginalprice}}</td>\n                    <td>{{item.gpresentprice}}</td>\n                    <td>{{item.gremark}}</td>\n                </tr>\n\n                </tbody>\n            </table>\n        </div>\n    </div>\n\n</div>");
+$templateCache.put("admin-home/merchant-detail.html","<div class=\"wrapper wrapper-content animated fadeInRight\">\n    <div class=\"ibox\">\n        <div class=\"ibox-title\">\n            <h5>基本信息</h5>\n        </div>\n        <div class=\"ibox-content\">\n            <form class=\"form-horizontal\">\n            <div class=\"form-group\">\n                <label class=\"col-md-1 control-label\">商户名称:</label>\n                <div class=\"col-sm-10\">\n                    <p class=\"form-control-static\">{{name}}</p>\n                </div>\n            </div>\n\n            <div class=\"form-group\">\n                <label class=\"col-md-1 control-label\">联系方式:</label>\n                <div class=\"col-md-10\">\n                    <p class=\"form-control-static\">{{plate}}</p>\n                </div>\n            </div>\n\n            <div class=\"form-group\">\n                <label class=\"col-md-1 control-label\">商户地址:</label>\n                <div class=\"col-md-10\">\n                    <p class=\"form-control-static\">{{address}}</p>\n                </div>\n            </div>\n\n\n            </form>\n\n        </div>\n    </div>\n\n    <div class=\"ibox\">\n        <div class=\"ibox-title\">\n            <h5>银行卡信息</h5>\n        </div>\n        <div class=\"ibox-content\">\n            <table class=\" table\">\n                <thead>\n                <tr>\n                    <th>#</th>\n                    <th>卡号类型</th>\n                    <th>卡号</th>\n                    <th>创建时间</th>\n\n                </tr>\n                </thead>\n                <tbody>\n                <tr ng-repeat=\"item in bankCards\">\n                    <td>{{$index+1}}</td>\n                    <td><span class=\"line\">{{item.bankname}}</span>\n                    </td>\n                    <td>{{item.bankcard}}</td>\n                    <td>{{item.createtime}}</td>\n                </tr>\n\n                </tbody>\n            </table>\n        </div>\n    </div>\n\n\n    <!--<div class=\"ibox\">-->\n        <!--<div class=\"ibox-title\">-->\n            <!--<h5>商品信息</h5>-->\n        <!--</div>-->\n        <!--<div class=\"ibox-content\">-->\n            <!--<table class=\"ibox table table-hover\">-->\n                <!--<caption>商品信息</caption>-->\n                <!--<thead>-->\n                <!--<tr>-->\n                    <!--<th>#</th>-->\n                    <!--<th>油类型</th>-->\n                    <!--<th>优惠折扣</th>-->\n                    <!--<th>其他优惠信息</th>-->\n\n                <!--</tr>-->\n                <!--</thead>-->\n                <!--<tbody>-->\n                <!--<tr ng-repeat=\"item in goods\">-->\n                    <!--<td>{{$index+1}}</td>-->\n                    <!--<td><span class=\"line\">{{item.gname}}</span>-->\n                    <!--</td>-->\n                    <!--<td>{{item.goriginalprice}}</td>-->\n                    <!--<td>{{item.gremark}}</td>-->\n                <!--</tr>-->\n\n                <!--</tbody>-->\n            <!--</table>-->\n        <!--</div>-->\n    <!--</div>-->\n\n</div>");
 $templateCache.put("admin-home/merchant.html","<div>\n    <div class=\"ibox\">\n        <div class=\"ibox-title\">\n            <h5>商户管理</h5>\n        </div>\n        <div class=\"ibox-content\">\n            <table class=\"table table-hover\">\n                <thead>\n                <tr>\n                    <th>#</th>\n                    <th>商户名称</th>\n                    <th>登录名</th>\n                    <th>商户地址</th>\n                    <th>联系方式</th>\n                    <th>操作</th>\n\n                </tr>\n                </thead>\n                <tbody>\n                <tr ng-repeat=\"item in itemList\">\n                    <td>{{$index+1}}</td>\n                    <td>{{item.mname}}</td>\n                    <td>{{item.mphone}}</td>\n                    <td>{{item.cityname}}{{item.adname}}{{item.maddress}}</td>\n\n                    <td>{{item.tel}}</td>\n                    <td>\n                        <button ng-click=\"onSelect(item.mid)\" class=\"btn btn-default\" type=\"submit\">选择</button>\n                    </td>\n\n                </tr>\n\n                </tbody>\n            </table>\n        </div>\n\n        <div>\n\n            <nav aria-label=\"...\">\n                <ul class=\"pager\">\n                    <li><a ng-click=\"last()\">上一页</a></li>\n                    <li><a ng-click=\"next()\">下一页</a></li>\n                </ul>\n            </nav>\n\n        </div>\n\n    </div>\n</div>");
 $templateCache.put("admin-home/oil-manager.html","\n<head>\n\n\n\n</head>\n\n<div>\n\n    <div class=\"bs-example\">\n        <button style=\"margin-top:30px;margin-left: 10px;margin-bottom: 10px\" data-toggle=\"modal\" ng-click=\"showAddDialog()\" data-target=\"#add\" type=\"submit\" class=\"btn btn-sm btn-primary\">\n            添加\n        </button>\n        <table class=\"table table-hover\">\n            <thead>\n            <tr>\n                <th>#</th>\n                <th>油号</th>\n                <th>挂牌价</th>\n                <th>涨降情况</th>\n                <th>操作</th>\n\n            </tr>\n            </thead>\n            <tbody>\n            <tr ng-repeat=\"item in itemList\">\n                <td>{{$index+1}}</td>\n                <td><span >{{item.typename}}</span></td>\n                <td><span >{{item.typeprice}}</span></td>\n                <td><span >{{item.isrise}}</span></td>\n                <td>\n                    <button ng-click=\"onSelect(item)\" class=\"btn btn-success\" data-toggle=\"modal\" data-target=\"#update\" type=\"submit\">修改</button>\n                    <button ng-click=\"onDelete(item)\" class=\"btn btn-danger\" type=\"submit\">删除</button>\n                </td>\n\n            </tr>\n\n            </tbody>\n        </table>\n\n\n\n        <div class=\"modal inmodal fade\" id=\"update\" tabindex=\"-1\" role=\"dialog\"  aria-hidden=\"true\">\n            <div class=\"modal-dialog modal-sm\">\n                <div class=\"modal-content\">\n                    <div class=\"modal-header\">\n                        <button type=\"button\" class=\"close\" data-dismiss=\"modal\"><span aria-hidden=\"true\">&times;</span><span class=\"sr-only\">Close</span></button>\n                        <h4 class=\"modal-title\">{{title}}</h4>\n                    </div>\n                    <div class=\"modal-body\">\n                        <div class=\"form-group\">\n                            <label for=\"discount\">油价</label>\n                            <input  ng-model=\"price\" class=\"form-control\" id=\"discount\" placeholder=\"请输入油价\">\n                        </div>\n                    </div>\n                    <div class=\"modal-footer\">\n                        <button type=\"button\" class=\"btn btn-white\" data-dismiss=\"modal\">关闭</button>\n                        <button type=\"button\" ng-click=\"onUpdate()\"  data-dismiss=\"modal\" class=\"btn btn-primary\">更新</button>\n                    </div>\n                </div>\n            </div>\n        </div>\n\n        <div class=\"modal inmodal fade\" id=\"add\" tabindex=\"-1\" role=\"dialog\"  aria-hidden=\"true\" >\n            <div class=\"modal-dialog modal-sm\">\n                <div class=\"modal-content\">\n                    <div class=\"modal-header\">\n                        <button type=\"button\" class=\"close\" data-dismiss=\"modal\"><span aria-hidden=\"true\">&times;</span><span class=\"sr-only\">Close</span></button>\n                        <h4 class=\"modal-title\">折扣添加</h4>\n                    </div>\n                    <div class=\"modal-body\">\n                        <div class=\"form-group\">\n                            <label for=\"exampleInputEmail1\">油号</label>\n                            <input ng-model=\"name\" class=\"form-control\" id=\"exampleInputEmail1\" placeholder=\"请输入油号\">\n                        </div>\n                        <div class=\"form-group\">\n                            <label for=\"exampleInputPassword1\">价格</label>\n                            <input  ng-model=\"price\" class=\"form-control\" id=\"exampleInputPassword1\" placeholder=\"请输入价格\">\n                        </div>\n                    </div>\n                    <div class=\"modal-footer\">\n                        <button type=\"button\" class=\"btn btn-white\" data-dismiss=\"modal\">关闭</button>\n                        <button type=\"button\" ng-click=\"onAdd()\" data-dismiss=\"modal\" class=\"btn btn-primary\">保存</button>\n                    </div>\n                </div>\n            </div>\n        </div>\n    </div>\n\n</div>");
 $templateCache.put("admin-home/recharge-manage.html","<div>\n\n    <div class=\"ibox\">\n        <div class=\"ibox-title\">\n            <h5>充值管理</h5>\n        </div>\n        <div class=\"ibox-content\">\n            <div style=\"margin-right: 40px;margin-bottom: 30px\" class=\"btn-group\">\n                <button ng-click=\"check1()\" data-toggle=\"button\" class=\"btn btn-primary btn-outline active\" type=\"button\" aria-pressed=\"true\">未充值</button>\n                <button ng-click=\"check2()\" data-toggle=\"button\" class=\"btn btn-primary\" type=\"button\" aria-pressed=\"false\">充值成功</button>\n            </div>\n            <table class=\"table table-hover\">\n                <thead>\n                <tr>\n                    <th>#</th>\n                    <th>卡号</th>\n                    <th>公司类型</th>\n                    <th>充值金额</th>\n                    <th>用户名</th>\n                    <th>充值状态</th>\n\n                </tr>\n                </thead>\n                <tbody>\n                <tr ng-repeat=\"item in itemList\">\n                    <td>{{$index+1}}</td>\n                    <td>{{item.oilcardid}}</td>\n                    <td>{{item.oilcardname}}</td>\n                    <td>{{item.amount}}</td>\n                    <td>{{item.uname}}</td>\n                    <td>{{item.status}}</td>\n                    <td class=\"text-navy\"><i class=\"fa fa-level-up\"></i></td>\n                    <td>\n                        <div class=\"btn-group\">\n                            <button type=\"button\" class=\"btn btn-default dropdown-toggle\" data-toggle=\"dropdown\"\n                                    aria-haspopup=\"true\" aria-expanded=\"false\">\n                                操作 <span class=\"caret\"></span>\n                            </button>\n                            <ul class=\"dropdown-menu\">\n                                <li><a ng-click=\"rechargeSuccess(item)\">充值成功</a></li>\n                            </ul>\n                        </div>\n                    </td>\n                </tr>\n\n                </tbody>\n            </table>\n        </div>\n\n        <div>\n            <nav aria-label=\"...\">\n                <ul class=\"pager\">\n                    <li><a ng-click=\"last()\">上一页</a></li>\n                    <li><a ng-click=\"next()\">下一页</a></li>\n                </ul>\n            </nav>\n\n        </div>\n\n    </div>\n</div>");
 $templateCache.put("admin-home/user-detail.html","<div>\n\n\n    <div class=\"ibox\">\n        <div class=\"ibox-title\">\n            <h5>基本信息</h5>\n        </div>\n        <div class=\"ibox-content\">\n            <form class=\"form-horizontal\">\n                <div class=\"form-group\">\n                    <label class=\"col-sm-1 control-label\">姓名</label>\n                    <div class=\"col-sm-10\">\n                        <p class=\"form-control-static\">{{name}}</p>\n                    </div>\n                </div>\n                <div class=\"form-group\">\n                    <label class=\"col-sm-1 control-label\">联系方式</label>\n                    <div class=\"col-sm-10\">\n                        <p class=\"form-control-static\">{{phone}}</p>\n                    </div>\n                </div>\n\n                <div class=\"form-group\">\n                    <label class=\"col-sm-1 control-label\">车牌号</label>\n                    <div class=\"col-sm-10\">\n                        <p class=\"form-control-static\">{{plate}}</p>\n                    </div>\n                </div>\n            </form>\n        </div>\n    </div>\n\n\n    <div class=\"ibox\">\n        <div class=\"ibox-title\">\n            <h5>油卡信息</h5>\n        </div>\n        <div class=\"ibox-content\">\n            <table class=\"table table-hover\">\n                <thead>\n                <tr>\n                    <th>#</th>\n                    <th>卡号类型</th>\n                    <th>卡号</th>\n                    <th>车牌号</th>\n                    <th>创建时间</th>\n\n                </tr>\n                </thead>\n                <tbody>\n                <tr ng-repeat=\"item in oilCards\">\n                    <td>{{$index+1}}</td>\n                    <td><span>{{item.oilcardname}}</span>\n                    </td>\n                    <td>{{item.oilcardid}}</td>\n                    <td>{{item.platenumber}}</td>\n                    <td>{{item.createtime}}</td>\n                </tr>\n\n                </tbody>\n            </table>\n        </div>\n    </div>\n\n\n</div>");
 $templateCache.put("admin-home/user.html","<div>\n    <div class=\"ibox\">\n        <div class=\"ibox-title\">\n            <h5>用户管理</h5>\n        </div>\n        <div class=\"ibox-content\">\n            <div style=\"margin-right: 40px;margin-bottom: 30px\" class=\"pull-right mail-search\">\n                <div class=\"input-group\">\n                    <input ng-model=\"search\" type=\"text\" class=\"form-control input-sm\" name=\"search\"\n                           placeholder=\"输入手机号搜索\">\n                    <div class=\"input-group-btn\">\n                        <button ng-click=\"onSearch()\" type=\"submit\" class=\"btn btn-sm btn-primary\">\n                            搜索\n                        </button>\n                    </div>\n                </div>\n            </div>\n\n            <table class=\"table table-hover\">\n                <thead>\n                <tr>\n                    <th>#</th>\n                    <th>姓名</th>\n                    <th>联系方式</th>\n                    <th>创建时间</th>\n                    <th>操作</th>\n\n                </tr>\n                </thead>\n                <tbody>\n                <tr ng-repeat=\"item in itemList\">\n                    <th>{{$index+1}}</th>\n                    <td>{{item.uname}}\n                    </td>\n                    <td>{{item.uphone}}</td>\n                    <td>{{item.createtime}}</td>\n                    <td>\n                        <button ng-click=\"onSelect(item.uid)\" class=\"btn btn-default\" type=\"submit\">选择</button>\n                    </td>\n\n                </tr>\n\n                </tbody>\n            </table>\n        </div>\n\n        <div>\n\n            <nav style=\"margin-bottom: 40px\" aria-label=\"...\">\n                <ul class=\"pager\">\n                    <li><a ng-click=\"last()\">上一页</a></li>\n                    <li><a ng-click=\"next()\">下一页</a></li>\n                </ul>\n            </nav>\n\n        </div>\n\n    </div>\n</div>");
 $templateCache.put("admin-home/withdraw.html","<div>\n\n    <div>\n        <table class=\"table table-hover\">\n            <thead>\n            <tr>\n                <th>#</th>\n                <th>提现卡号</th>\n                <th>提现银行</th>\n                <th>持卡人姓名</th>\n                <th>提现金额</th>\n                <th>提现状态</th>\n\n            </tr>\n            </thead>\n            <tbody>\n            <tr ng-repeat=\"item in itemList\">\n                <td>{{$index+1}}</td>\n                <td><span class=\"line\">{{item.bankcard}}</span></td>\n                <td><span class=\"line\">{{item.bankname}}</span></td>\n                <td><span class=\"line\">{{item.name}}</span></td>\n                <td><span class=\"line\">{{item.money}}</span></td>\n                <td><span class=\"line\">{{item.status}}</span></td>\n                <td>\n                    <div class=\"btn-group\">\n                        <button type=\"button\" class=\"btn btn-default dropdown-toggle\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\n                            操作 <span class=\"caret\"></span>\n                        </button>\n                        <ul class=\"dropdown-menu\">\n                            <li><a ng-click=\"rechargeSuccess()\">提现成功</a></li>\n                            <li><a ng-click=\"rechargeError()\">提现失败</a></li>\n                        </ul>\n                    </div>\n                </td>\n\n            </tr>\n\n            </tbody>\n        </table>\n    </div>\n\n    <div>\n\n        <nav aria-label=\"...\">\n            <ul class=\"pager\">\n                <li><a href=\"\">上一页</a></li>\n                <li><a href=\"\">下一页</a></li>\n            </ul>\n        </nav>\n\n    </div>\n\n</div>");}]);
-!function(){function t(t,i,n){function o(){i.Log.d("init"),i.Log.d(i.Data.get("aid")),i.Api.getAllAdminAdvertising().then(function(t){i.Log.d(t),r.itemList=t.data})}function e(t){}function a(t){swal({title:"您确定要删除这条信息吗",text:"删除后将无法恢复，请谨慎操作！",type:"warning",showCancelButton:!0,confirmButtonColor:"#DD6B55",confirmButtonText:"删除",closeOnConfirm:!1},function(){i.Api.deleteAdminAdvertising(i.Data.get("aid"),t.id).then(function(n){if(0==n.status){for(var o=0;o<r.itemList.length;o++)r.itemList[o].id==t.id&&r.itemList.splice(o,1);swal("删除成功！","您已经永久删除了这条信息。","success")}else i.Notify.info("删除失败")})})}function d(){i.Api.addAdminAdvertising(i.Data.get("aid"),r.title,s,r.city,r.url).then(function(t){0==t.status?o():i.Notify.info("添加失败")})}function l(){r.company="",r.discount=""}function e(){i.Api.updateAdminAdvertising(i.Data.get("aid"),c.id,r.title,s,r.city,r.url).then(function(t){0==t.status?o():i.Notify.info("更新失败")})}function u(t){c=t,r.city=t.city,r.title=t.context,r.url=t.url}var c,r=t;r.onDelete=a,r.onAdd=d,r.showAddDialog=l,r.onUpdate=e,r.onSelect=u;var s;o(),t.uploadImg="",r.upload=function(t){n.upload({url:"http://119.23.79.196/api/util/uploadAvitor",data:{file:t}}).then(function(t){var n=t.data;s=n.data.fileName,r.src="http://www.hzautomotive.com/picture/"+s,i.Log.d(n)},function(t){i.Log.d("error"),i.Log.d(t)},function(t){var n=parseInt(100*t.loaded/t.total);console.log("progress: "+n+"% "),i.Log.d(t)})}}angular.module("app").controller("advertising.ManageController",["$scope","Core","Upload",t])}();
-!function(){function t(t,i){function n(){i.Log.d("init"),i.Log.d(i.Data.get("aid")),i.Api.getAllAdminOilcardtype().then(function(t){i.Log.d(t),u.itemList=t.data})}function o(t){}function e(t){swal({title:"您确定要删除这条信息吗",text:"删除后将无法恢复，请谨慎操作！",type:"warning",showCancelButton:!0,confirmButtonColor:"#DD6B55",confirmButtonText:"删除",closeOnConfirm:!1},function(){i.Api.deleteAdminOilcardtypeById(i.Data.get("aid"),t.id).then(function(n){if(0==n.status){for(var o=0;o<u.itemList.length;o++)u.itemList[o].id==t.id&&u.itemList.splice(o,1);swal("删除成功！","您已经永久删除了这条信息。","success")}else i.Notify.info("删除失败")})})}function a(){i.Api.saveAdminOilcardtype(i.Data.get("aid"),u.company,u.discount).then(function(t){0==t.status?n():i.Notify.info("添加失败")})}function c(){u.company="",u.discount=""}function o(){i.Api.updateAdminOilcardtype(i.Data.get("aid"),l.id,u.title,u.discount).then(function(t){0==t.status?n():i.Notify.info("更新失败")})}function d(t){u.updateDialog=!0,l=t,u.title=l.oilcardname}var l,u=t;u.onDelete=e,u.onAdd=a,u.showAddDialog=c,u.onUpdate=o,u.onSelect=d,n()}angular.module("app").controller("discount.ManageController",["$scope","Core",t])}();
-!function(){function e(e,t,a){function A(){v.showDetail=!1}function n(){v.leaveStat={},v.reimbStat={},v.tripStat={},v.leaveData=[],v.tripData=[],v.reimbData=[],v.reimbDataY=[],v.leaveDataY=[],v.tripDataY=[],v.showDetail=!1}function i(){a.publish("init-chart",{x:v.leaveData,y:v.leaveDataY,type:a.Const.APP.TYPE.TYPE_ADMIN_LEAVE})}function o(){a.publish("init-chart",{x:v.reimbData,y:v.reimbDataY,type:a.Const.APP.TYPE.TYPE_FIN_REIMB})}function P(){a.publish("init-chart",{x:v.tripData,y:v.tripDataY,type:a.Const.APP.TYPE.TYPE_WORK_BUSINESS})}function _(e,t,a,n){switch(e){case-1:A(),m(t,a,!1,n);break;case 0:A();break;case 1:A(),E(t,a,!1,n)}}function r(e){v.clickItem=v.apvList[e].data,v.showDetail=!0}function c(){a.Api.APV_MANAGE.getApvManageApprovePendingList(v.company.id,"",1).then(function(e){if(0==e.code){var t=e.data.approve_pending_list;v.apvList=p(t)}},function(e){})}function p(e){var t=[];for(var A in e){var n={};switch(n.userName=v.user.name,n.status=" 待审批",n.creatTime=a.Util.timeFormat(e[A].create_time),n.data=e[A],n.id=e[A].id,e[A].apv_type){case a.Const.APP.APV_MANAGE.APV_TYPE_TEMPLATE:n.name=e[A].template.name,n.type=999;break;case a.Const.APP.APV_MANAGE.APV_TYPE_ADMIN_LEAVE:n.name="请假",n.type=1;break;case a.Const.APP.APV_MANAGE.APV_TYPE_FIN_PAY:n.name="支付",n.type=2;break;case a.Const.APP.APV_MANAGE.APV_TYPE_FIN_REIMB:n.name="报销",n.type=3;break;case a.Const.APP.APV_MANAGE.APV_TYPE_HR_RECRUITMENT:n.name="招募";break;case a.Const.APP.APV_MANAGE.APV_TYPE_WORK_BUSINESS:n.name="外勤",n.type=5;break;case a.Const.APP.APV_MANAGE.APV_TYPE_FIN_FUND:n.name="备用金申请",n.type=6;break;case a.Const.APP.APV_MANAGE.APV_TYPE_ADMIN_RES:n.name="";break;case a.Const.APP.APV_MANAGE.APV_TYPE_ADMIN_RES_GOODS:n.name="物品申领",n.type=8;break;case a.Const.APP.APV_MANAGE.APV_TYPE_ADMIN_RES_STAMP:n.name="用印申请",n.type=9;break;case a.Const.APP.APV_MANAGE.APV_TYPE_ADMIN_RES_CAR:n.name="用车申请",n.type=10;break;case a.Const.APP.APV_MANAGE.APV_TYPE_CARD:n.name="名片申请",n.type=11;break;case a.Const.APP.APV_MANAGE.APV_TYPE_CONTRACT:n.name="合同",n.type=12;break;case a.Const.APP.APV_MANAGE.APV_TYPE_TRAIN:n.name="培训",n.type=13;break;case a.Const.APP.APV_MANAGE.APV_TYPE_REPORT:n.name="报告",n.type=14;break;case a.Const.APP.APV_MANAGE.APV_TYPE_FIN_TRIP_REIMB:n.name="差旅费",n.type=15}if(t.push(n),A>=4)break}return t}function s(e){if(v.showDetail=!0,10999==e.itemType||999==e.itemType)v.clickItem=e.apvItem,v.clickItem.apv_type=999;else{var t={};t.isHome=!0,e.apvItem.apv?(t.org_id=e.apvItem.apv.org_id,t.id=e.apvItem.apv.id,t.org_root_id=e.apvItem.apv.org_root_id,v.clickItem=t,v.clickItem.apv_type=e.apvItem.apv.apv_type):(t.org_id=e.apvItem.org_id,t.id=e.apvItem.id,t.org_root_id=e.apvItem.org_root_id,v.clickItem=t,v.clickItem.apv_type=e.apvItem.apv_type)}}function E(e,t,A,n,i){A&&i.stopPropagation(),a.Api.APV_MANAGE.permitApv(e,N,t,n,"同意").then(function(e){0==e.code&&(v.onItem=!1,v.onApprove=!1,c(),a.Notify.success("操作成功"))},function(e){a.Notify.error("操作失败")})}function m(e,t,A,n,i){A&&i.stopPropagation(),a.Api.APV_MANAGE.rejectApv(e,N,t,n,"不同意").then(function(e){0==e.code&&(v.onItem=!1,v.onApprove=!1,c(),a.Notify.success("操作成功"))},function(e){a.Notify.error("操作失败")})}var v=t;v.user=a.Data.getUser(),v.user.avatar=a.Data.getAvatar(v.user.avatar),v.onClickCell=r,v.onClickBackground=A,v.onClickBtn=_,v.onClickPermit=E,v.onClickReject=m,v.onClickLeave=i,v.onClickTrip=P,v.onClickReimb=o,v.isShowNotify=!1;v.onClickDetail=s,a.on(a.Const.EVENT.EVENT_ORG_CHANGE,function(e,t){n()});var N;n()}angular.module("app").controller("adminHome",["$q","$scope","Core",e])}();
-!function(){function t(t,n){function i(){n.Log.d("init"),n.Api.getUserInvoiceList(u,s,a).then(function(t){n.Log.d(t),0==t.status?(n.Log.d(t),t.data&&o(t.data)):n.Notify.info("获取失败")})}function o(t){for(var n=0;n<t.length;n++)0==t[n].status?t[n].status="未开":1==t[n].status?t[n].status="已开":2==t[n].status&&(t[n].status="拒开");e.itemList=t}var e=t,s=1,a=8,u=0;e.group=!0,e.itemList=[],i(),e.rechargeSuccess=function(t){n.Log.d("Success"),n.Api.updateUserInvoiceStatus(n.Data.get("aid"),t.id,1).then(function(t){0==t.status?(n.Notify.info("操作成功"),i()):n.Notify.info("操作失败")})},e.rechargeError=function(t){n.Log.d("Success"),n.Api.updateUserInvoiceStatus(n.Data.get("aid"),t.id,2).then(function(t){0==t.status?(n.Notify.info("操作成功"),i()):n.Notify.info("操作失败")})},e.next=function(){n.Log.d("next"+s),n.Log.d("next"+e.itemList.length),8==e.itemList.length&&(s++,n.Api.getUserInvoiceList(u,s,a).then(function(t){0==t.status?(n.Log.d(t),t.data&&o(t.data)):n.Notify.info("获取失败")}))},e.last=function(){n.Log.d("next"+s),s>1&&(s--,n.Api.getUserInvoiceList(u,s,a).then(function(t){0==t.status?(n.Log.d(t),t.data&&o(t.data)):n.Notify.info("获取失败")}))},e.check0=function(){u=0,e.group=!0,i()},e.check1=function(){u=1,e.group=!1,i()},e.check2=function(){u=2,e.group=!1,i()}}angular.module("app").controller("invoice.ManageController",["$scope","Core",t])}();
-!function(){function a(a,n,t){function e(){console.log("getUserDetail"),n.Api.getMerchantBankCard(r).then(function(a){if(n.Log.d(a),a.data){o.bankCards=a.data.merchantbankcard,o.goods=a.data.merchantgoods;var t=a.data.merchant;t&&(o.name=t.mname,o.phone=t.mphone,o.address=t.maddress)}})}var o=a;n.Log.d("init"),n.Log.d(t.data);var r=t.data;e()}angular.module("app").controller("merchant.DetailController",["$scope","Core","$stateParams",a])}();
-!function(){function t(t,n){function e(){n.Log.d("init"),n.Api.queryAllMerchant(o,l).then(function(t){if(n.Log.d(t),t.data){for(var e=0;e<t.data.length;e++)"[]"==t.data[e].tel&&(t.data[e].tel="无");i.itemList=t.data}})}function a(t){n.Log.d("select mer"+t),n.go("admin.merchant-detail",t)}var i=t,o=1,l=10;i.onSelect=a,e(),i.next=function(){n.Log.d("next"+o),n.Log.d("next"+i.itemList.length),10==i.itemList.length&&(o++,n.Api.queryAllMerchant(o,l).then(function(t){n.Log.d(t),i.itemList=t.data}))},i.last=function(){n.Log.d("next"+o),o>1&&(o--,n.Api.queryAllMerchant(o,l).then(function(t){n.Log.d(t),i.itemList=t.data}))}}angular.module("app").controller("merchant.ManageController",["$scope","Core",t])}();
-!function(){function t(t,i){function n(){i.Log.d("init"),i.Log.d(i.Data.get("aid")),i.Api.getAllAdminGoods().then(function(t){i.Log.d(t),0==t.status?t.data&&c(t.data):i.Notify.info("更新失败")})}function o(t){}function e(t){swal({title:"您确定要删除这条信息吗",text:"删除后将无法恢复，请谨慎操作！",type:"warning",showCancelButton:!0,confirmButtonColor:"#DD6B55",confirmButtonText:"删除",closeOnConfirm:!1},function(){i.Api.deleteAdminGoods(i.Data.get("aid"),t.typeid).then(function(i){if(0==i.status){for(var n=0;n<f.itemList.length;n++)f.itemList[n].typeid==t.typeid&&f.itemList.splice(n,1);swal("删除成功！","您已经永久删除了这条信息。","success")}})})}function a(){i.Api.addAdminGoods(i.Data.get("aid"),f.name,f.price).then(function(t){0==t.status?n():i.Notify.info("添加失败")})}function s(){f.company="",f.discount=""}function o(){i.Api.updateAdminGoods(i.Data.get("aid"),u.typeid,f.title,f.price).then(function(t){0==t.status?n():i.Notify.info("更新失败")})}function d(t){f.updateDialog=!0,u=t,f.title=u.typename}function c(t){for(var i=0;i<t.length;i++)0==t[i].isrise?t[i].isrise="持平":1==t[i].isrise?t[i].isrise="上涨":t[i].isrise==-1&&(t[i].isrise="下调");f.itemList=t}var u,f=t;f.onDelete=e,f.onAdd=a,f.showAddDialog=s,f.onUpdate=o,f.onSelect=d,n()}angular.module("app").controller("oil-manager.ManageController",["$scope","Core",t])}();
-!function(){function t(t,i){function n(){i.Log.d("init"),i.Api.getUserOilcardSerialList(c,o,s).then(function(t){i.Log.d(t),0==t.status?(i.Log.d(t),t.data&&e(t.data)):i.Notify.info("获取失败")})}function e(t){for(var i=0;i<t.length;i++)1==t[i].status?t[i].status="未充值":2==t[i].status&&(t[i].status="充值成功");a.itemList=t}var a=t,o=1,s=10,c=1;a.itemList=[],n(),a.rechargeSuccess=function(t){i.Log.d("Success"),i.Api.updateUserOilcardSerialById(t.id,i.Data.get("aid")).then(function(t){0==t.status?(i.Notify.info("操作成功"),n()):i.Notify.info("操作失败")})},a.rechargeError=function(t){},a.check2=function(){c=2,n()},a.check1=function(){c=1,n()},a.next=function(){i.Log.d("next"+o),i.Log.d("next"+a.itemList.length),10==a.itemList.length&&(o++,i.Api.getUserOilcardSerialList(c,o,s).then(function(t){0==t.status?(i.Log.d(t),t.data&&e(t.data)):i.Notify.info("获取失败")}))},a.last=function(){i.Log.d("next"+o),o>1&&(o--,i.Api.getUserOilcardSerialList(c,o,s).then(function(t){0==t.status?(i.Log.d(t),t.data&&e(t.data)):i.Notify.info("获取失败")}))}}angular.module("app").controller("recharge.ManageController",["$scope","Core",t])}();
-!function(){function a(a,e,o){function t(){console.log("getUserDetail"),e.Api.getUserOilcardByUid(n).then(function(a){if(e.Log.d(a),a.data){r.oilCards=a.data.oilcard;var o=a.data.user;o&&(r.name=o.uname,r.phone=o.uphone,r.plate=o.uemail)}})}e.Log.d("init"),e.Log.d(o.data);var n=o.data,r=a;t()}angular.module("app").controller("user.DetailController",["$scope","Core","$stateParams",a])}();
-!function(){function t(t,e){function n(){e.Log.d("init"),e.Api.queryAllUser(0,a,u).then(function(t){0==t.status&&(e.Log.d(t),s.itemList=t.data)})}function i(t){e.Log.d("select user"+t),e.go("admin.user-detail",t)}function o(){e.Api.queryUser(0,s.search).then(function(t){e.Log.d(t),0==t.status&&(t.data?(s.itemList=[],s.itemList.push(t.data)):e.Notify.info("未找到用户"))})}var s=t,a=1,u=10;s.onSelect=i,s.onSearch=o,s.itemList=[],n(),s.next=function(){e.Log.d("next"+a),e.Log.d("next"+s.itemList.length),10==s.itemList.length&&(a++,e.Api.queryAllUser(0,a,u).then(function(t){0==t.status&&(e.Log.d(t),s.itemList=t.data)}))},s.last=function(){e.Log.d("next"+a),a>1&&(a--,e.Api.queryAllUser(0,a,u).then(function(t){0==t.status&&(e.Log.d(t),s.itemList=t.data)}))}}angular.module("app").controller("user.ManageController",["$scope","Core",t])}();
-!function(){function a(a,n){var e=a;n.publish(n.Const.DATA.KEY_DEFAULT_NAVIGATION,"withdraw"),e.itemList=[{id:"",bankcard:"6228480402564890018 ",bankname:"中国银行",name:"张三",money:"300.00",status:"提现成功"},{id:"",bankcard:"6228480402564890018 ",bankname:"中国银行",name:"张三",money:"300.00",status:"提现成功"},{id:"",bankcard:"6228480402564890018 ",bankname:"中国银行",name:"张三",money:"300.00",status:"提现成功"},{id:"",bankcard:"6228480402564890018 ",bankname:"中国银行",name:"张三",money:"300.00",status:"提现成功"},{id:"",bankcard:"6228480402564890018 ",bankname:"中国银行",name:"张三",money:"300.00",status:"提现成功"},{id:"",bankcard:"6228480402564890018 ",bankname:"中国银行",name:"张三",money:"300.00",status:"提现成功"},{id:"",bankcard:"6228480402564890018 ",bankname:"中国银行",name:"张三",money:"300.00",status:"提现成功"},{id:"",bankcard:"6228480402564890018 ",bankname:"中国银行",name:"张三",money:"300.00",status:"提现成功"}]}angular.module("app").controller("withdraw.ManageController",["$scope","Core",a])}();
+/**
+ * Created by huyg on 2017/5/18.
+ */
+(function () {
+    angular
+        .module('app')
+        .controller('advertising.ManageController', ['$scope', 'Core','Upload', ManageController]);
+
+    function ManageController($scope, Core,Upload) {
+        var context = $scope;
+        var selectItem;
+        context.onDelete = onDelete;
+        context.onAdd = onAdd;
+        context.showAddDialog = showAddDialog;
+        context.onUpdate = onUpdate;
+        context.onSelect = onSelect;
+        var filename;
+        init();
+
+        function init() {
+            Core.Log.d("init");
+            Core.Log.d(Core.Data.get("aid"));
+
+            Core.Api.getAllAdminAdvertising().then(function (response) {
+                Core.Log.d(response);
+                context.itemList = response.data;
+            });
+        }
+
+        function onUpdate(id) {
+
+        }
+
+        function onDelete(item) {
+            swal({
+                title: "您确定要删除这条信息吗",
+                text: "删除后将无法恢复，请谨慎操作！",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "删除",
+                closeOnConfirm: false
+            }, function () {
+                Core.Api.deleteAdminAdvertising(Core.Data.get("aid"), item.id).then(function (response) {
+                    if (response.status == 0) {
+                        for (var i = 0; i < context.itemList.length; i++) {
+                            if (context.itemList[i].id == item.id) {
+                                context.itemList.splice(i, 1);
+                            }
+                        }
+                        swal("删除成功！", "您已经永久删除了这条信息。", "success");
+                    } else {
+                        Core.Notify.info("删除失败");
+                    }
+                })
+
+            });
+        }
+
+        function onAdd() {
+            Core.Api.addAdminAdvertising(Core.Data.get("aid"), context.title, filename,context.city,context.url).then(function (response) {
+                if (response.status == 0) {
+                    init();
+                } else {
+                    Core.Notify.info("添加失败");
+                }
+            })
+        }
+
+
+        function showAddDialog() {
+
+            context.company = "";
+            context.discount = "";
+        }
+
+        function onUpdate() {
+            Core.Api.updateAdminAdvertising(Core.Data.get("aid"), selectItem.id, context.title, filename,context.city,context.url).then(function (response) {
+                if (response.status == 0) {
+                    init();
+                } else {
+                    Core.Notify.info("更新失败");
+                }
+            })
+        }
+
+
+        function onSelect(item) {
+            selectItem = item;
+            context.city=item.city;
+            context.title=item.context;
+            context.url=item.url;
+
+        }
+
+        $scope.uploadImg = '';
+
+        context.upload = function (file) {
+
+            Upload.upload({
+                url: "http://119.23.79.196/api/util/uploadAvitor",
+                data: {file: file}
+            }).then(function (resp) {
+                var response = resp.data;
+                filename=response.data.fileName
+                context.src="http://www.hzautomotive.com/picture/"+filename;
+                Core.Log.d(response);
+
+            }, function (resp) {
+                Core.Log.d('error');
+                Core.Log.d(resp);
+            }, function (evt) {
+                var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+                console.log('progress: ' + progressPercentage + '% ');
+                Core.Log.d(evt);
+            });
+
+
+        };
+    }
+})();
+/**
+ * Created by huyg on 2017/5/18.
+ */
+(function () {
+    angular
+        .module('app')
+        .controller('discount.ManageController', ['$scope', 'Core', ManageController]);
+
+    function ManageController($scope, Core) {
+        var context = $scope;
+        var selectItem;
+        context.onDelete = onDelete;
+        context.onAdd = onAdd;
+        context.showAddDialog = showAddDialog;
+        context.onUpdate = onUpdate;
+        context.onSelect=onSelect;
+        init();
+
+        function init() {
+            Core.Log.d("init");
+            Core.Log.d(Core.Data.get("aid"));
+
+            Core.Api.getAllAdminOilcardtype().then(function (response) {
+                Core.Log.d(response);
+                context.itemList = response.data;
+            });
+        }
+
+        function onUpdate(id) {
+
+        }
+
+        function onDelete(item) {
+            swal({
+                title: "您确定要删除这条信息吗",
+                text: "删除后将无法恢复，请谨慎操作！",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "删除",
+                closeOnConfirm: false
+            }, function () {
+                Core.Api.deleteAdminOilcardtypeById(Core.Data.get("aid"), item.id).then(function (response) {
+                    if (response.status == 0) {
+                        for (var i = 0; i < context.itemList.length; i++) {
+                            if (context.itemList[i].id == item.id) {
+                                context.itemList.splice(i, 1);
+                            }
+                        }
+                        swal("删除成功！", "您已经永久删除了这条信息。", "success");
+                    }else{
+                        Core.Notify.info("删除失败");
+                    }
+                })
+
+            });
+        }
+
+        function onAdd() {
+            Core.Api.saveAdminOilcardtype(Core.Data.get("aid"), context.company, context.discount).then(function (response) {
+                if (response.status == 0) {
+                    init();
+                } else {
+                    Core.Notify.info("添加失败");
+                }
+            })
+        }
+
+
+        function showAddDialog() {
+
+            context.company = "";
+            context.discount = "";
+        }
+
+        function onUpdate() {
+            Core.Api.updateAdminOilcardtype(Core.Data.get("aid"), selectItem.id,context.title, context.discount).then(function (response) {
+                if (response.status == 0) {
+                    init();
+                } else {
+                    Core.Notify.info("更新失败");
+                }
+            })
+        }
+
+
+        function onSelect(item) {
+            context.updateDialog=true;
+            selectItem = item;
+            context.title=selectItem.oilcardname;
+        }
+
+
+    }
+})();
+(function () {
+    angular
+        .module('app')
+        .controller('adminHome', ['$q', '$scope', 'Core', AdminHomeController]);
+
+    function AdminHomeController($q, $scope, Core) {
+        var context = $scope;
+
+
+
+        context.user = Core.Data.getUser();
+        context.user.avatar = Core.Data.getAvatar(context.user.avatar);
+        context.onClickCell = onClickCell;
+        context.onClickBackground = onClickBackground;
+
+        context.onClickBtn = onClickBtn;
+        context.onClickPermit = onClickPermit;
+        context.onClickReject = onClickReject;
+        context.onClickLeave = onClickLeave;
+        context.onClickTrip = onClickTrip;
+        context.onClickReimb = onClickReimb;
+        context.isShowNotify = false;
+
+        var reimbStat;
+        var leaveStat;
+        var tripStat;
+
+        context.onClickDetail = onClickDetail;
+        Core.on(Core.Const.EVENT.EVENT_ORG_CHANGE, function (event, data) {
+            init();
+        });
+        var orgRootId;
+        var orgId;
+
+
+        init();
+
+        function onClickBackground() {
+            context.showDetail = false;
+        }
+
+        function init() {
+            
+            context.leaveStat = {};
+            context.reimbStat = {};
+            context.tripStat = {};
+
+            context.leaveData = [];
+            context.tripData = [];
+            context.reimbData = [];
+            context.reimbDataY = [];
+            context.leaveDataY = [];
+            context.tripDataY = [];
+
+            
+            context.showDetail = false;
+        }
+
+        function getStat() {
+
+            var time = new Date();
+            var month = time.getMonth() + 1;
+            Core.Log.d(month);
+
+            var week = theWeek();
+            Core.Log.d(week);
+
+            Core.Api.STATISTICS.getApvAdmnLeaveStat(orgRootId).then(function (response) {
+                Core.Log.d('请假');
+                Core.Log.d(response);
+                if (response.code == 0) {
+                    leaveStat = response.data;
+                    context.leaveStat.num = (leaveStat.month_stat[month]/100).toFixed(1);
+                    if(month < 2 || leaveStat.month_stat[month-1] == 0 || leaveStat.month_stat[month] == 0) {
+                        context.leaveStat.showLeaveStatContrast = false;
+                    }
+                    else {
+                        context.leaveStat.showLeaveStatContrast = true;
+                        if(leaveStat.month_stat[month]>leaveStat.month_stat[month-1]) {
+                            context.leaveStat.leaveStatContrast =   ((leaveStat.month_stat[month]-leaveStat.month_stat[month-1])/leaveStat.month_stat[month-1]*100).toFixed(2);
+                            context.leaveStat.up = true;
+                            context.leaveStat.down = false;
+                        }
+                        else if(leaveStat.month_stat[month]<leaveStat.month_stat[month-1]) {
+                            context.leaveStat.leaveStatContrast =   ((leaveStat.month_stat[month-1]-leaveStat.month_stat[month])/leaveStat.month_stat[month-1]*100).toFixed(2);
+                            context.leaveStat.up = false;
+                            context.leaveStat.down = true;
+                        }
+                        else {
+                            context.leaveStat.leaveStatContrast = 0;
+                            context.leaveStat.up = false;
+                            context.leaveStat.down = flse;
+                        }
+                        if(context.leaveStatContrast == 0) {
+                            context.leaveStat.up = false;
+                            context.leaveStat.down = true;
+                        }
+                    }
+                    var weekData = week;
+                    
+                    for (var i = 6; i > 0 ; i--) {
+                        if(weekData < 1) {
+                            break;
+                        }
+                        context.leaveData.push((leaveStat.week_stat[weekData]/100).toFixed(1));
+                        context.leaveDataY.push('第' + weekData + '周');
+                        weekData--;
+                    }
+
+                    context.leaveData.reverse();
+                    context.leaveDataY.reverse();
+                    
+                    Core.publish('init-chart',{x:context.leaveData,y:context.leaveDataY,type: 1});
+                }
+            }, function (error) {
+                Core.Log.d(error);
+            });
+
+            Core.Api.STATISTICS.getReimbStat(orgRootId).then(function (response) {
+                Core.Log.d('报销');
+                Core.Log.d(response);
+                if (response.code == 0) {
+                    reimbStat = response.data;
+                    context.reimbStat.num = (reimbStat.month_stat[month]/100).toFixed(2);
+                    if(month < 2 || reimbStat.month_stat[month-1] == 0 || reimbStat.month_stat[month] == 0) {
+                        context.reimbStat.showReimbStatContrast = false;
+                    }
+                    else {
+                        context.reimbStat.showReimbStatContrast = true;
+                        if(reimbStat.month_stat[month]>reimbStat.month_stat[month-1]) {
+                            context.reimbStat.reimbStatContrast =   (((reimbStat.month_stat[month]-reimbStat.month_stat[month-1])/reimbStat.month_stat[month-1])*100).toFixed(2);
+                            context.reimbStat.up = true;
+                            context.reimbStat.down = false;
+                        }
+                        else if(reimbStat.month_stat[month]<reimbStat.month_stat[month-1]) {
+                            context.reimbStat.reimbStatContrast =   (((reimbStat.month_stat[month-1]-reimbStat.month_stat[month])/reimbStat.month_stat[month-1])*100).toFixed(2);
+                            context.reimbStat.up = false ;
+                            context.reimbStat.down = true ;
+                        }
+                        else {
+                            context.reimbStat.reimbStatContrast = 0;
+                            context.reimbStat.up = false ;
+                            context.reimbStat.down = false ;
+                        }
+                        
+                        if(context.reimbStat.reimbStatContrast == 0) {
+                            context.reimbStat.up = false ;
+                            context.reimbStat.down = false ;
+                        }
+                    }
+                    var weekData = week;
+
+                    for (var i = 6; i > 0 ; i--) {
+                        if(weekData < 1) {
+                            break;
+                        }
+                        context.reimbData.push(((reimbStat.week_stat[weekData])/100).toFixed(2));
+                        context.reimbDataY.push('第' + weekData + '周');
+                        weekData--;
+                    }
+                    context.reimbData.reverse();
+                    context.reimbDataY.reverse();
+                }
+            }, function (error) {
+                Core.Log.d(error);
+            });
+
+            Core.Api.STATISTICS.getTripStat(orgRootId).then(function (response) {
+                Core.Log.d('外勤');
+                Core.Log.d(response);
+                if (response.code == 0) {
+                    tripStat = response.data;
+                    context.tripStat.num = tripStat.month_stat[month];
+                    
+                    if(month < 2 || tripStat.month_stat[month] == 0 || tripStat.month_stat[month-1] == 0) {
+                        context.tripStat.showTripStatContrast = false;
+                    }
+                    else {
+                        context.tripStat.showTripStatContrast = true;
+                        
+                        if(tripStat.month_stat[month] > tripStat.month_stat[month-1]) {
+                            context.tripStat.tripStatContrast = ((tripStat.month_stat[month]-tripStat.month_stat[month-1])/tripStat.month_stat[month-1]*100).toFixed(1);
+                            context.tripStat.up = true;
+                            context.tripStat.down = false;
+                        }
+                        else if(tripStat.month_stat[month] < tripStat.month_stat[month-1]) {
+                            context.tripStat.tripStatContrast = ((tripStat.month_stat[month-1]) - tripStat.month_stat[month]/tripStat.month_stat[month-1]*100).toFixed(1);
+                            context.tripStat.up = false;
+                            context.tripStat.down = true;
+                        }
+                        else {
+                            context.tripStat.tripStatContrast = 0;
+                            context.tripStat.up = false;
+                            context.tripStat.down = false;                       
+                        }
+                        
+                        if(context.tripStat.tripStatContrast == 0) {
+                            context.tripStat.up = false;
+                            context.tripStat.down = false;
+                        }
+                        
+                    }
+                    var weekData = week;
+                    context.tripDataY = [];
+                    for (var i = 6; i > 0 ; i--) {
+                        if(weekData < 1) {
+                            break;
+                        }
+                        context.tripData.push(tripStat.week_stat[weekData]);
+                        context.tripDataY.push('第' + weekData + '周');
+                        weekData--;
+                    }
+                    context.tripData.reverse();
+                    context.tripDataY.reverse();
+                }
+            }, function (error) {
+                Core.Log.d(error);
+            });
+        }
+
+        function onClickLeave() {
+            Core.publish('init-chart',{x:context.leaveData,y:context.leaveDataY,type:Core.Const.APP.TYPE.TYPE_ADMIN_LEAVE});
+        }
+
+        function onClickReimb() {
+            Core.publish('init-chart',{x:context.reimbData,y:context.reimbDataY,type:Core.Const.APP.TYPE.TYPE_FIN_REIMB});
+        }
+
+        function onClickTrip() {
+            Core.publish('init-chart',{x:context.tripData,y:context.tripDataY,type:Core.Const.APP.TYPE.TYPE_WORK_BUSINESS});
+        }
+
+        function onClickBtn(status, orgId, itemId, type) {
+            switch (status) {
+                case -1:
+                    onClickBackground();
+                    onClickReject(orgId, itemId, false, type);
+                    break;
+                case 0:
+                    onClickBackground();
+                    break;
+                case 1:
+                    onClickBackground();
+                    onClickPermit(orgId, itemId, false, type);
+                    break;
+                default :
+                    break;
+            }
+        }
+
+        function onClickCell(index) {
+            context.clickItem = context.apvList[index].data;
+            context.showDetail = true;
+        }
+
+        function getApvList() {
+            Core.Api.APV_MANAGE.getApvManageApprovePendingList(context.company.id, '', 1).then(function (response) {
+                if (response.code == 0) {
+                    var apvList = response.data.approve_pending_list;
+                    context.apvList = getApvData(apvList);
+                }
+            }, function (error) {
+            })
+        }
+
+        function getApvData(data) {
+            var apvList = [];
+            for (var i in data) {
+                var item = {};
+                item.userName = context.user.name;
+                item.status = ' 待审批';
+                item.creatTime = Core.Util.timeFormat(data[i].create_time);
+                item.data = data[i];
+                item.id = data[i].id;
+                switch (data[i].apv_type) {
+                    case Core.Const.APP.APV_MANAGE.APV_TYPE_TEMPLATE:
+                        item.name = data[i].template.name;
+                        item.type = 999;
+                        break;
+                    case Core.Const.APP.APV_MANAGE.APV_TYPE_ADMIN_LEAVE:
+                        item.name = '请假';
+                        item.type = 1;
+                        break;
+                    case Core.Const.APP.APV_MANAGE.APV_TYPE_FIN_PAY:
+                        item.name = '支付';
+                        item.type = 2;
+                        break;
+                    case Core.Const.APP.APV_MANAGE.APV_TYPE_FIN_REIMB:
+                        item.name = '报销';
+                        item.type = 3;
+                        break;
+                    case Core.Const.APP.APV_MANAGE.APV_TYPE_HR_RECRUITMENT:
+                        item.name = '招募';
+                        break;
+                    case Core.Const.APP.APV_MANAGE.APV_TYPE_WORK_BUSINESS:
+                        item.name = '外勤';
+                        item.type = 5;
+                        break;
+                    case Core.Const.APP.APV_MANAGE.APV_TYPE_FIN_FUND:
+                        item.name = '备用金申请';
+                        item.type = 6;
+                        break;
+                    case Core.Const.APP.APV_MANAGE.APV_TYPE_ADMIN_RES:
+                        item.name = '';
+                        break;
+                    case Core.Const.APP.APV_MANAGE.APV_TYPE_ADMIN_RES_GOODS:
+                        item.name = '物品申领';
+                        item.type = 8;
+                        break;
+                    case Core.Const.APP.APV_MANAGE.APV_TYPE_ADMIN_RES_STAMP:
+                        item.name = '用印申请';
+                        item.type = 9;
+                        break;
+                    case Core.Const.APP.APV_MANAGE.APV_TYPE_ADMIN_RES_CAR:
+                        item.name = '用车申请';
+                        item.type = 10;
+                        break;
+                    case Core.Const.APP.APV_MANAGE.APV_TYPE_CARD:
+                        item.name = '名片申请';
+                        item.type = 11;
+                        break;
+                    case Core.Const.APP.APV_MANAGE.APV_TYPE_CONTRACT:
+                        item.name = '合同';
+                        item.type = 12;
+                        break;
+                    case Core.Const.APP.APV_MANAGE.APV_TYPE_TRAIN:
+                        item.name = '培训';
+                        item.type = 13;
+                        break;
+                    case Core.Const.APP.APV_MANAGE.APV_TYPE_REPORT:
+                        item.name = '报告';
+                        item.type = 14;
+                        break;
+                    case Core.Const.APP.APV_MANAGE.APV_TYPE_FIN_TRIP_REIMB:
+                        item.name = '差旅费';
+                        item.type = 15;
+                        break;
+
+                }
+                apvList.push(item);
+                if (i >= 4) {
+                    break;
+                }
+            }
+            return apvList;
+        }
+
+        function onClickDetail(item) {
+            context.showDetail = true;
+            if (item.itemType == 10999 || item.itemType == 999) {
+                
+                context.clickItem = item.apvItem;
+                context.clickItem.apv_type = 999;
+            }
+            else {
+                var itemDetail = {};
+                itemDetail.isHome = true;
+
+                if (item.apvItem.apv) {
+                    itemDetail.org_id = item.apvItem.apv.org_id;
+                    itemDetail.id = item.apvItem.apv.id;
+                    itemDetail.org_root_id = item.apvItem.apv.org_root_id;
+                    context.clickItem = itemDetail;
+                    context.clickItem.apv_type = item.apvItem.apv.apv_type;
+                }
+                else {
+                    itemDetail.org_id = item.apvItem.org_id;
+                    itemDetail.id = item.apvItem.id;
+                    itemDetail.org_root_id = item.apvItem.org_root_id;
+                    context.clickItem = itemDetail;
+                    context.clickItem.apv_type = item.apvItem.apv_type;
+                }
+
+            }
+        }
+
+
+
+        function onClickPermit(orgId, itemId, isStop, type, $event) {
+            if (isStop) {
+                $event.stopPropagation();
+            }
+            Core.Api.APV_MANAGE.permitApv(orgId, orgRootId, itemId, type, '同意').then(function (response) {
+                if (response.code == 0) {
+                    context.onItem = false;
+                    context.onApprove = false;
+                    getApvList();
+                    // setList();
+                    Core.Notify.success('操作成功');
+                }
+            }, function (reason) {
+                Core.Notify.error('操作失败');
+            });
+        }
+
+        function onClickReject(orgId, itemId, isStop, type, $event) {
+            if (isStop) {
+                $event.stopPropagation();
+            }
+            Core.Api.APV_MANAGE.rejectApv(orgId, orgRootId, itemId, type, '不同意').then(function (response) {
+                if (response.code == 0) {
+                    context.onItem = false;
+                    context.onApprove = false;
+                    getApvList();
+                    // setList();
+                    Core.Notify.success('操作成功');
+                }
+            }, function (reason) {
+                Core.Notify.error('操作失败');
+            });
+        }
+
+        function theWeek() {
+            var totalDays = 0;
+            var now = new Date();
+            var years = now.getYear()
+            if (years < 1000) {
+                years += 1900;
+            }
+            var days = new Array(12);
+            days[0] = 31;
+            days[2] = 31;
+            days[3] = 30;
+            days[4] = 31;
+            days[5] = 30;
+            days[6] = 31;
+            days[7] = 31;
+            days[8] = 30;
+            days[9] = 31;
+            days[10] = 30;
+            days[11] = 31;
+            if (Math.round(now.getYear() / 4) == now.getYear() / 4) {
+                days[1] = 29
+            } else {
+                days[1] = 28
+            }
+            if (now.getMonth() == 0) {
+                totalDays = totalDays + now.getDate();
+            } else {
+                var curMonth = now.getMonth();
+                for (var count = 1; count <= curMonth; count++) {
+                    totalDays = totalDays + days[count - 1];
+                }
+                totalDays = totalDays + now.getDate();
+            }
+            var week = Math.round(totalDays / 7);
+            return week;
+        }
+    }
+})();
+/**
+ * Created by huyg on 2017/5/18.
+ */
+(function () {
+    angular
+        .module('app')
+        .controller('invoice.ManageController', ['$scope', 'Core', ManageController]);
+
+    function ManageController($scope, Core) {
+        var context = $scope;
+        var page = 1;
+        var number = 8;
+        var status = 0;
+        context.group=true;
+        context.itemList = [];
+        init();
+        function init() {
+            Core.Log.d("init");
+            Core.Api.getUserInvoiceList(status,page, number).then(function (response) {
+                Core.Log.d(response);
+                if (response.status == 0) {
+                    Core.Log.d(response);
+                    if (response.data) {
+                        changeList(response.data)
+                    }
+                } else {
+                    Core.Notify.info("获取失败");
+                }
+            });
+        }
+
+        context.rechargeSuccess = function (item) {
+            Core.Log.d("Success");
+            Core.Api.updateUserInvoiceStatus(Core.Data.get("aid"),item.id,1).then(function (response) {
+                if (response.status == 0) {
+                    Core.Notify.info("操作成功");
+                    init();
+                } else {
+                    Core.Notify.info("操作失败");
+                }
+            });
+        }
+
+        context.rechargeError = function (item) {
+            Core.Log.d("Success");
+            Core.Api.updateUserInvoiceStatus(Core.Data.get("aid"),item.id,2).then(function (response) {
+                if (response.status == 0) {
+                    Core.Notify.info("操作成功");
+                    init();
+                } else {
+                    Core.Notify.info("操作失败");
+                }
+            });
+        }
+
+
+        context.next = function () {
+            Core.Log.d("next" + page);
+            Core.Log.d("next" + context.itemList.length);
+            if (context.itemList.length == 8) {
+                page++;
+                Core.Api.getUserInvoiceList(status,page, number).then(function (response) {
+                    if (response.status == 0) {
+                        Core.Log.d(response);
+                        if (response.data) {
+                            changeList(response.data)
+                        }
+                    } else {
+                        Core.Notify.info("获取失败");
+                    }
+                });
+            }
+
+        }
+
+        context.last = function () {
+            Core.Log.d("next" + page);
+            if (page > 1) {
+                page--;
+                Core.Api.getUserInvoiceList(status,page, number).then(function (response) {
+                    if (response.status == 0) {
+                        Core.Log.d(response);
+                        if (response.data) {
+                            changeList(response.data)
+                        }
+
+                    } else {
+                        Core.Notify.info("获取失败");
+                    }
+
+                });
+            }
+
+        }
+
+        function changeList(itemList) {
+            for (var i = 0; i < itemList.length; i++) {
+                if (itemList[i].status == 0) {
+                    itemList[i].status = "未开";
+                } else if (itemList[i].status == 1) {
+                    itemList[i].status = "已开";
+                } else if (itemList[i].status == 2) {
+                    itemList[i].status = "拒开";
+                }
+            }
+            context.itemList = itemList;
+        }
+
+        context.check0 = function () {
+            status=0;
+            context.group=true;
+            init();
+        }
+        context.check1 = function () {
+            status=1;
+            context.group=false;
+            init();
+        }
+        context.check2 = function () {
+            status=2;
+            context.group=false;
+            init();
+        }
+    }
+})();
+/**
+ * Created by huyg on 2017/5/18.
+ */
+(function () {
+    angular
+        .module('app')
+        .controller('merchant.DetailController', ['$scope', 'Core','$stateParams', DetailController]);
+
+    function DetailController($scope, Core,$stateParams) {
+        var context = $scope;
+        Core.Log.d("init");
+        Core.Log.d($stateParams.data);
+        var merId = $stateParams.data;
+        init();
+        function init() {
+            console.log("getUserDetail");
+            Core.Api.getMerchantBankCard(merId).then(function (response) {
+                Core.Log.d(response);
+                if (response.data) {
+                    context.bankCards = response.data.merchantbankcard;
+                    context.goods = response.data.merchantgoods;
+                    var merchant = response.data.merchant;
+                    if (merchant) {
+                        context.name = merchant.mname;
+                        context.phone = merchant.mphone;
+                        context.address = merchant.maddress;
+                    }
+                }
+
+            });
+        }
+
+
+    }
+})();
+/**
+ * Created by huyg on 2017/5/18.
+ */
+(function () {
+    angular
+        .module('app')
+        .controller('merchant.ManageController', ['$scope', 'Core', ManageController]);
+
+    function ManageController($scope, Core) {
+        var context = $scope;
+        var page = 1;
+        var number = 10;
+        context.onSelect = onSelect;
+        init();
+
+        function init() {
+            Core.Log.d("init");
+            Core.Api.queryAllMerchant(page, number).then(function (response) {
+                Core.Log.d(response);
+                if(response.data){
+                    for(var i=0;i<response.data.length;i++){
+                        if(response.data[i].tel=="[]"){
+                            response.data[i].tel="无";
+                        }
+                    }
+                    context.itemList = response.data;
+                }
+            });
+        }
+
+        function onSelect(merId) {
+            Core.Log.d("select mer"+merId);
+            Core.go('admin.merchant-detail',merId);
+        }
+
+
+        context.next = function () {
+            Core.Log.d("next"+page);
+            Core.Log.d("next"+context.itemList.length);
+            if(context.itemList.length==10){
+                page++;
+                Core.Api.queryAllMerchant(page, number).then(function (response) {
+                    Core.Log.d(response);
+                    context.itemList = response.data;
+                });
+            }
+
+        }
+
+        context.last=function () {
+            Core.Log.d("next"+page);
+            if (page>1){
+                page--;
+                Core.Api.queryAllMerchant(page, number).then(function (response) {
+                    Core.Log.d(response);
+                    context.itemList = response.data;
+                });
+            }
+
+        }
+    }
+})();
+/**
+ * Created by huyg on 2017/5/18.
+ */
+(function () {
+    angular
+        .module('app')
+        .controller('oil-manager.ManageController', ['$scope', 'Core', ManageController]);
+
+    function ManageController($scope, Core) {
+        var context = $scope;
+        var selectItem;
+        context.onDelete = onDelete;
+        context.onAdd = onAdd;
+        context.showAddDialog = showAddDialog;
+        context.onUpdate = onUpdate;
+        context.onSelect=onSelect;
+        init();
+
+        function init() {
+            Core.Log.d("init");
+            Core.Log.d(Core.Data.get("aid"));
+
+            Core.Api.getAllAdminGoods().then(function (response) {
+                Core.Log.d(response);
+
+                if (response.status == 0) {
+                    if (response.data){
+                        changeList(response.data)
+                    }
+
+                } else {
+                    Core.Notify.info("更新失败");
+                }
+            });
+        }
+
+        function onUpdate(id) {
+
+        }
+
+        function onDelete(item) {
+            swal({
+                title: "您确定要删除这条信息吗",
+                text: "删除后将无法恢复，请谨慎操作！",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "删除",
+                closeOnConfirm: false
+            }, function () {
+                Core.Api.deleteAdminGoods(Core.Data.get("aid"), item.typeid).then(function (response) {
+                    if (response.status == 0) {
+                        for (var i = 0; i < context.itemList.length; i++) {
+                            if (context.itemList[i].typeid == item.typeid) {
+                                context.itemList.splice(i, 1);
+                            }
+                        }
+                        swal("删除成功！", "您已经永久删除了这条信息。", "success");
+                    }
+                })
+
+            });
+        }
+
+        function onAdd() {
+            Core.Api.addAdminGoods(Core.Data.get("aid"), context.name, context.price).then(function (response) {
+                if (response.status == 0) {
+                    init();
+                } else {
+                    Core.Notify.info("添加失败");
+                }
+            })
+        }
+
+
+        function showAddDialog() {
+
+            context.company = "";
+            context.discount = "";
+        }
+
+        function onUpdate() {
+            Core.Api.updateAdminGoods(Core.Data.get("aid"), selectItem.typeid,context.title, context.price).then(function (response) {
+                if (response.status == 0) {
+                    init();
+                } else {
+                    Core.Notify.info("更新失败");
+                }
+            })
+        }
+
+
+        function onSelect(item) {
+            context.updateDialog=true;
+            selectItem = item;
+            context.title=selectItem.typename;
+        }
+
+
+        function changeList(itemList) {
+            for(var i=0;i<itemList.length;i++){
+                if(itemList[i].isrise==0){
+                    itemList[i].isrise="持平";
+                }else if(itemList[i].isrise==1){
+                    itemList[i].isrise="上涨";
+                }else if(itemList[i].isrise==-1){
+                    itemList[i].isrise="下调";
+                }
+            }
+            context.itemList = itemList;
+        }
+
+
+
+    }
+})();
+/**
+ * Created by huyg on 2017/5/18.
+ */
+(function () {
+    angular
+        .module('app')
+        .controller('recharge.ManageController', ['$scope', 'Core', ManageController]);
+
+    function ManageController($scope, Core) {
+        var context = $scope;
+        var page = 1;
+        var number = 10;
+        var status = 1;
+        context.itemList = [];
+        init();
+        function init() {
+            Core.Log.d("init");
+            Core.Api.getUserOilcardSerialList(status, page, number).then(function (response) {
+                Core.Log.d(response);
+                if (response.status == 0) {
+                    Core.Log.d(response);
+                    if(response.data){
+                        changeList(response.data)
+                    }
+                }else{
+                    Core.Notify.info("获取失败");
+                }
+            });
+        }
+
+        context.rechargeSuccess = function (item) {
+            Core.Log.d("Success");
+            Core.Api.updateUserOilcardSerialById(item.id,Core.Data.get("aid")).then(function (response) {
+                if (response.status == 0) {
+                    Core.Notify.info("操作成功");
+                    init();
+                }else{
+                    Core.Notify.info("操作失败");
+                }
+            });
+        }
+        
+        context.rechargeError = function (item) {
+            
+        }
+
+
+        context.check2 = function () {
+            status = 2;
+            init();
+        }
+
+        context.check1 = function () {
+            status = 1;
+            init();
+        }
+
+        context.next = function () {
+            Core.Log.d("next" + page);
+            Core.Log.d("next" + context.itemList.length);
+            if (context.itemList.length == 10) {
+                page++;
+                Core.Api.getUserOilcardSerialList(status, page, number).then(function (response) {
+                    if (response.status == 0) {
+                        Core.Log.d(response);
+                        if(response.data){
+                            changeList(response.data)
+                        }
+                    }else{
+                        Core.Notify.info("获取失败");
+                    }
+                });
+            }
+
+        }
+
+        context.last = function () {
+            Core.Log.d("next" + page);
+            if (page > 1) {
+                page--;
+                Core.Api.getUserOilcardSerialList(status, page, number).then(function (response) {
+                    if (response.status == 0) {
+                        Core.Log.d(response);
+                        if(response.data){
+                            changeList(response.data)
+                        }
+
+                    }else{
+                        Core.Notify.info("获取失败");
+                    }
+
+                });
+            }
+
+        }
+
+        function changeList(itemList) {
+            for(var i=0;i<itemList.length;i++){
+                if(itemList[i].status==1){
+                    itemList[i].status="未充值";
+                }else if(itemList[i].status==2){
+                    itemList[i].status="充值成功";
+                }
+            }
+            context.itemList = itemList;
+        }
+
+    }
+})();
+/**
+ * Created by huyg on 2017/5/18.
+ */
+(function () {
+    angular
+        .module('app')
+        .controller('user.DetailController', ['$scope', 'Core', '$stateParams', DetailController]);
+
+    function DetailController($scope, Core, $stateParams) {
+        Core.Log.d("init");
+        Core.Log.d($stateParams.data);
+        var userId = $stateParams.data;
+        var context = $scope;
+        init();
+        function init() {
+            console.log("getUserDetail");
+            Core.Api.getUserOilcardByUid(userId).then(function (response) {
+                Core.Log.d(response);
+                if (response.data) {
+                    context.oilCards = response.data.oilcard;
+                    var user = response.data.user;
+                    if (user) {
+                        context.name = user.uname;
+                        context.phone = user.uphone;
+                        context.plate = user.uemail;
+                    }
+                }
+
+            });
+        }
+
+
+    }
+})();
+/**
+ * Created by huyg on 2017/5/18.
+ */
+(function () {
+    angular
+        .module('app')
+        .controller('user.ManageController', ['$scope', 'Core', ManageController]);
+
+    function ManageController($scope, Core) {
+        var context = $scope;
+        var page = 1;
+        var number = 10;
+        context.onSelect = onSelect;
+        context.onSearch = onSearch;
+        context.itemList = [];
+        init();
+
+        function init() {
+            Core.Log.d("init");
+            Core.Api.queryAllUser(0, page, number).then(function (response) {
+                if (response.status == 0) {
+                    Core.Log.d(response);
+                    context.itemList = response.data;
+                }
+            });
+        }
+
+        function onSelect(userId) {
+            Core.Log.d("select user" + userId);
+            Core.go('admin.user-detail', userId);
+        }
+
+        context.next = function () {
+            Core.Log.d("next" + page);
+            Core.Log.d("next" + context.itemList.length);
+            if (context.itemList.length == 10) {
+                page++;
+                Core.Api.queryAllUser(0, page, number).then(function (response) {
+                    if (response.status == 0) {
+                        Core.Log.d(response);
+                        context.itemList = response.data;
+                    }
+                });
+            }
+
+        }
+
+        context.last = function () {
+            Core.Log.d("next" + page);
+            if (page > 1) {
+                page--;
+                Core.Api.queryAllUser(0, page, number).then(function (response) {
+                    if (response.status == 0) {
+                        Core.Log.d(response);
+                        context.itemList = response.data;
+                    }
+
+                });
+            }
+
+        }
+
+        function onSearch() {
+            Core.Api.queryUser(0, context.search).then(function (response) {
+                Core.Log.d(response);
+                if (response.status == 0) {
+                    if (response.data) {
+
+                        context.itemList = [];
+                        context.itemList.push(response.data);
+                    }else{
+                        Core.Notify.info("未找到用户");
+                    }
+
+                }
+
+            });
+        }
+
+
+    }
+})();
+/**
+ * Created by huyg on 2017/5/18.
+ */
+(function () {
+    angular
+        .module('app')
+        .controller('withdraw.ManageController', ['$scope', 'Core', ManageController]);
+
+    function ManageController($scope, Core) {
+        var context = $scope;
+        Core.publish(Core.Const.DATA.KEY_DEFAULT_NAVIGATION,'withdraw');
+        context.itemList=[
+            {
+                id:'',
+                bankcard:'6228480402564890018 ',
+                bankname:'中国银行',
+                name:'张三',
+                money:'300.00',
+                status:'提现成功'
+            },
+            {
+                id:'',
+                bankcard:'6228480402564890018 ',
+                bankname:'中国银行',
+                name:'张三',
+                money:'300.00',
+                status:'提现成功'
+            },
+            {
+                id:'',
+                bankcard:'6228480402564890018 ',
+                bankname:'中国银行',
+                name:'张三',
+                money:'300.00',
+                status:'提现成功'
+            },
+            {
+                id:'',
+                bankcard:'6228480402564890018 ',
+                bankname:'中国银行',
+                name:'张三',
+                money:'300.00',
+                status:'提现成功'
+            },
+            {
+                id:'',
+                bankcard:'6228480402564890018 ',
+                bankname:'中国银行',
+                name:'张三',
+                money:'300.00',
+                status:'提现成功'
+            },
+            {
+                id:'',
+                bankcard:'6228480402564890018 ',
+                bankname:'中国银行',
+                name:'张三',
+                money:'300.00',
+                status:'提现成功'
+            },{
+                id:'',
+                bankcard:'6228480402564890018 ',
+                bankname:'中国银行',
+                name:'张三',
+                money:'300.00',
+                status:'提现成功'
+            },{
+                id:'',
+                bankcard:'6228480402564890018 ',
+                bankname:'中国银行',
+                name:'张三',
+                money:'300.00',
+                status:'提现成功'
+            }
+
+
+
+
+        ];
+
+
+
+    }
+})();

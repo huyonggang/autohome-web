@@ -1,0 +1,1 @@
+angular.module("templates").run(["$templateCache", function($templateCache) {$templateCache.put("core/navigation/drop-down.html","<div class=\"dropdown\" uib-dropdown>\n    <a href class=\"m-link\"\n       uib-dropdown-toggle>\n        <span>{{clickItem.name}}</span>\n    </a>\n</div>\n");}]);

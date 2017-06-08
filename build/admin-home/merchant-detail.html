@@ -32,64 +32,37 @@
         </div>
     </div>
 
+
+
     <div class="ibox">
         <div class="ibox-title">
-            <h5>银行卡信息</h5>
+            <h5>商品信息</h5>
         </div>
         <div class="ibox-content">
-            <table class=" table">
+            <table class="ibox table table-hover">
+                <caption>商品信息</caption>
                 <thead>
                 <tr>
                     <th>#</th>
-                    <th>卡号类型</th>
-                    <th>卡号</th>
-                    <th>创建时间</th>
+                    <th>油号名称</th>
+                    <th>挂牌价</th>th>
+                    <th>优惠后价格</th>
+                    <th>其他优惠信息</th>
 
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="item in bankCards">
+                <tr ng-repeat="item in goods">
                     <td>{{$index+1}}</td>
-                    <td><span class="line">{{item.bankname}}</span>
-                    </td>
-                    <td>{{item.bankcard}}</td>
-                    <td>{{item.createtime}}</td>
+                    <td>{{item.gname}}</td>
+                    <td>{{item.goriginalprice}}</td>
+                    <td>{{item.gpresentprice}}</td>
+                    <td>{{item.gremark}}</td>
                 </tr>
 
                 </tbody>
             </table>
         </div>
     </div>
-
-
-    <!--<div class="ibox">-->
-        <!--<div class="ibox-title">-->
-            <!--<h5>商品信息</h5>-->
-        <!--</div>-->
-        <!--<div class="ibox-content">-->
-            <!--<table class="ibox table table-hover">-->
-                <!--<caption>商品信息</caption>-->
-                <!--<thead>-->
-                <!--<tr>-->
-                    <!--<th>#</th>-->
-                    <!--<th>油类型</th>-->
-                    <!--<th>优惠折扣</th>-->
-                    <!--<th>其他优惠信息</th>-->
-
-                <!--</tr>-->
-                <!--</thead>-->
-                <!--<tbody>-->
-                <!--<tr ng-repeat="item in goods">-->
-                    <!--<td>{{$index+1}}</td>-->
-                    <!--<td><span class="line">{{item.gname}}</span>-->
-                    <!--</td>-->
-                    <!--<td>{{item.goriginalprice}}</td>-->
-                    <!--<td>{{item.gremark}}</td>-->
-                <!--</tr>-->
-
-                <!--</tbody>-->
-            <!--</table>-->
-        <!--</div>-->
-    <!--</div>-->
 
 </div>
