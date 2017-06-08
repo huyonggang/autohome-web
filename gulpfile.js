@@ -20,6 +20,7 @@ var rev = require("gulp-rev");
 var revReplace = require("gulp-rev-replace");
 var browserSync = require('browser-sync').create();
 var sass = require('gulp-sass');
+var connect = require('gulp-connect');
 
 var imagemin = require('gulp-imagemin');
 var pngquant = require('imagemin-pngquant');
@@ -30,8 +31,8 @@ var isProd = false;
  * begin build app js dir
  */
 
-var apps = ['admin-home','login'];
-var coreComponents = ['top-bar' , 'form-error-tip', 'loading', 'menu', 'navigation', 'toast', 'page','image-show','search-bar','setting-bar','aside','aside-user','drop-down'];
+var apps = ['admin-home', 'login'];
+var coreComponents = ['top-bar', 'form-error-tip', 'loading', 'menu', 'navigation', 'toast', 'page', 'image-show', 'search-bar', 'setting-bar', 'aside', 'aside-user', 'drop-down'];
 
 gulp.task('clean-build', function () {
     var tasks = [];
@@ -61,44 +62,44 @@ gulp.task('set-prod-true', function () {
 
 gulp.task('concat-dep-js', ['clean-build'], function () {
     var bundle = gulp.src([
-            './node_modules/angular/angular.js',
-            './node_modules/angular-route/angular-route.js',
-            './node_modules/angular-animate/angular-animate.js',
-            './node_modules/angular-touch/angular-touch.js',
-            './node_modules/angular-local-storage/dist/angular-local-storage.js',
-            './node_modules/ng-file-upload/dist/ng-file-upload-all.js',
-            './node_modules/angular-sortable-view/src/angular-sortable-view.js',
-            './node_modules/angular-ui-router/release/angular-ui-router.js',
-            './node_modules/oclazyload/dist/ocLazyLoad.js',
-            './node_modules/ng-dialog/js/ngDialog.js',
-            './node_modules/angular-ui-notification/dist/angular-ui-notification.js',
-            './node_modules/ng-sortable/dist/ng-sortable.js',
-            './node_modules/angularjs-datepicker/dist/angular-datepicker.min.js',
-            './node_modules/echarts/dist/echarts.min.js',
-            './lib/bootstrap/ui-bootstrap-tpls-1.1.2.min.js',
-            './node_modules/sweetalert/dist/sweetalert.min.js'
-            
-        ])
+        './node_modules/angular/angular.js',
+        './node_modules/angular-route/angular-route.js',
+        './node_modules/angular-animate/angular-animate.js',
+        './node_modules/angular-touch/angular-touch.js',
+        './node_modules/angular-local-storage/dist/angular-local-storage.js',
+        './node_modules/ng-file-upload/dist/ng-file-upload-all.js',
+        './node_modules/angular-sortable-view/src/angular-sortable-view.js',
+        './node_modules/angular-ui-router/release/angular-ui-router.js',
+        './node_modules/oclazyload/dist/ocLazyLoad.js',
+        './node_modules/ng-dialog/js/ngDialog.js',
+        './node_modules/angular-ui-notification/dist/angular-ui-notification.js',
+        './node_modules/ng-sortable/dist/ng-sortable.js',
+        './node_modules/angularjs-datepicker/dist/angular-datepicker.min.js',
+        './node_modules/echarts/dist/echarts.min.js',
+        './lib/bootstrap/ui-bootstrap-tpls-1.1.2.min.js',
+        './node_modules/sweetalert/dist/sweetalert.min.js'
+
+    ])
         .pipe(concat('bundle.js', {newLine: '\r\n'}))
         .pipe(gulp.dest('build/asset/dep/'));
 
     var bundleMinified = gulp.src([
-            './node_modules/angular/angular.min.js',
-            './node_modules/angular-route/angular-route.min.js',
-            './node_modules/angular-animate/angular-animate.min.js',
-            './node_modules/angular-touch/angular-touch.min.js',
-            './node_modules/angular-local-storage/dist/angular-local-storage.min.js',
-            './node_modules/ng-file-upload/dist/ng-file-upload-all.min.js',
-            './node_modules/angular-sortable-view/src/angular-sortable-view.min.js',
-            './node_modules/angular-ui-router/release/angular-ui-router.min.js',
-            './node_modules/oclazyload/dist/ocLazyLoad.min.js',
-            './node_modules/ng-dialog/js/ngDialog.min.js',
-            './node_modules/angular-ui-notification/dist/angular-ui-notification.min.js',
-            './node_modules/ng-sortable/dist/ng-sortable.min.js',
-            './node_modules/angularjs-datepicker/dist/angular-datepicker.min.js',
-            './node_modules/echarts/dist/echarts.js',
-            './lib/bootstrap/ui-bootstrap-tpls-1.1.2.min.js'
-        ])
+        './node_modules/angular/angular.min.js',
+        './node_modules/angular-route/angular-route.min.js',
+        './node_modules/angular-animate/angular-animate.min.js',
+        './node_modules/angular-touch/angular-touch.min.js',
+        './node_modules/angular-local-storage/dist/angular-local-storage.min.js',
+        './node_modules/ng-file-upload/dist/ng-file-upload-all.min.js',
+        './node_modules/angular-sortable-view/src/angular-sortable-view.min.js',
+        './node_modules/angular-ui-router/release/angular-ui-router.min.js',
+        './node_modules/oclazyload/dist/ocLazyLoad.min.js',
+        './node_modules/ng-dialog/js/ngDialog.min.js',
+        './node_modules/angular-ui-notification/dist/angular-ui-notification.min.js',
+        './node_modules/ng-sortable/dist/ng-sortable.min.js',
+        './node_modules/angularjs-datepicker/dist/angular-datepicker.min.js',
+        './node_modules/echarts/dist/echarts.js',
+        './lib/bootstrap/ui-bootstrap-tpls-1.1.2.min.js'
+    ])
         .pipe(concat('bundle.min.js', {newLine: '\r\n'}))
         .pipe(gulp.dest('build/asset/dep/'));
 
@@ -107,17 +108,17 @@ gulp.task('concat-dep-js', ['clean-build'], function () {
 
 gulp.task('concat-dep-css', ['clean-build'], function () {
     var bundle = gulp.src([
-            './node_modules/angular-ui-notification/dist/angular-ui-notification.css',
-            './node_modules/angularjs-datepicker/dist/angular-datepicker.min.css',
-            './node_modules/sweetalert/dist/sweetalert.css'
-        ])
+        './node_modules/angular-ui-notification/dist/angular-ui-notification.css',
+        './node_modules/angularjs-datepicker/dist/angular-datepicker.min.css',
+        './node_modules/sweetalert/dist/sweetalert.css'
+    ])
         .pipe(concat('bundle.css', {newLine: '\r\n'}))
         .pipe(gulp.dest('build/asset/dep/'));
 
     var bundleMinified = gulp.src([
-            './node_modules/angular-ui-notification/dist/angular-ui-notification.min.css',
-            './node_modules/angularjs-datepicker/dist/angular-datepicker.min.css'
-        ])
+        './node_modules/angular-ui-notification/dist/angular-ui-notification.min.css',
+        './node_modules/angularjs-datepicker/dist/angular-datepicker.min.css'
+    ])
         .pipe(concat('bundle.min.css', {newLine: '\r\n'}))
         .pipe(gulp.dest('build/asset/dep/'));
 
@@ -126,14 +127,14 @@ gulp.task('concat-dep-css', ['clean-build'], function () {
 
 gulp.task('concat-third-lib-css', ['clean-build'], function () {
     var thirdLibCss = gulp.src([
-            'lib/bootstrap/bootstrap.css'
-        ])
+        'lib/bootstrap/bootstrap.css'
+    ])
         .pipe(concat('third-lib.css', {newLine: '\r\n'}))
         .pipe(gulp.dest('build/asset/lib/'));
 
     var thirdLibCssMinified = gulp.src([
-            'lib/bootstrap/bootstrap.css'
-        ])
+        'lib/bootstrap/bootstrap.css'
+    ])
         .pipe(concat('third-lib.min.css', {newLine: '\r\n'}))
         .pipe(gulp.dest('build/asset/lib/'));
 
@@ -368,21 +369,21 @@ gulp.task('copy-img', ['clean-build'], function () {
 });
 
 //concat third js
-gulp.task('concat-third-lib-js', ['clean-build'], function(){
+gulp.task('concat-third-lib-js', ['clean-build'], function () {
     var thirdLibJs = gulp.src([
-            'node_modules/jquery/dist/jquery.min.js', 
-            'lib/jquery-ui/jquery-ui.min.js',
-            'lib/ui-gird/ui-grid.js',
-            'lib/page/extendPagination.js'
-        ])
+        'node_modules/jquery/dist/jquery.min.js',
+        'lib/jquery-ui/jquery-ui.min.js',
+        'lib/ui-gird/ui-grid.js',
+        'lib/page/extendPagination.js'
+    ])
         .pipe(concat('third-lib.js', {newLine: '\r\n'}))
         .pipe(gulp.dest('build/asset/lib/'));
 
     var thirdLibJsMinified = gulp.src([
-            'node_modules/jquery/dist/jquery.min.js', 
-            'lib/jquery-ui/jquery-ui.min.js',
-            'lib/ui-gird/ui-grid.js'
-        ])
+        'node_modules/jquery/dist/jquery.min.js',
+        'lib/jquery-ui/jquery-ui.min.js',
+        'lib/ui-gird/ui-grid.js'
+    ])
         .pipe(concat('third-lib.min.js', {newLine: '\r\n'}))
         .pipe(gulp.dest('build/asset/lib/'));
 
@@ -562,18 +563,18 @@ gulp.task('build-holder-html', ['build-holder'], function () {
 
 gulp.task('rev', ['default', 'clean-dist'], function () {
     return gulp.src(['build/**/*.css', 'build/**/*.js', 'build/**/*.html'])
-        //.pipe(rev())
+    //.pipe(rev())
         .pipe(gulp.dest('dist/'))
         //.pipe(rev.manifest())
         //.pipe(gulp.dest('build/'))
-    ;
+        ;
 });
 
 gulp.task('rev-replace', ["rev", 'clean-dist'], function () {
     var manifest = gulp.src('build/rev-manifest.json');
 
     return gulp.src(['build/*.html'])
-        //.pipe(revReplace({manifest: manifest}))
+    //.pipe(revReplace({manifest: manifest}))
         .pipe(gulp.dest('dist/'));
 });
 
@@ -700,6 +701,13 @@ gulp.task('sync', function () {
 gulp.task('sync-dist', function () {
     browserSync.init({
         server: "./dist",
+        open: false
+    });
+});
+gulp.task('server', function () {
+    connect.server({
+        root: "./build",
+        port: 8000,
         open: false
     });
 });
