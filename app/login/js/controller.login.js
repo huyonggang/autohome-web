@@ -19,6 +19,7 @@
                 if(response.status==0){
                     Core.Notify.info("登录成功");
                     Core.Data.set("aid",response.data.aid);
+                    Core.Data.set();
                     Core.go('admin.user');
                 }else{
                     Core.Notify.info("用户名或密码错误");

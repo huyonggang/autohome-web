@@ -88,8 +88,6 @@
                             if(response.data.data){
                                 changeList(response.data.data)
                             }
-                            var total=response.data.count;
-                            showPage(total);
                         }else{
                             Core.Notify.info("获取失败");
                         }
