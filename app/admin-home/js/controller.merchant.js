@@ -12,19 +12,26 @@
         var number = 10;
         context.onSelect = onSelect;
         init();
-
         function init() {
             Core.Log.d("init");
             Core.Api.queryAllMerchant(page, number).then(function (response) {
                 Core.Log.d(response);
-                if(response.data){
-                    for(var i=0;i<response.data.length;i++){
-                        if(response.data[i].tel=="[]"){
-                            response.data[i].tel="无";
+                if (response.status==0){
+                    if(response.data.data){
+                        for(var i=0;i<response.data.data.length;i++){
+                            if(response.data.data[i].tel=="[]"){
+                                response.data.data[i].tel="无";
+                            }
                         }
+                        context.itemList = response.data.data;
                     }
-                    context.itemList = response.data;
+                    var total = response.data.count;
+                    showPage(total);
                 }
+                else{
+                    Core.Notify.info("获取商户失败");
+                }
+
             });
         }
 
@@ -33,30 +40,60 @@
             Core.go('admin.merchant-detail',merId);
         }
 
+        context.onSearch=function (){
+            Core.Api.queryMerchantByName(context.name,1, 1).then(function (response) {
+                Core.Log.d(response);
+                if (response.status==0){
+                    if(response.data.data){
+                        for(var i=0;i<response.data.data.length;i++){
+                            if(response.data.data[i].tel=="[]"){
+                                response.data.data[i].tel="无";
+                            }
+                        }
+                        context.itemList = response.data.data;
+                    }
+                    var total = response.data.count;
+                    showPage(total);
+                }
+                else{
+                    Core.Notify.info("获取商户失败");
+                }
 
-        context.next = function () {
-            Core.Log.d("next"+page);
-            Core.Log.d("next"+context.itemList.length);
-            if(context.itemList.length==10){
-                page++;
-                Core.Api.queryAllMerchant(page, number).then(function (response) {
-                    Core.Log.d(response);
-                    context.itemList = response.data;
-                });
-            }
-
+            });
         }
 
-        context.last=function () {
-            Core.Log.d("next"+page);
-            if (page>1){
-                page--;
-                Core.Api.queryAllMerchant(page, number).then(function (response) {
-                    Core.Log.d(response);
-                    context.itemList = response.data;
-                });
-            }
+        function showPage(total) {
+            $('#callBackPager').extendPagination({
 
+                totalCount: total,
+
+                showCount: 10,
+
+                limit: 10,
+
+                callback: function (curr, limit, totalCount) {
+                    Core.Log.d("totalCount " + totalCount);
+                    Core.Api.queryAllMerchant(curr, limit).then(function (response) {
+                        Core.Log.d(response);
+                        if (response.status==0){
+                            if(response.data.data){
+                                for(var i=0;i<response.data.data.length;i++){
+                                    if(response.data.data[i].tel=="[]"){
+                                        response.data.data[i].tel="无";
+                                    }
+                                }
+                                context.itemList = response.data.data;
+                            }
+                        }
+                        else{
+                            Core.Notify.info("获取商户失败");
+                        }
+
+                    });
+
+                }
+
+            });
         }
     }
 })();

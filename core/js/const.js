@@ -42,6 +42,8 @@
             },
 
             NET: {
+                IMG_UPLOAD:"http://119.23.79.196/api/util/uploadAvitorAndroid",
+                IMG_RUL:"http://www.hzautomotive.com/picture/",
                 END_POINT: 'http://119.23.79.196/api/admin',
                 END_POINT_USER: 'http://sw-user-api.yuntick.com/public/1',
                 END_POINT_ORG: 'http://sw-user-api.yuntick.com/public/1',
@@ -64,6 +66,7 @@
                     USER_GET_LIST:"queryAllUser",
                     USER_GET:"queryUser",
                     MERCHANT_GET_LIST:"queryAllMerchant",
+                    MERCHANT_GET:"queryMerchantByName",
                     USER_OIL_CARD:"getUSerOilcardByUid",
                     MERCHANT_BANK_CARD:"getMerchantBankcardAndGoodsByMid",
                     WITHDRAW_GET_LIST:"getAllWithdrawals",

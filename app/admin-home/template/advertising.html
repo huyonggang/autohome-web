@@ -40,7 +40,7 @@
 
 
         <div class="modal inmodal fade" id="update" tabindex="-1" role="dialog"  aria-hidden="true">
-            <div class="modal-dialog modal-sm">
+            <div class="modal-dialog modal-sm" style="width: 700px">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
@@ -61,8 +61,11 @@
                             <input  ng-model="url" class="form-control" id="url" placeholder="请输入地址(http://开头)">
                         </div>
 
-                        <img ng-src={{src}}  >
-                        <button ngf-select="upload($file)" accept="image/jpg,image/jpeg,image/png,image/gif" type="button" class="btn btn-white" data-dismiss="modal">图片上传</button>
+                        <div>
+                            <img ng-src={{src}} style="width: 640px;height: 200px" >
+                        </div>
+
+                        <button style="margin-top: 10px" ngf-select="upload($file)" accept="image/jpg,image/jpeg,image/png,image/gif" type="button" class="btn btn-primary" data-dismiss="modal" ng-model="data.file">图片上传(规格为640*200)</button>
 
 
                     </div>
@@ -75,8 +78,8 @@
             </div>
         </div>
 
-        <div class="modal inmodal fade" id="add" tabindex="-1" role="dialog"  aria-hidden="true" >
-            <div class="modal-dialog modal-sm">
+        <div class="modal inmodal fade"  id="add" tabindex="-1" role="dialog"  aria-hidden="true" >
+            <div class="modal-dialog modal-sm" style="width: 700px">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
@@ -95,9 +98,11 @@
                             <label for="url">地址</label>
                             <input  ng-model="url" class="form-control" id="url" placeholder="请输入地址(http://开头)">
                         </div>
+                        <div>
+                            <img ng-src={{src}} style="width: 640px;height: 200px" >
+                        </div>
 
-                        <img ng-src={{src}}  >
-                        <button ngf-select="upload($file)" accept="image/jpg,image/jpeg,image/png,image/gif" type="button" class="btn btn-white" data-dismiss="modal">图片上传</button>
+                        <button style="margin-top: 10px" ngf-select="upload($file)" accept="image/jpg,image/jpeg,image/png,image/gif" type="button" class="btn btn-primary" data-dismiss="modal" ng-model="data.file">图片上传(规格为640*200)</button>
 
 
                     </div>

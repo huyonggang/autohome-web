@@ -19,8 +19,12 @@
             Core.Log.d("init");
             Core.Api.queryAllUser(0, page, number).then(function (response) {
                 if (response.status == 0) {
+                    var total=response.data.count;
+                    showPage(total);
                     Core.Log.d(response);
-                    context.itemList = response.data;
+                    context.itemList = response.data.data;
+                }else{
+                    Core.Notify.info("获取用户失败");
                 }
             });
         }
@@ -30,44 +34,13 @@
             Core.go('admin.user-detail', userId);
         }
 
-        context.next = function () {
-            Core.Log.d("next" + page);
-            Core.Log.d("next" + context.itemList.length);
-            if (context.itemList.length == 10) {
-                page++;
-                Core.Api.queryAllUser(0, page, number).then(function (response) {
-                    if (response.status == 0) {
-                        Core.Log.d(response);
-                        context.itemList = response.data;
-                    }
-                });
-            }
-
-        }
-
-        context.last = function () {
-            Core.Log.d("next" + page);
-            if (page > 1) {
-                page--;
-                Core.Api.queryAllUser(0, page, number).then(function (response) {
-                    if (response.status == 0) {
-                        Core.Log.d(response);
-                        context.itemList = response.data;
-                    }
-
-                });
-            }
-
-        }
-
         function onSearch() {
             Core.Api.queryUser(0, context.search).then(function (response) {
                 Core.Log.d(response);
                 if (response.status == 0) {
                     if (response.data) {
-
                         context.itemList = [];
-                        context.itemList.push(response.data);
+                        context.itemList.push(response.data.data);
                     }else{
                         Core.Notify.info("未找到用户");
                     }
@@ -76,6 +49,31 @@
 
             });
         }
+        function showPage(total) {
+            $('#callBackPager').extendPagination({
+
+                totalCount: total,
+
+                showCount: 10,
+
+                limit: 10,
+
+                callback: function (curr, limit, totalCount) {
+                    Core.Log.d("totalCount " + totalCount);
+                    Core.Api.queryAllUser(0, curr, limit).then(function (response) {
+                        if (response.status == 0) {
+                            Core.Log.d(response);
+                            context.itemList = response.data.data;
+                        }
+
+                    });
+
+                }
+
+            });
+        }
+
+
 
 
     }

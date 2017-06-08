@@ -90,6 +90,7 @@
             context.city=item.city;
             context.title=item.context;
             context.url=item.url;
+            context.src=Core.Const.NET.IMG_RUL+item.picture;
 
         }
 
@@ -98,12 +99,13 @@
         context.upload = function (file) {
 
             Upload.upload({
-                url: "http://119.23.79.196/api/util/uploadAvitor",
+                url: Core.Const.NET.IMG_UPLOAD,
                 data: {file: file}
+
             }).then(function (resp) {
                 var response = resp.data;
                 filename=response.data.fileName
-                context.src="http://www.hzautomotive.com/picture/"+filename;
+                context.src=Core.Const.NET.IMG_RUL+filename;
                 Core.Log.d(response);
 
             }, function (resp) {
@@ -114,8 +116,6 @@
                 console.log('progress: ' + progressPercentage + '% ');
                 Core.Log.d(evt);
             });
-
-
         };
     }
 })();

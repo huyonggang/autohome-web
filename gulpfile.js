@@ -372,7 +372,8 @@ gulp.task('concat-third-lib-js', ['clean-build'], function(){
     var thirdLibJs = gulp.src([
             'node_modules/jquery/dist/jquery.min.js', 
             'lib/jquery-ui/jquery-ui.min.js',
-            'lib/ui-gird/ui-grid.js'
+            'lib/ui-gird/ui-grid.js',
+            'lib/page/extendPagination.js'
         ])
         .pipe(concat('third-lib.js', {newLine: '\r\n'}))
         .pipe(gulp.dest('build/asset/lib/'));

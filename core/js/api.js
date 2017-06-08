@@ -33,6 +33,14 @@
                     pagenum: num
                 });
             },
+            queryMerchantByName:function (name,page, num) {
+                return post(Const.NET.API.MERCHANT_GET, {
+                    name:name,
+                    currentpage: page,
+                    pagenum: num
+                });
+            },
+
             getUserOilcardByUid: function (id) {
                 return post(Const.NET.API.USER_OIL_CARD, {
                     uid: id

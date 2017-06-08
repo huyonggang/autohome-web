@@ -20,9 +20,11 @@
                 Core.Log.d(response);
                 if (response.status == 0) {
                     Core.Log.d(response);
-                    if (response.data) {
-                        changeList(response.data)
+                    if (response.data.data) {
+                        changeList(response.data.data)
                     }
+                    var total = response.data.count;
+                    showPage(total);
                 } else {
                     Core.Notify.info("获取失败");
                 }
@@ -54,44 +56,7 @@
         }
 
 
-        context.next = function () {
-            Core.Log.d("next" + page);
-            Core.Log.d("next" + context.itemList.length);
-            if (context.itemList.length == 8) {
-                page++;
-                Core.Api.getUserInvoiceList(status,page, number).then(function (response) {
-                    if (response.status == 0) {
-                        Core.Log.d(response);
-                        if (response.data) {
-                            changeList(response.data)
-                        }
-                    } else {
-                        Core.Notify.info("获取失败");
-                    }
-                });
-            }
 
-        }
-
-        context.last = function () {
-            Core.Log.d("next" + page);
-            if (page > 1) {
-                page--;
-                Core.Api.getUserInvoiceList(status,page, number).then(function (response) {
-                    if (response.status == 0) {
-                        Core.Log.d(response);
-                        if (response.data) {
-                            changeList(response.data)
-                        }
-
-                    } else {
-                        Core.Notify.info("获取失败");
-                    }
-
-                });
-            }
-
-        }
 
         function changeList(itemList) {
             for (var i = 0; i < itemList.length; i++) {
@@ -120,6 +85,34 @@
             status=2;
             context.group=false;
             init();
+        }
+
+        function showPage(total) {
+            $('#callBackPager').extendPagination({
+
+                totalCount: total,
+
+                showCount: 10,
+
+                limit: 10,
+
+                callback: function (curr, limit, totalCount) {
+                    Core.Log.d("totalCount " + totalCount);
+                    Core.Api.getUserInvoiceList(status,curr, limit).then(function (response) {
+                        Core.Log.d(response);
+                        if (response.status == 0) {
+                            Core.Log.d(response);
+                            if (response.data.data) {
+                                changeList(response.data.data)
+                            }
+                        } else {
+                            Core.Notify.info("获取失败");
+                        }
+                    });
+
+                }
+
+            });
         }
     }
 })();
