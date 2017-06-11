@@ -1,0 +1,57 @@
+<div>
+
+    <div class="ibox">
+        <div class="ibox-title">
+            <h5>发票管理</h5>
+        </div>
+        <div class="ibox-content">
+            <div  class="btn-group" role="group" aria-label="...">
+                <button ng-click="check0()" type="button" class="btn btn-default">未开</button>
+                <button ng-click="check1()"type="button" class="btn btn-default">已开</button>
+                <button ng-click="check2()"type="button" class="btn btn-default">拒开</button>
+            </div>
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>公司抬头</th>
+                    <th>发票金额</th>
+                    <th>收件人</th>
+                    <th>联系电话</th>
+                    <th>详细地址</th>
+                    <th>状态</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="item in itemList">
+                    <td>{{$index+1}}</td>
+                    <td>{{item.invoiceheader}}</td>
+                    <td>{{item.invoicevalue}}</td>
+                    <td>{{item.name}}</td>
+                    <td>{{item.phone}}</td>
+                    <td>{{item.address}}</td>
+                    <td>{{item.status}}</td>
+                    <td class="text-navy"><i class="fa fa-level-up"></i></td>
+                    <td ng-show="group">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false">
+                                操作 <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a ng-click="rechargeSuccess(item)">已开</a></li>
+                                <li><a ng-click="rechargeError(item)">拒开</a></li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+
+                </tbody>
+            </table>
+        </div>
+
+        <div id="callBackPager" style="text-align: center"></div>
+
+    </div>
+</div>

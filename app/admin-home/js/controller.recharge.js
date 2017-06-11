@@ -11,6 +11,7 @@
         var page = 1;
         var number = 10;
         var status = 1;
+        var selectItem;
         context.itemList = [];
         init();
         function init() {
@@ -51,14 +52,32 @@
 
         context.check2 = function () {
             status = 2;
+            context.isRecharge=true;
             init();
         }
 
         context.check1 = function () {
             status = 1;
+            context.isRecharge=false;
             init();
         }
 
+        context.selectItem = function (item) {
+            selectItem=item;
+        }
+        
+        context.onRemark = function () {
+            Core.Log.d("Success");
+            Core.Api.updateUserOilcardSerialRemarkById(selectItem.id,Core.Data.get("aid"),context.remark).then(function (response) {
+                if (response.status == 0) {
+                    Core.Notify.info("操作成功");
+                    init();
+                }else{
+                    Core.Notify.info("操作失败");
+                }
+            });
+            
+        }
 
         function changeList(itemList) {
             for(var i=0;i<itemList.length;i++){

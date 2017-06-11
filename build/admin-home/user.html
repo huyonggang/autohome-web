@@ -1,0 +1,49 @@
+<div>
+    <div class="ibox">
+        <div class="ibox-title">
+            <h5>用户管理</h5>
+        </div>
+        <div class="ibox-content">
+            <div style="margin-right: 40px;margin-bottom: 30px" class="pull-right mail-search">
+                <div class="input-group">
+                    <input ng-model="search" type="text" class="form-control input-sm" name="search"
+                           placeholder="输入手机号搜索">
+                    <div class="input-group-btn">
+                        <button ng-click="onSearch()" type="submit" class="btn btn-sm btn-primary">
+                            搜索
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>姓名</th>
+                    <th>联系方式</th>
+                    <th>创建时间</th>
+                    <th>操作</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="item in itemList">
+                    <th>{{$index+1}}</th>
+                    <td>{{item.uname}}
+                    </td>
+                    <td>{{item.uphone}}</td>
+                    <td>{{item.createtime}}</td>
+                    <td>
+                        <button ng-click="onSelect(item.uid)" class="btn btn-default" type="submit">详情</button>
+                    </td>
+
+                </tr>
+
+                </tbody>
+            </table>
+        </div>
+        <div id="callBackPager" style="text-align: center"></div>
+
+    </div>
+</div>

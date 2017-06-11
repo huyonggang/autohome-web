@@ -1,0 +1,88 @@
+
+<head>
+
+
+
+</head>
+
+<div>
+
+    <div class="bs-example">
+        <button style="margin-top:30px;margin-left: 10px;margin-bottom: 10px" data-toggle="modal" ng-click="showAddDialog()" data-target="#add" type="submit" class="btn btn-sm btn-primary">
+            添加
+        </button>
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>公司名称</th>
+                <th>折扣</th>
+                <th>操作</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="item in itemList">
+                <td>{{$index+1}}</td>
+                <td><span >{{item.oilcardname}}</span></td>
+                <td><span >{{item.discount}}</span></td>
+                <td>
+                    <button ng-click="onSelect(item)" class="btn btn-success" data-toggle="modal" data-target="#update" type="submit">修改</button>
+                    <button ng-click="onDelete(item)" class="btn btn-danger" type="submit">删除</button>
+                </td>
+
+            </tr>
+
+            </tbody>
+        </table>
+
+
+
+        <div class="modal inmodal fade" id="update" tabindex="-1" role="dialog"  aria-hidden="true">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        <h4 class="modal-title">{{title}}</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="discount">折扣</label>
+                            <input  ng-model="discount" class="form-control" id="discount" placeholder="请输入折扣">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+                        <button type="button" ng-click="onUpdate()"  data-dismiss="modal" class="btn btn-primary">更新</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal inmodal fade" id="add" tabindex="-1" role="dialog"  aria-hidden="true" >
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        <h4 class="modal-title">折扣添加</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">公司名称</label>
+                            <input ng-model="company" class="form-control" id="exampleInputEmail1" placeholder="请输入公司名称">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">折扣</label>
+                            <input  ng-model="discount" class="form-control" id="exampleInputPassword1" placeholder="请输入折扣">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+                        <button type="button" ng-click="onAdd()" data-dismiss="modal" class="btn btn-primary">保存</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -155,6 +155,13 @@
                     aid: aid
                 });
             },
+            updateUserOilcardSerialRemarkById: function (id, aid,remark) {
+                return post(Const.NET.API.RECHARGE_ORDER_REMARK, {
+                    id: id,
+                    aid: aid,
+                    remark:remark
+                });
+            },
             addAdminAdvertising: function (aid, context,picture,city,url) {
                 return post(Const.NET.API.ADVERTISING_ADD, {
                     aid: aid,

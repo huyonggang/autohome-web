@@ -43,7 +43,7 @@
 
             NET: {
                 IMG_UPLOAD:"http://119.23.79.196/api/util/uploadAvitorAndroid",
-                IMG_RUL:"http://www.hzautomotive.com/picture/",
+                    IMG_RUL:"http://www.hzautomotive.com/picture/",
                 END_POINT: 'http://119.23.79.196/api/admin',
                 END_POINT_USER: 'http://sw-user-api.yuntick.com/public/1',
                 END_POINT_ORG: 'http://sw-user-api.yuntick.com/public/1',
@@ -81,6 +81,7 @@
                     OIL_CARD_DELETE:"deleteAdminOilcardtypeById",
                     RECHARGE_LIST:"getUserOilcardSerialList",
                     RECHARGE_ORDER:"updateUserOilcardSerialById",
+                    RECHARGE_ORDER_REMARK:"updateUserOilcardSerialRemarkById",
                     ADVERTISING_ADD:"addAdminAdvertising",
                     ADVERTISING_UPDATE:"updateAdminAdvertising",
                     ADVERTISING_DELETE:"deleteAdminAdvertising",

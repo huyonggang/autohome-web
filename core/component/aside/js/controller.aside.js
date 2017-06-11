@@ -30,11 +30,19 @@
 
         $scope.itemList = [
             {
-                img: 'asset/core/component/aside/img/icon-home.png',
-                heightLight: 'asset/core/component/aside/img/icon-home-heighlight.png',
+                img: 'asset/core/component/aside/img/icon-user-manager.png',
+                heightLight: 'asset/core/component/aside/img/icon-user-manager-heighlight.png',
                 stateUiSref: 'admin.user',
                 state: 'admin.user',
                 title: '用户管理'
+            },
+
+            {
+                img: 'asset/core/component/aside/img/icon-home.png',
+                heightLight: 'asset/core/component/aside/img/icon-home-heighlight.png',
+                stateUiSref: 'admin.company',
+                state: 'admin.company',
+                title: '公司管理'
             },
 
             {
@@ -52,16 +60,9 @@
                 state: 'admin.recharge',
                 title: '充值管理'
             },
-            // {
-            //     img: 'asset/core/component/aside/img/icon-work.png',
-            //     heightLight: 'asset/core/component/aside/img/icon-work-heighlight.png',
-            //     stateUiSref: 'admin.withdraw',
-            //     state: 'admin.withdraw',
-            //     title: '提现管理'
-            // },
             {
-                img: 'asset/core/component/aside/img/icon-setting.png',
-                heightLight: 'asset/core/component/aside/img/icon-setting-heighlight.png',
+                img: 'asset/core/component/aside/img/icon-discount.png',
+                heightLight: 'asset/core/component/aside/img/icon-discount-heighlight.png',
                 stateUiSref: 'admin.discount',
                 state: 'admin.discount',
                 title: '折扣管理'
@@ -74,15 +75,15 @@
                 title: '广告管理'
             },
             {
-                img: 'asset/core/component/aside/img/icon-setting.png',
-                heightLight: 'asset/core/component/aside/img/icon-setting-heighlight.png',
+                img: 'asset/core/component/aside/img/icon-oil.png',
+                heightLight: 'asset/core/component/aside/img/icon-oil-heighlight.png',
                 stateUiSref: 'admin.oil-manager',
                 state: 'admin.oil-manager',
                 title: '油价管理'
             },
             {
-                img: 'asset/core/component/aside/img/icon-setting.png',
-                heightLight: 'asset/core/component/aside/img/icon-setting-heighlight.png',
+                img: 'asset/core/component/aside/img/icon-invoice.png',
+                heightLight: 'asset/core/component/aside/img/icon-invoice-heighlight.png',
                 stateUiSref: 'admin.invoice',
                 state: 'admin.invoice',
                 title: '发票管理'

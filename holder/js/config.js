@@ -227,6 +227,16 @@
                 templateUrl: 'admin-home/user-detail.html',
                 controller: 'user.DetailController'
             })
+            .state('admin.company',{
+                url: '/company',
+                templateUrl: 'admin-home/company.html',
+                controller: 'company.ManageController'
+            })
+            .state('admin.company-detail',{
+                url: '/company-detail?data',
+                templateUrl: 'admin-home/company-detail.html',
+                controller: 'company.DetailController'
+            })
             .state('admin.withdraw',{
                 url: '/withdraw',
                 templateUrl: 'admin-home/withdraw.html',

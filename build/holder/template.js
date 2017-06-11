@@ -1,0 +1,2 @@
+angular.module("templates").run(["$templateCache", function($templateCache) {$templateCache.put("holder/template/blank.html","<div id=\"holder\" style=\"height: 100%\" ui-view></div>");
+$templateCache.put("holder/template/holder.html","<aside is-show-all=\"app.settings.asideFolded\"></aside>\n<div class=\"layout-content\">\n    <navigation app=\"app\"></navigation>\n\n    <div id=\"holder\" style=\"margin-top:100px;margin-left: 40px;margin-right: 40px\" ui-view ng-class= \"{ \'dialog-open\': dialogOpenStatus  }\"></div>\n</div>\n");}]);
