@@ -15,7 +15,7 @@
             <div class="form-group">
                 <label class="col-md-1 control-label">联系方式:</label>
                 <div class="col-md-10">
-                    <p class="form-control-static">{{plate}}</p>
+                    <p class="form-control-static">{{tel}}</p>
                 </div>
             </div>
 
@@ -45,7 +45,7 @@
                     <th>#</th>
                     <th>油号名称</th>
                     <th>挂牌价</th>
-                    <th>优惠后价格</th>
+                    <th>优惠价</th>
                     <th>其他优惠信息</th>
 
                 </tr>
@@ -54,8 +54,8 @@
                 <tr ng-repeat="item in goods">
                     <td>{{$index+1}}</td>
                     <td>{{item.gname}}</td>
-                    <td>{{item.goriginalprice}}</td>
-                    <td>{{item.gpresentprice}}</td>
+                    <td>{{item.typeprice}}</td>
+                    <td>{{item.gdiscount}}</td>
                     <td>{{item.gremark}}</td>
                 </tr>
 

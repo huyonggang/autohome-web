@@ -237,7 +237,7 @@
                 return post(Const.NET.API.RECHARGE_ORDER_REMARK, {
                     id: id,
                     aid: aid,
-                    remark:remark
+                    remarks:remark
                 });
             },
             addAdminAdvertising: function (aid, context,picture,city,url) {

@@ -22,7 +22,7 @@
                     var merchant = response.data.merchant;
                     if (merchant) {
                         context.name = merchant.mname;
-                        context.phone = merchant.mphone;
+                        context.tel = merchant.tel;
                         context.address = merchant.maddress;
                     }
                 }

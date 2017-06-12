@@ -1335,6 +1335,18 @@ ul, li {
     background: #EAEDF4;
     border-radius: 2px; }
 
+.page-holder {
+  display: inline-block;
+  height: 60px;
+  line-height: 60px;
+  margin-right: 20px;
+  float: right; }
+  .page-holder .page, .page-holder .prev, .page-holder .next, .page-holder .total-page {
+    color: #616161;
+    padding: 0px 6px; }
+  .page-holder .green {
+    color: #0A9908; }
+
 .core-directive .contextmenu-node {
   position: fixed;
   background: white;
@@ -1352,18 +1364,6 @@ ul, li {
     background: #FFFFFF; }
   .core-directive .contextmenu-node .mouseEnter {
     background: #D8D8D8; }
-
-.page-holder {
-  display: inline-block;
-  height: 60px;
-  line-height: 60px;
-  margin-right: 20px;
-  float: right; }
-  .page-holder .page, .page-holder .prev, .page-holder .next, .page-holder .total-page {
-    color: #616161;
-    padding: 0px 6px; }
-  .page-holder .green {
-    color: #0A9908; }
 
 .component-search-bar {
   left: 190px;
