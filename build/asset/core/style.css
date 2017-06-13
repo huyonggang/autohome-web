@@ -596,9 +596,10 @@ ul, li {
       left: 12px;
       margin-top: 24px; }
     .aside .logo-holder .logo-content {
-      width: 200px;
-      height: 50px;
-      margin-top: 15px; }
+      width: 160px;
+      height: 42px;
+      margin-top: 17px;
+      margin-left: 17px; }
   .aside .home-title {
     font-size: 16px;
     margin: 5px 0;
@@ -660,9 +661,6 @@ ul, li {
     z-index: 300;
     padding: 5px; }
 
-
-
-
 .menu {
   z-index: 100;
   height: 100%; }
@@ -708,6 +706,9 @@ ul, li {
     left: 0;
     background: rgba(0, 0, 0, 0.6);
     z-index: 99; }
+
+
+
 
 .navigation-company-list {
   position: fixed;

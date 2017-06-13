@@ -110,7 +110,7 @@
             updateAdminOilcardtype: function (aid, id, name, discount) {
                 return post(Const.NET.API.OIL_CARD_UPDATE, {
                     aid: aid,
-                    typeid: id,
+                    id: id,
                     oilcardname: name,
                     discount: discount
                 });
