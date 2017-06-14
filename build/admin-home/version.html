@@ -1,10 +1,4 @@
 
-<head>
-
-
-
-</head>
-
 <div>
 
     <div class="bs-example">
@@ -15,21 +9,18 @@
             <thead>
             <tr>
                 <th>#</th>
-                <th>油号</th>
-                <th>挂牌价</th>
-                <th>涨降情况</th>
-                <th>活动说明</th>
-                <th>操作</th>
+                <th>城市</th>
+                <th>标题</th>
+                <th>地址</th>
 
             </tr>
             </thead>
             <tbody>
             <tr ng-repeat="item in itemList">
                 <td>{{$index+1}}</td>
-                <td><span >{{item.typename}}</span></td>
-                <td><span >{{item.typeprice}}</span></td>
-                <td><span >{{item.isrise}}</span></td>
-                <td><span >{{item.notice}}</span></td>
+                <td><span >{{item.city}}</span></td>
+                <td><span >{{item.context}}</span></td>
+                <td><span >{{item.url}}</span></td>
                 <td>
                     <button ng-click="onSelect(item)" class="btn btn-success" data-toggle="modal" data-target="#update" type="submit">修改</button>
                     <button ng-click="onDelete(item)" class="btn btn-danger" type="submit">删除</button>
@@ -43,22 +34,36 @@
 
 
         <div class="modal inmodal fade" id="update" tabindex="-1" role="dialog"  aria-hidden="true">
-            <div class="modal-dialog modal-sm">
+            <div class="modal-dialog modal-sm" style="width: 700px">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                        <h4 class="modal-title">{{title}}</h4>
+                        <h4 class="modal-title">广告修改</h4>
                     </div>
+
                     <div class="modal-body">
                         <div class="form-group">
-                            <label for="discount">油价</label>
-                            <input  ng-model="price" class="form-control" id="discount" placeholder="请输入油价">
+                            <label for="city">城市</label>
+                            <input ng-model="city" class="form-control" id="city" placeholder="请输入城市">
                         </div>
                         <div class="form-group">
-                            <label for="notice">活动说明</label>
-                            <input  ng-model="notice" class="form-control" id="notice" placeholder="请输入通知">
+                            <label for="title">标题</label>
+                            <input  ng-model="title" class="form-control" id="title" placeholder="请输入标题">
                         </div>
+                        <div class="form-group">
+                            <label for="url">地址</label>
+                            <input  ng-model="url" class="form-control" id="url" placeholder="请输入地址(http://开头)">
+                        </div>
+
+                        <div>
+                            <img ng-src={{src}} style="width: 640px;height: 200px" >
+                        </div>
+
+                        <button style="margin-top: 10px" ngf-select="upload($file)" accept="image/jpg,image/jpeg,image/png,image/gif" type="button" class="btn btn-primary" data-dismiss="modal" ng-model="data.file">图片上传(规格为640*200)</button>
+
+
                     </div>
+
                     <div class="modal-footer">
                         <button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
                         <button type="button" ng-click="onUpdate()"  data-dismiss="modal" class="btn btn-primary">更新</button>
@@ -67,26 +72,33 @@
             </div>
         </div>
 
-        <div class="modal inmodal fade" id="add" tabindex="-1" role="dialog"  aria-hidden="true" >
-            <div class="modal-dialog modal-sm">
+        <div class="modal inmodal fade"  id="add" tabindex="-1" role="dialog"  aria-hidden="true" >
+            <div class="modal-dialog modal-sm" style="width: 700px">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                        <h4 class="modal-title">折扣添加</h4>
+                        <h4 class="modal-title">广告添加</h4>
                     </div>
                     <div class="modal-body">
                         <div class="form-group">
-                            <label for="exampleInputEmail1">油号</label>
-                            <input ng-model="name" class="form-control" id="exampleInputEmail1" placeholder="请输入油号">
+                            <label for="city">城市</label>
+                            <input ng-model="city" class="form-control" id="city" placeholder="请输入城市">
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputPassword1">价格</label>
-                            <input  ng-model="price" class="form-control" id="exampleInputPassword1" placeholder="请输入价格">
+                            <label for="title">标题</label>
+                            <input  ng-model="title" class="form-control" id="title" placeholder="请输入标题">
                         </div>
                         <div class="form-group">
-                            <label for="notice_add">活动说明</label>
-                            <input  ng-model="notice" class="form-control" id="notice_add" placeholder="请输入通知">
+                            <label for="url">地址</label>
+                            <input  ng-model="url" class="form-control" id="url" placeholder="请输入地址(http://开头)">
                         </div>
+                        <div>
+                            <img ng-src={{src}} style="width: 640px;height: 200px" >
+                        </div>
+
+                        <button style="margin-top: 10px" ngf-select="upload($file)" accept="image/jpg,image/jpeg,image/png,image/gif" type="button" class="btn btn-primary" data-dismiss="modal" ng-model="data.file">图片上传(规格为640*200)</button>
+
+
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>

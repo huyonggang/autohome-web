@@ -146,11 +146,12 @@
                 });
 
             },
-            addAdminGoods: function (id, name, price) {
+            addAdminGoods: function (id, name, price,notice) {
                 return post(Const.NET.API.GOODS_ADD, {
                     aid: id,
                     name: name,
-                    price: price
+                    price: price,
+                    notice:notice
                 });
 
             },
@@ -161,12 +162,13 @@
                 });
 
             },
-            updateAdminGoods: function (aid, id, name, price) {
+            updateAdminGoods: function (aid, id, name, price,notice) {
                 return post(Const.NET.API.GOODS_UPDATE, {
                     aid: aid,
                     typeid: id,
                     name: name,
-                    price: price
+                    price: price,
+                    notice:notice
                 });
 
             },
@@ -188,7 +190,7 @@
             updateAdminOilcardtype: function (aid, id, name, discount) {
                 return post(Const.NET.API.OIL_CARD_UPDATE, {
                     aid: aid,
-                    typeid: id,
+                    id: id,
                     oilcardname: name,
                     discount: discount
                 });
@@ -2717,7 +2719,14 @@
                 stateUiSref: 'admin.invoice',
                 state: 'admin.invoice',
                 title: '发票管理'
-            }
+            },
+            // {
+            //     img: 'asset/core/component/aside/img/icon-version.png',
+            //     heightLight: 'asset/core/component/aside/img/icon-version-heighlight.png',
+            //     stateUiSref: 'admin.version',
+            //     state: 'admin.version',
+            //     title: '版本管理'
+            // }
 
         ];
     }

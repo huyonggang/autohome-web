@@ -18,6 +18,7 @@
                 <th>油号</th>
                 <th>挂牌价</th>
                 <th>涨降情况</th>
+                <th>活动说明</th>
                 <th>操作</th>
 
             </tr>
@@ -28,6 +29,7 @@
                 <td><span >{{item.typename}}</span></td>
                 <td><span >{{item.typeprice}}</span></td>
                 <td><span >{{item.isrise}}</span></td>
+                <td><span >{{item.notice}}</span></td>
                 <td>
                     <button ng-click="onSelect(item)" class="btn btn-success" data-toggle="modal" data-target="#update" type="submit">修改</button>
                     <button ng-click="onDelete(item)" class="btn btn-danger" type="submit">删除</button>
@@ -51,6 +53,10 @@
                         <div class="form-group">
                             <label for="discount">油价</label>
                             <input  ng-model="price" class="form-control" id="discount" placeholder="请输入油价">
+                        </div>
+                        <div class="form-group">
+                            <label for="notice">活动说明</label>
+                            <input  ng-model="notice" class="form-control" id="notice" placeholder="请输入通知">
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -76,6 +82,10 @@
                         <div class="form-group">
                             <label for="exampleInputPassword1">价格</label>
                             <input  ng-model="price" class="form-control" id="exampleInputPassword1" placeholder="请输入价格">
+                        </div>
+                        <div class="form-group">
+                            <label for="notice_add">活动说明</label>
+                            <input  ng-model="notice" class="form-control" id="notice_add" placeholder="请输入通知">
                         </div>
                     </div>
                     <div class="modal-footer">

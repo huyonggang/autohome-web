@@ -88,7 +88,14 @@ angular.module("templates").run(["$templateCache", function($templateCache) {$te
                 stateUiSref: 'admin.invoice',
                 state: 'admin.invoice',
                 title: '发票管理'
-            }
+            },
+            // {
+            //     img: 'asset/core/component/aside/img/icon-version.png',
+            //     heightLight: 'asset/core/component/aside/img/icon-version-heighlight.png',
+            //     stateUiSref: 'admin.version',
+            //     state: 'admin.version',
+            //     title: '版本管理'
+            // }
 
         ];
     }

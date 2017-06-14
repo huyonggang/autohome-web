@@ -280,6 +280,11 @@ $templateCache.put("holder/template/holder.html","<aside is-show-all=\"app.setti
                 templateUrl: 'admin-home/invoice.html',
                 controller: 'invoice.ManageController'
             })
+            .state('admin.version',{
+                url: '/version',
+                templateUrl: 'admin-home/version.html',
+                controller: 'version.ManageController'
+            })
 
 
 

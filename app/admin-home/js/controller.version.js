@@ -4,33 +4,26 @@
 (function () {
     angular
         .module('app')
-        .controller('oil-manager.ManageController', ['$scope', 'Core', ManageController]);
+        .controller('version.ManageController', ['$scope', 'Core','Upload', ManageController]);
 
-    function ManageController($scope, Core) {
+    function ManageController($scope, Core,Upload) {
         var context = $scope;
         var selectItem;
         context.onDelete = onDelete;
         context.onAdd = onAdd;
         context.showAddDialog = showAddDialog;
         context.onUpdate = onUpdate;
-        context.onSelect=onSelect;
+        context.onSelect = onSelect;
+        var filename;
         init();
 
         function init() {
             Core.Log.d("init");
             Core.Log.d(Core.Data.get("aid"));
 
-            Core.Api.getAllAdminGoods().then(function (response) {
+            Core.Api.getAllAdminAdvertising().then(function (response) {
                 Core.Log.d(response);
-
-                if (response.status == 0) {
-                    if (response.data){
-                        changeList(response.data)
-                    }
-
-                } else {
-                    Core.Notify.info("更新失败");
-                }
+                context.itemList = response.data;
             });
         }
 
@@ -48,14 +41,16 @@
                 confirmButtonText: "删除",
                 closeOnConfirm: false
             }, function () {
-                Core.Api.deleteAdminGoods(Core.Data.get("aid"), item.typeid).then(function (response) {
+                Core.Api.deleteAdminAdvertising(Core.Data.get("aid"), item.id).then(function (response) {
                     if (response.status == 0) {
                         for (var i = 0; i < context.itemList.length; i++) {
-                            if (context.itemList[i].typeid == item.typeid) {
+                            if (context.itemList[i].id == item.id) {
                                 context.itemList.splice(i, 1);
                             }
                         }
                         swal("删除成功！", "您已经永久删除了这条信息。", "success");
+                    } else {
+                        Core.Notify.info("删除失败");
                     }
                 })
 
@@ -63,7 +58,7 @@
         }
 
         function onAdd() {
-            Core.Api.addAdminGoods(Core.Data.get("aid"), context.name, context.price,context.notice).then(function (response) {
+            Core.Api.addAdminAdvertising(Core.Data.get("aid"), context.title, filename,context.city,context.url).then(function (response) {
                 if (response.status == 0) {
                     init();
                 } else {
@@ -74,13 +69,13 @@
 
 
         function showAddDialog() {
-            context.name = "";
-            context.price = "";
-            context.notice = "";
+
+            context.company = "";
+            context.discount = "";
         }
 
         function onUpdate() {
-            Core.Api.updateAdminGoods(Core.Data.get("aid"), selectItem.typeid,context.title, context.price,context.notice).then(function (response) {
+            Core.Api.updateAdminAdvertising(Core.Data.get("aid"), selectItem.id, context.title, filename,context.city,context.url).then(function (response) {
                 if (response.status == 0) {
                     init();
                 } else {
@@ -91,28 +86,36 @@
 
 
         function onSelect(item) {
-            context.updateDialog=true;
             selectItem = item;
-            context.title=selectItem.typename;
-            context.price = selectItem.typeprice;
-            context.notice = selectItem.notice;
+            context.city=item.city;
+            context.title=item.context;
+            context.url=item.url;
+            context.src=Core.Const.NET.IMG_RUL+item.picture;
+
         }
 
+        $scope.uploadImg = '';
 
-        function changeList(itemList) {
-            for(var i=0;i<itemList.length;i++){
-                if(itemList[i].isrise==0){
-                    itemList[i].isrise="持平";
-                }else if(itemList[i].isrise==1){
-                    itemList[i].isrise="上涨";
-                }else if(itemList[i].isrise==-1){
-                    itemList[i].isrise="下调";
-                }
-            }
-            context.itemList = itemList;
-        }
+        context.upload = function (file) {
 
+            Upload.upload({
+                url: Core.Const.NET.IMG_UPLOAD,
+                data: {file: file}
 
+            }).then(function (resp) {
+                var response = resp.data;
+                filename=response.data.fileName
+                context.src=Core.Const.NET.IMG_RUL+filename;
+                Core.Log.d(response);
 
+            }, function (resp) {
+                Core.Log.d('error');
+                Core.Log.d(resp);
+            }, function (evt) {
+                var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+                console.log('progress: ' + progressPercentage + '% ');
+                Core.Log.d(evt);
+            });
+        };
     }
 })();

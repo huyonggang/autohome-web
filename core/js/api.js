@@ -68,11 +68,12 @@
                 });
 
             },
-            addAdminGoods: function (id, name, price) {
+            addAdminGoods: function (id, name, price,notice) {
                 return post(Const.NET.API.GOODS_ADD, {
                     aid: id,
                     name: name,
-                    price: price
+                    price: price,
+                    notice:notice
                 });
 
             },
@@ -83,12 +84,13 @@
                 });
 
             },
-            updateAdminGoods: function (aid, id, name, price) {
+            updateAdminGoods: function (aid, id, name, price,notice) {
                 return post(Const.NET.API.GOODS_UPDATE, {
                     aid: aid,
                     typeid: id,
                     name: name,
-                    price: price
+                    price: price,
+                    notice:notice
                 });
 
             },

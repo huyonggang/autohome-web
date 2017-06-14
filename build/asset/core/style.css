@@ -598,7 +598,7 @@ ul, li {
     .aside .logo-holder .logo-content {
       width: 160px;
       height: 42px;
-      margin-top: 17px;
+      margin-top: 20px;
       margin-left: 17px; }
   .aside .home-title {
     font-size: 16px;
@@ -634,14 +634,6 @@ ul, li {
     width: 200px; }
 
 
-.form-error-tip.core-component {
-  position: fixed;
-  z-index: 100; }
-  .form-error-tip.core-component .ui-toptips {
-    display: block; }
-  .form-error-tip.core-component .ng-hide {
-    display: none; }
-
 .image-show-holder {
   position: fixed;
   top: 0;
@@ -660,6 +652,17 @@ ul, li {
     height: auto;
     z-index: 300;
     padding: 5px; }
+
+.form-error-tip.core-component {
+  position: fixed;
+  z-index: 100; }
+  .form-error-tip.core-component .ui-toptips {
+    display: block; }
+  .form-error-tip.core-component .ng-hide {
+    display: none; }
+
+
+
 
 .menu {
   z-index: 100;
@@ -706,9 +709,6 @@ ul, li {
     left: 0;
     background: rgba(0, 0, 0, 0.6);
     z-index: 99; }
-
-
-
 
 .navigation-company-list {
   position: fixed;
@@ -1366,6 +1366,182 @@ ul, li {
   .core-directive .contextmenu-node .mouseEnter {
     background: #D8D8D8; }
 
+.component-process-menu {
+  border-right: 1px solid #F5F5F5;
+  position: absolute;
+  top: 80px;
+  width: 190px;
+  background: #FCFCFC;
+  bottom: 0;
+  padding-bottom: 50px;
+  overflow: auto; }
+  .component-process-menu .index-bar {
+    position: absolute;
+    left: 188px;
+    top: 84px;
+    z-index: 60;
+    width: 190px;
+    background: #FCFCFC;
+    max-height: 400px;
+    overflow: scroll; }
+  .component-process-menu .special-bar {
+    position: absolute;
+    left: 188px;
+    top: 174px;
+    z-index: 60;
+    width: 190px;
+    background: #FCFCFC;
+    max-height: 400px;
+    overflow: auto; }
+  .component-process-menu .menu-sub-title {
+    height: 45px; }
+    .component-process-menu .menu-sub-title .process-menu-holder {
+      top: 4px;
+      height: 40px;
+      position: relative;
+      line-height: 40px;
+      margin: 5px 10px; }
+      .component-process-menu .menu-sub-title .process-menu-holder .icon-right {
+        float: right;
+        margin-right: 15px;
+        margin-top: 20px;
+        width: 9px;
+        height: 5px; }
+      .component-process-menu .menu-sub-title .process-menu-holder .icon-bottom {
+        float: right;
+        margin-right: 15px;
+        margin-top: 16px;
+        width: 9px;
+        height: 5px; }
+      .component-process-menu .menu-sub-title .process-menu-holder .menu-icon {
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        top: 50%;
+        margin-top: -10px; }
+      .component-process-menu .menu-sub-title .process-menu-holder .defaule-title {
+        font-size: 16px;
+        color: #6F7785;
+        margin-left: 12px; }
+      .component-process-menu .menu-sub-title .process-menu-holder .menu-title {
+        font-size: 14px;
+        color: #616161;
+        margin-left: 34px; }
+    .component-process-menu .menu-sub-title .process-menu-other-holder {
+      top: 4px;
+      height: 45px;
+      position: relative;
+      line-height: 45px;
+      margin: 5px 10px; }
+      .component-process-menu .menu-sub-title .process-menu-other-holder .icon-right {
+        float: right;
+        margin-right: 15px;
+        margin-top: 20px;
+        width: 9px;
+        height: 5px; }
+      .component-process-menu .menu-sub-title .process-menu-other-holder .icon-bottom {
+        float: right;
+        margin-right: 15px;
+        margin-top: 16px;
+        width: 9px;
+        height: 5px; }
+      .component-process-menu .menu-sub-title .process-menu-other-holder .menu-icon {
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        top: 50%;
+        margin-top: -10px; }
+      .component-process-menu .menu-sub-title .process-menu-other-holder .defaule-title {
+        font-size: 16px;
+        color: #6F7785;
+        margin-left: 12px; }
+      .component-process-menu .menu-sub-title .process-menu-other-holder .menu-title {
+        font-size: 14px;
+        color: #616161;
+        margin-left: 34px; }
+  .component-process-menu .menu-sub-title-holder .menu-sub-title .apv-menu-holder {
+    margin: 5px 10px;
+    height: 40px;
+    padding-left: 40px;
+    position: relative;
+    line-height: 40px; }
+    .component-process-menu .menu-sub-title-holder .menu-sub-title .apv-menu-holder .menu-icon {
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      top: 50%;
+      margin-top: -10px; }
+    .component-process-menu .menu-sub-title-holder .menu-sub-title .apv-menu-holder .menu-title {
+      font-size: 14px;
+      color: #202B3D;
+      margin-left: 36px; }
+  .component-process-menu .menu-sub-title-holder .menu-sub-other-title .apv-menu-holder {
+    margin: 5px 10px;
+    height: 40px;
+    position: relative;
+    line-height: 40px; }
+    .component-process-menu .menu-sub-title-holder .menu-sub-other-title .apv-menu-holder .menu-icon {
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      top: 50%;
+      margin-top: -10px; }
+    .component-process-menu .menu-sub-title-holder .menu-sub-other-title .apv-menu-holder .menu-title {
+      font-size: 14px;
+      color: #202B3D;
+      margin-left: 25px; }
+    .component-process-menu .menu-sub-title-holder .menu-sub-other-title .apv-menu-holder .icon-bottom {
+      float: right;
+      margin-right: 15px;
+      margin-top: 16px;
+      width: 9px;
+      height: 5px; }
+    .component-process-menu .menu-sub-title-holder .menu-sub-other-title .apv-menu-holder .icon-right {
+      float: right;
+      margin-right: 15px;
+      margin-top: 20px;
+      width: 9px;
+      height: 5px; }
+  .component-process-menu .menu-sub-title-holder .menu-sub-other-title .apv-menu-other-holder {
+    margin: 5px 10px;
+    height: 40px;
+    position: relative;
+    line-height: 40px; }
+    .component-process-menu .menu-sub-title-holder .menu-sub-other-title .apv-menu-other-holder .menu-icon {
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      top: 50%;
+      margin-top: -10px; }
+    .component-process-menu .menu-sub-title-holder .menu-sub-other-title .apv-menu-other-holder .menu-title {
+      font-size: 14px;
+      color: #202B3D;
+      margin-left: 25px; }
+    .component-process-menu .menu-sub-title-holder .menu-sub-other-title .apv-menu-other-holder .icon-bottom {
+      float: right;
+      margin-right: 15px;
+      margin-top: 20px;
+      width: 9px;
+      height: 5px; }
+    .component-process-menu .menu-sub-title-holder .menu-sub-other-title .apv-menu-other-holder .icon-right {
+      float: right;
+      margin-right: 15px;
+      margin-top: 20px;
+      width: 9px;
+      height: 5px; }
+  .component-process-menu .apv-menu-holder:hover {
+    background: #EAEDF4;
+    border-radius: 2px; }
+  .component-process-menu .checked-true .apv-menu-holder {
+    background: #EAEDF4;
+    border-radius: 2px; }
+  .component-process-menu .process-menu-holder:hover {
+    background: #EAEDF4;
+    border-radius: 2px; }
+  .component-process-menu .checked-true .process-menu-holder {
+    background: #EAEDF4;
+    border-radius: 2px; }
+
 .component-search-bar {
   left: 190px;
   top: 80px;
@@ -1558,182 +1734,6 @@ ul, li {
     min-width: 400px; }
     .component-search-bar ._720kb-datepicker-open ._720kb-datepicker-calendar-header {
       background: #138EFA; }
-
-.component-process-menu {
-  border-right: 1px solid #F5F5F5;
-  position: absolute;
-  top: 80px;
-  width: 190px;
-  background: #FCFCFC;
-  bottom: 0;
-  padding-bottom: 50px;
-  overflow: auto; }
-  .component-process-menu .index-bar {
-    position: absolute;
-    left: 188px;
-    top: 84px;
-    z-index: 60;
-    width: 190px;
-    background: #FCFCFC;
-    max-height: 400px;
-    overflow: scroll; }
-  .component-process-menu .special-bar {
-    position: absolute;
-    left: 188px;
-    top: 174px;
-    z-index: 60;
-    width: 190px;
-    background: #FCFCFC;
-    max-height: 400px;
-    overflow: auto; }
-  .component-process-menu .menu-sub-title {
-    height: 45px; }
-    .component-process-menu .menu-sub-title .process-menu-holder {
-      top: 4px;
-      height: 40px;
-      position: relative;
-      line-height: 40px;
-      margin: 5px 10px; }
-      .component-process-menu .menu-sub-title .process-menu-holder .icon-right {
-        float: right;
-        margin-right: 15px;
-        margin-top: 20px;
-        width: 9px;
-        height: 5px; }
-      .component-process-menu .menu-sub-title .process-menu-holder .icon-bottom {
-        float: right;
-        margin-right: 15px;
-        margin-top: 16px;
-        width: 9px;
-        height: 5px; }
-      .component-process-menu .menu-sub-title .process-menu-holder .menu-icon {
-        width: 20px;
-        height: 20px;
-        position: absolute;
-        top: 50%;
-        margin-top: -10px; }
-      .component-process-menu .menu-sub-title .process-menu-holder .defaule-title {
-        font-size: 16px;
-        color: #6F7785;
-        margin-left: 12px; }
-      .component-process-menu .menu-sub-title .process-menu-holder .menu-title {
-        font-size: 14px;
-        color: #616161;
-        margin-left: 34px; }
-    .component-process-menu .menu-sub-title .process-menu-other-holder {
-      top: 4px;
-      height: 45px;
-      position: relative;
-      line-height: 45px;
-      margin: 5px 10px; }
-      .component-process-menu .menu-sub-title .process-menu-other-holder .icon-right {
-        float: right;
-        margin-right: 15px;
-        margin-top: 20px;
-        width: 9px;
-        height: 5px; }
-      .component-process-menu .menu-sub-title .process-menu-other-holder .icon-bottom {
-        float: right;
-        margin-right: 15px;
-        margin-top: 16px;
-        width: 9px;
-        height: 5px; }
-      .component-process-menu .menu-sub-title .process-menu-other-holder .menu-icon {
-        width: 20px;
-        height: 20px;
-        position: absolute;
-        top: 50%;
-        margin-top: -10px; }
-      .component-process-menu .menu-sub-title .process-menu-other-holder .defaule-title {
-        font-size: 16px;
-        color: #6F7785;
-        margin-left: 12px; }
-      .component-process-menu .menu-sub-title .process-menu-other-holder .menu-title {
-        font-size: 14px;
-        color: #616161;
-        margin-left: 34px; }
-  .component-process-menu .menu-sub-title-holder .menu-sub-title .apv-menu-holder {
-    margin: 5px 10px;
-    height: 40px;
-    padding-left: 40px;
-    position: relative;
-    line-height: 40px; }
-    .component-process-menu .menu-sub-title-holder .menu-sub-title .apv-menu-holder .menu-icon {
-      width: 20px;
-      height: 20px;
-      position: absolute;
-      top: 50%;
-      margin-top: -10px; }
-    .component-process-menu .menu-sub-title-holder .menu-sub-title .apv-menu-holder .menu-title {
-      font-size: 14px;
-      color: #202B3D;
-      margin-left: 36px; }
-  .component-process-menu .menu-sub-title-holder .menu-sub-other-title .apv-menu-holder {
-    margin: 5px 10px;
-    height: 40px;
-    position: relative;
-    line-height: 40px; }
-    .component-process-menu .menu-sub-title-holder .menu-sub-other-title .apv-menu-holder .menu-icon {
-      width: 20px;
-      height: 20px;
-      position: absolute;
-      top: 50%;
-      margin-top: -10px; }
-    .component-process-menu .menu-sub-title-holder .menu-sub-other-title .apv-menu-holder .menu-title {
-      font-size: 14px;
-      color: #202B3D;
-      margin-left: 25px; }
-    .component-process-menu .menu-sub-title-holder .menu-sub-other-title .apv-menu-holder .icon-bottom {
-      float: right;
-      margin-right: 15px;
-      margin-top: 16px;
-      width: 9px;
-      height: 5px; }
-    .component-process-menu .menu-sub-title-holder .menu-sub-other-title .apv-menu-holder .icon-right {
-      float: right;
-      margin-right: 15px;
-      margin-top: 20px;
-      width: 9px;
-      height: 5px; }
-  .component-process-menu .menu-sub-title-holder .menu-sub-other-title .apv-menu-other-holder {
-    margin: 5px 10px;
-    height: 40px;
-    position: relative;
-    line-height: 40px; }
-    .component-process-menu .menu-sub-title-holder .menu-sub-other-title .apv-menu-other-holder .menu-icon {
-      width: 20px;
-      height: 20px;
-      position: absolute;
-      top: 50%;
-      margin-top: -10px; }
-    .component-process-menu .menu-sub-title-holder .menu-sub-other-title .apv-menu-other-holder .menu-title {
-      font-size: 14px;
-      color: #202B3D;
-      margin-left: 25px; }
-    .component-process-menu .menu-sub-title-holder .menu-sub-other-title .apv-menu-other-holder .icon-bottom {
-      float: right;
-      margin-right: 15px;
-      margin-top: 20px;
-      width: 9px;
-      height: 5px; }
-    .component-process-menu .menu-sub-title-holder .menu-sub-other-title .apv-menu-other-holder .icon-right {
-      float: right;
-      margin-right: 15px;
-      margin-top: 20px;
-      width: 9px;
-      height: 5px; }
-  .component-process-menu .apv-menu-holder:hover {
-    background: #EAEDF4;
-    border-radius: 2px; }
-  .component-process-menu .checked-true .apv-menu-holder {
-    background: #EAEDF4;
-    border-radius: 2px; }
-  .component-process-menu .process-menu-holder:hover {
-    background: #EAEDF4;
-    border-radius: 2px; }
-  .component-process-menu .checked-true .process-menu-holder {
-    background: #EAEDF4;
-    border-radius: 2px; }
 
 .toast {
   position: fixed;

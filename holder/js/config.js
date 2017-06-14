@@ -262,6 +262,11 @@
                 templateUrl: 'admin-home/invoice.html',
                 controller: 'invoice.ManageController'
             })
+            .state('admin.version',{
+                url: '/version',
+                templateUrl: 'admin-home/version.html',
+                controller: 'version.ManageController'
+            })
 
 
 
