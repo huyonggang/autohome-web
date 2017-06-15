@@ -43,7 +43,8 @@
 
             NET: {
                 IMG_UPLOAD:"http://119.23.79.196/api/util/uploadAvitorAndroid",
-                    IMG_RUL:"http://www.hzautomotive.com/picture/",
+                FILE_UPLOAD:"http://119.23.79.196/api/util/uploadAndroidAPK",
+                IMG_RUL:"http://www.hzautomotive.com/picture/",
                 END_POINT: 'http://119.23.79.196/api/admin',
                 END_POINT_USER: 'http://sw-user-api.yuntick.com/public/1',
                 END_POINT_ORG: 'http://sw-user-api.yuntick.com/public/1',
@@ -87,8 +88,9 @@
                     ADVERTISING_DELETE:"deleteAdminAdvertising",
                     ADVERTISING_LIST:"getAllAdminAdvertising",
                     INVOICE_LIST:"getUserInvoiceList",
-                    INVOICE_UPDATE:"updateUserInvoiceStatus"
-
+                    INVOICE_UPDATE:"updateUserInvoiceStatus",
+                    VERSION_LIST:"getSoftVersionList",
+                    VERSION_UPDATE:"saveSoftVersion"
                 }
             },
             APP: {

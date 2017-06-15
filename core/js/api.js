@@ -193,7 +193,20 @@
                     aid:aid,
                     id: id,
                 });
-            }
+            },
+            saveSoftVersion:function (flag,filename,version,versioncode) {
+                return post(Const.NET.API.VERSION_UPDATE, {
+                    flag:flag,
+                    filename: filename,
+                    version:version,
+                    versioncode:versioncode
+                });
+            },
+            getSoftVersionList:function () {
+                return post(Const.NET.API.VERSION_LIST, {
+                    flag:""
+                });
+            },
 
 
 

@@ -9,73 +9,34 @@
     function ManageController($scope, Core,Upload) {
         var context = $scope;
         var selectItem;
-        context.onDelete = onDelete;
-        context.onAdd = onAdd;
-        context.showAddDialog = showAddDialog;
-        context.onUpdate = onUpdate;
-        context.onSelect = onSelect;
         var filename;
+        context.onSelect=onSelect;
+        context.onUpdate=onUpdate;
+        var flag=0;
         init();
 
         function init() {
             Core.Log.d("init");
             Core.Log.d(Core.Data.get("aid"));
 
-            Core.Api.getAllAdminAdvertising().then(function (response) {
+            Core.Api.getSoftVersionList().then(function (response) {
                 Core.Log.d(response);
-                context.itemList = response.data;
-            });
-        }
-
-        function onUpdate(id) {
-
-        }
-
-        function onDelete(item) {
-            swal({
-                title: "您确定要删除这条信息吗",
-                text: "删除后将无法恢复，请谨慎操作！",
-                type: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#DD6B55",
-                confirmButtonText: "删除",
-                closeOnConfirm: false
-            }, function () {
-                Core.Api.deleteAdminAdvertising(Core.Data.get("aid"), item.id).then(function (response) {
-                    if (response.status == 0) {
-                        for (var i = 0; i < context.itemList.length; i++) {
-                            if (context.itemList[i].id == item.id) {
-                                context.itemList.splice(i, 1);
-                            }
-                        }
-                        swal("删除成功！", "您已经永久删除了这条信息。", "success");
-                    } else {
-                        Core.Notify.info("删除失败");
+                var itemList = response.data;
+                for(var i=0;i<itemList.length;i++){
+                    if(itemList[i].softname=='0'){
+                        itemList[i].softname="客户端";
+                        itemList[i].flag=0;
+                    }else{
+                        itemList[i].softname="商户端";
+                        itemList[i].flag=1;
                     }
-                })
-
-            });
-        }
-
-        function onAdd() {
-            Core.Api.addAdminAdvertising(Core.Data.get("aid"), context.title, filename,context.city,context.url).then(function (response) {
-                if (response.status == 0) {
-                    init();
-                } else {
-                    Core.Notify.info("添加失败");
                 }
-            })
-        }
-
-
-        function showAddDialog() {
-
-            context.company = "";
-            context.discount = "";
+                context.itemList=itemList;
+            });
         }
 
         function onUpdate() {
-            Core.Api.updateAdminAdvertising(Core.Data.get("aid"), selectItem.id, context.title, filename,context.city,context.url).then(function (response) {
+            Core.Api.saveSoftVersion(flag,filename,context.softversion,context.versioncode).then(function (response) {
                 if (response.status == 0) {
                     init();
                 } else {
@@ -87,11 +48,15 @@
 
         function onSelect(item) {
             selectItem = item;
-            context.city=item.city;
-            context.title=item.context;
-            context.url=item.url;
-            context.src=Core.Const.NET.IMG_RUL+item.picture;
-
+            context.isprogress=false;
+            context.isButton=true;
+            context.state="点击上传";
+            context.softname=item.softname;
+            if(item.flag==0){
+                flag=0;
+            }else{
+                flag=1;
+            }
         }
 
         $scope.uploadImg = '';
@@ -99,21 +64,26 @@
         context.upload = function (file) {
 
             Upload.upload({
-                url: Core.Const.NET.IMG_UPLOAD,
-                data: {file: file}
+                url: Core.Const.NET.FILE_UPLOAD,
+                data: {file: file,flag:flag}
 
             }).then(function (resp) {
+                context.isprogress=false;
+                context.isButton=true;
+                context.state="上传完成";
                 var response = resp.data;
-                filename=response.data.fileName
-                context.src=Core.Const.NET.IMG_RUL+filename;
-                Core.Log.d(response);
+                filename=response.data.fileName;
+                Core.Log.d(filename);
 
             }, function (resp) {
                 Core.Log.d('error');
                 Core.Log.d(resp);
             }, function (evt) {
-                var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-                console.log('progress: ' + progressPercentage + '% ');
+                context.isprogress=true;
+                context.isButton=false;
+                var vm=context.vm={};
+                vm.value = parseInt(100*evt.loaded / evt.total);
+                console.log('progress: ' + context.progress + '% ');
                 Core.Log.d(evt);
             });
         };

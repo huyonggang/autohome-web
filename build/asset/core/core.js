@@ -271,7 +271,20 @@
                     aid:aid,
                     id: id,
                 });
-            }
+            },
+            saveSoftVersion:function (flag,filename,version,versioncode) {
+                return post(Const.NET.API.VERSION_UPDATE, {
+                    flag:flag,
+                    filename: filename,
+                    version:version,
+                    versioncode:versioncode
+                });
+            },
+            getSoftVersionList:function () {
+                return post(Const.NET.API.VERSION_LIST, {
+                    flag:""
+                });
+            },
 
 
 
@@ -562,7 +575,8 @@
 
             NET: {
                 IMG_UPLOAD:"http://119.23.79.196/api/util/uploadAvitorAndroid",
-                    IMG_RUL:"http://www.hzautomotive.com/picture/",
+                FILE_UPLOAD:"http://119.23.79.196/api/util/uploadAndroidAPK",
+                IMG_RUL:"http://www.hzautomotive.com/picture/",
                 END_POINT: 'http://119.23.79.196/api/admin',
                 END_POINT_USER: 'http://sw-user-api.yuntick.com/public/1',
                 END_POINT_ORG: 'http://sw-user-api.yuntick.com/public/1',
@@ -606,8 +620,9 @@
                     ADVERTISING_DELETE:"deleteAdminAdvertising",
                     ADVERTISING_LIST:"getAllAdminAdvertising",
                     INVOICE_LIST:"getUserInvoiceList",
-                    INVOICE_UPDATE:"updateUserInvoiceStatus"
-
+                    INVOICE_UPDATE:"updateUserInvoiceStatus",
+                    VERSION_LIST:"getSoftVersionList",
+                    VERSION_UPDATE:"saveSoftVersion"
                 }
             },
             APP: {
@@ -2720,13 +2735,13 @@
                 state: 'admin.invoice',
                 title: '发票管理'
             },
-            // {
-            //     img: 'asset/core/component/aside/img/icon-version.png',
-            //     heightLight: 'asset/core/component/aside/img/icon-version-heighlight.png',
-            //     stateUiSref: 'admin.version',
-            //     state: 'admin.version',
-            //     title: '版本管理'
-            // }
+            {
+                img: 'asset/core/component/aside/img/icon-version.png',
+                heightLight: 'asset/core/component/aside/img/icon-version-heighlight.png',
+                stateUiSref: 'admin.version',
+                state: 'admin.version',
+                title: '版本管理'
+            }
 
         ];
     }
