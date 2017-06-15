@@ -923,6 +923,7 @@
                         context.tel = merchant.tel;
                         context.address = merchant.maddress;
                         context.logo=Core.Const.NET.IMG_RUL+merchant.mavitor;
+                        Core.Log.d(context.logo);
                         context.license=Core.Const.NET.IMG_RUL+merchant.businesslicense;
                     }
                 }
