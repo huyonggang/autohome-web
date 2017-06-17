@@ -1011,7 +1011,7 @@ $templateCache.put("admin-home/withdraw.html","<div>\n\n    <div>\n        <tabl
         }
 
         context.onSearch=function (){
-            Core.Api.queryMerchantByName(context.name,1, 1).then(function (response) {
+            Core.Api.queryMerchantByName(context.name,1, 10).then(function (response) {
                 Core.Log.d(response);
                 if (response.status==0){
                     if(response.data.data){
@@ -1043,24 +1043,43 @@ $templateCache.put("admin-home/withdraw.html","<div>\n\n    <div>\n        <tabl
 
                 callback: function (curr, limit, totalCount) {
                     Core.Log.d("totalCount " + totalCount);
-                    Core.Api.queryAllMerchant(curr, limit).then(function (response) {
-                        Core.Log.d(response);
-                        if (response.status==0){
-                            if(response.data.data){
-                                for(var i=0;i<response.data.data.length;i++){
-                                    if(response.data.data[i].tel=="[]"){
-                                        response.data.data[i].tel="无";
+                    if(context.name){
+                        Core.Api.queryMerchantByName(context.name,curr, limit).then(function (response) {
+                            Core.Log.d(response);
+                            if (response.status==0){
+                                if(response.data.data){
+                                    for(var i=0;i<response.data.data.length;i++){
+                                        if(response.data.data[i].tel=="[]"){
+                                            response.data.data[i].tel="无";
+                                        }
                                     }
+                                    context.itemList = response.data.data;
                                 }
-                                context.itemList = response.data.data;
                             }
-                        }
-                        else{
-                            Core.Notify.info("获取商户失败");
-                        }
+                            else{
+                                Core.Notify.info("获取商户失败");
+                            }
 
-                    });
+                        });
+                    }else{
+                        Core.Api.queryAllMerchant(curr, limit).then(function (response) {
+                            Core.Log.d(response);
+                            if (response.status==0){
+                                if(response.data.data){
+                                    for(var i=0;i<response.data.data.length;i++){
+                                        if(response.data.data[i].tel=="[]"){
+                                            response.data.data[i].tel="无";
+                                        }
+                                    }
+                                    context.itemList = response.data.data;
+                                }
+                            }
+                            else{
+                                Core.Notify.info("获取商户失败");
+                            }
 
+                        });
+                    }
                 }
 
             });
