@@ -922,7 +922,14 @@
                         context.name = merchant.mname;
                         context.tel = merchant.tel;
                         context.address = merchant.maddress;
+                        if(merchant.mremark){
+                            context.remark = merchant.mremark;
+                        } else {
+                            context.remark = "无优惠信息"
+                        }
+
                         context.logo=Core.Const.NET.IMG_RUL+merchant.mavitor;
+
                         Core.Log.d(context.logo);
                         context.license=Core.Const.NET.IMG_RUL+merchant.businesslicense;
                     }

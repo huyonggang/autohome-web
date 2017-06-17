@@ -633,6 +633,7 @@ ul, li {
   .all-aside .logo-holder {
     width: 200px; }
 
+
 .form-error-tip.core-component {
   position: fixed;
   z-index: 100; }
@@ -640,7 +641,6 @@ ul, li {
     display: block; }
   .form-error-tip.core-component .ng-hide {
     display: none; }
-
 
 .image-show-holder {
   position: fixed;
