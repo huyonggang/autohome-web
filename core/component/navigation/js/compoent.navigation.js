@@ -92,6 +92,10 @@
                     $scope.title = '充值管理';
                     $scope.selectStatus = 'recharge';
                     break;
+                case 'company':
+                    $scope.title = '公司管理';
+                    $scope.selectStatus = 'recharge';
+                    break;
                 case 'user':
                     $scope.title = '用户管理';
                     $scope.selectStatus = 'user';
@@ -102,10 +106,14 @@
                     break;
                 case 'withdraw':
                     $scope.title = '提现管理';
+
                     break;
 
                 case 'advertising':
                     $scope.title = '广告管理';
+                    break;
+                case 'version':
+                    $scope.title = '版本管理';
                     break;
 
                 default:
