@@ -40,6 +40,26 @@
             });
         }
 
+        context.onSelect = function (gid) {
+            Core.Api.deleteMerchantGoodByGid(Core.Data.get("aid"),gid).then(function (response) {
+                Core.Log.d(response);
+                if (response.status==0) {
+                    init();
+                }
+
+            });
+        }
+
+        context.onUpdateName = function () {
+            Core.Api.updateMerInfoNameByMid(Core.Data.get("aid"),merId,context.updateName).then(function (response) {
+                Core.Log.d(response);
+                if (response.status==0) {
+                    init();
+                }
+
+            });
+        }
+
 
     }
 })();

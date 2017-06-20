@@ -285,7 +285,19 @@
                     flag:""
                 });
             },
-
+            deleteMerchantGoodByGid:function (aid,gid) {
+                return post(Const.NET.API.MERCHANT_GOOD_DELETE, {
+                    aid:aid,
+                    gid:gid
+                });
+            },
+            updateMerInfoNameByMid: function (aid,mid,mname) {
+                    return post(Const.NET.API.MERCHANT_NAME_UPDATE, {
+                        aid:aid,
+                        mid:mid,
+                        mname:mname
+                    });
+                },
 
 
         }
@@ -577,7 +589,7 @@
                 IMG_UPLOAD:"http://119.23.79.196/api/util/uploadAvitorAndroid",
                 FILE_UPLOAD:"http://119.23.79.196/api/util/uploadAndroidAPK",
                 IMG_RUL:"http://www.hzautomotive.com/picture/",
-                END_POINT: 'http://119.23.79.196/api/admin',
+                END_POINT: 'http://39.108.1.8/api/admin',
                 END_POINT_USER: 'http://sw-user-api.yuntick.com/public/1',
                 END_POINT_ORG: 'http://sw-user-api.yuntick.com/public/1',
                 //END_POINT: 'http://api-sw-oa/client/100',
@@ -600,6 +612,8 @@
                     USER_GET:"queryUser",
                     MERCHANT_GET_LIST:"queryAllMerchant",
                     MERCHANT_GET:"queryMerchantByName",
+                    MERCHANT_GOOD_DELETE:"deleteMerchantGoodByGid",
+                    MERCHANT_NAME_UPDATE:"updateMerInfoNameByMid",
                     USER_OIL_CARD:"getUSerOilcardByUid",
                     MERCHANT_BANK_CARD:"getMerchantBankcardAndGoodsByMid",
                     WITHDRAW_GET_LIST:"getAllWithdrawals",
@@ -2747,39 +2761,6 @@
     }
 
 })();
-/**
- * Created by dd on 2/24/16.
- */
-(function () {
-    angular
-        .module('app.core.component')
-        .component('formErrorTip', {
-            templateUrl: 'core/form-error-tip/tip.html',
-            controller: TipController,
-            controllerAs: 'context',
-            // bindToController: true,
-            bindings: {
-                show: '=',
-                content: '='
-            }
-        });
-
-    TipController.$inject = ['$scope', '$timeout', 'Log'];
-
-    function TipController($scope, $timeout, Log)
-    {
-        var context = this;
-        $scope.$watch('context.show', function(newValue, oldValue) {
-            if (newValue && !oldValue)
-            {
-                $timeout(function() {
-                    context.show = false;
-                }, 3000);
-            }
-        });
-    }
-
-})();
 (function () {
     angular
         .module('app.core.component')
@@ -2828,6 +2809,39 @@
     }
 })();
 
+/**
+ * Created by dd on 2/24/16.
+ */
+(function () {
+    angular
+        .module('app.core.component')
+        .component('formErrorTip', {
+            templateUrl: 'core/form-error-tip/tip.html',
+            controller: TipController,
+            controllerAs: 'context',
+            // bindToController: true,
+            bindings: {
+                show: '=',
+                content: '='
+            }
+        });
+
+    TipController.$inject = ['$scope', '$timeout', 'Log'];
+
+    function TipController($scope, $timeout, Log)
+    {
+        var context = this;
+        $scope.$watch('context.show', function(newValue, oldValue) {
+            if (newValue && !oldValue)
+            {
+                $timeout(function() {
+                    context.show = false;
+                }, 3000);
+            }
+        });
+    }
+
+})();
 (function () {
     angular
         .module('app.core.component')
@@ -3805,183 +3819,6 @@
 (function () {
     angular
         .module('app.core.component')
-        .component('searchBar', {
-            templateUrl: 'core/search-bar/search-bar.html',
-            controller: searchBarController,
-            controllerAs: 'context',
-            bindings: {
-                onClickSearch: '&',
-                onClickExport: '&',
-                onClickData: '&',
-                onClickTable: '&',
-                type: '=',
-                page: '=',
-                templateId: '=',
-                onClickGoods: '&'
-            }
-        });
-
-    searchBarController.$inject = ['$scope', 'Core', '$state'];
-
-    function searchBarController($scope, Core, $state) {
-        var context = this;
-        $scope.status='请选择状态';
-        $scope.isShowSearchBar = true;
-        $scope.isShowExport = true;
-        $scope.$state = Core.$state;
-
-        $scope.changeStatus = function (status) {
-            $scope.status = status;
-            $scope.isShow = false;
-        };
-        var searchMessage = {};
-        var orgRootId;
-        var userId;
-
-        init();
-
-        function init() {
-            if ($state.includes('work.journal') || $state.includes('work.index')) {
-                $scope.isShowSearchBar = false;
-                $scope.isShowExport = false;
-            }
-        }
-
-        Core.on(Core.Const.EVENT.KEY_CLEAR_SEARCH_DATA, function (event) {
-            $scope.status = '请选择状态';
-            $scope.dateBegin = '';
-            $scope.dateEnd = '';
-            $scope.name = '';
-        });
-
-        Core.Api.ORG.getDefaultOrgRoot().then(function (data) {
-            orgRootId = data.id;
-        });
-
-        Core.Api.LOCAL.getLocalUser().then(function (data) {
-            userId = data.id;
-        });
-        
-        $scope.onClickSearch = function onClickSearch() {
-            
-            var status;
-            var beginTime;
-            var endTime;
-            var name;
-
-            if($scope.status == '请选择状态') {
-                status = '';
-            }
-            else {
-                status = $scope.status;
-            }
-
-            if(!$scope.dateBegin&&$scope.dateEnd){
-                Core.Notify.info('请选择开始时间');
-                return;
-            }
-            else if(!$scope.dateEnd&&$scope.dateBegin){
-                Core.Notify.info('请选择结束时间');
-                return;
-            }
-            else if(!$scope.dateBegin&&!$scope.dateEnd){
-                beginTime = 0;
-                endTime = 0;
-            }
-            else if($scope.dateBegin<=$scope.dateEnd) {
-                beginTime = Core.Util.getTimestamp(parseDate($scope.dateBegin));
-                endTime = Core.Util.getTimestamp(parseDate($scope.dateEnd));
-            }
-            else {
-                Core.Notify.info('开始时间不能小于结束时间');
-                return;
-            }
-
-            
-
-            if($scope.name) {
-                name = $scope.name;
-            }
-            else {
-                name = '';
-            }
-
-            if(!status&&!beginTime&&!endTime&&!name) {
-                Core.Notify.info('请选择条件');
-                return;
-            }
-            else {
-                var message = {
-                    name : name,
-                    beginTime: beginTime,
-                    endTime: endTime,
-                    status: status,
-                };
-                searchMessage = message;
-                context.onClickSearch({message:message});
-            }
-        };
-
-        $scope.onClickExport = function onClickExport() {
-            Core.Log.d(context.type);
-            Core.Log.d(context.page);
-            Core.Log.d(context.templateId);
-
-            switch ($scope.status) {
-                case '请选择状态':
-                    context.status = '';
-                    break;
-                case '全部':
-                    context.status = '';
-                    break;
-                case '待审批':
-                    context.status = 1;
-                    break;
-                case '已审批':
-                    context.status = 2;
-                    break;
-                case '审批未通过':
-                    context.status = -1;
-                    break;
-                default:
-                    context.status = '';
-                    break;
-            }
-            
-            if(!searchMessage.beginTime) {
-                searchMessage.beginTime = '';
-            }
-            if(!searchMessage.endTime) {
-                searchMessage.endTime = '';
-            }
-            if(!searchMessage.name) {
-                searchMessage.name = '';
-            }
-            var data = {
-                org_root_id: orgRootId,
-                user_id: userId,
-                type: context.type,
-                status: context.status,
-                page: context.page,
-                template_id : context.templateId,
-                begin_time : searchMessage.beginTime,
-                end_time : searchMessage.endTime,
-                name : searchMessage.name
-            };
-            Core.Log.d(Core.Data.getExportUrl(data));
-            context.exportUrl = Core.Data.getExportUrl(data);
-        };
-
-        function parseDate(input) {
-            var parts = input.match(/(\d+)/g);
-            // new Date(year, month [, date [, hours[, minutes[, seconds[, ms]]]]])
-            return new Date(parts[0], parts[1]-1, parts[2]); // months are 0-based
-        }
-    }
-})();
-(function () {
-    angular
-        .module('app.core.component')
         .component('settingBar', {
             templateUrl: 'core/setting-bar/setting-bar.html',
             controller: searchBarController,
@@ -4360,6 +4197,183 @@
                     return icon;
                 }
             }
+        }
+    }
+})();
+(function () {
+    angular
+        .module('app.core.component')
+        .component('searchBar', {
+            templateUrl: 'core/search-bar/search-bar.html',
+            controller: searchBarController,
+            controllerAs: 'context',
+            bindings: {
+                onClickSearch: '&',
+                onClickExport: '&',
+                onClickData: '&',
+                onClickTable: '&',
+                type: '=',
+                page: '=',
+                templateId: '=',
+                onClickGoods: '&'
+            }
+        });
+
+    searchBarController.$inject = ['$scope', 'Core', '$state'];
+
+    function searchBarController($scope, Core, $state) {
+        var context = this;
+        $scope.status='请选择状态';
+        $scope.isShowSearchBar = true;
+        $scope.isShowExport = true;
+        $scope.$state = Core.$state;
+
+        $scope.changeStatus = function (status) {
+            $scope.status = status;
+            $scope.isShow = false;
+        };
+        var searchMessage = {};
+        var orgRootId;
+        var userId;
+
+        init();
+
+        function init() {
+            if ($state.includes('work.journal') || $state.includes('work.index')) {
+                $scope.isShowSearchBar = false;
+                $scope.isShowExport = false;
+            }
+        }
+
+        Core.on(Core.Const.EVENT.KEY_CLEAR_SEARCH_DATA, function (event) {
+            $scope.status = '请选择状态';
+            $scope.dateBegin = '';
+            $scope.dateEnd = '';
+            $scope.name = '';
+        });
+
+        Core.Api.ORG.getDefaultOrgRoot().then(function (data) {
+            orgRootId = data.id;
+        });
+
+        Core.Api.LOCAL.getLocalUser().then(function (data) {
+            userId = data.id;
+        });
+        
+        $scope.onClickSearch = function onClickSearch() {
+            
+            var status;
+            var beginTime;
+            var endTime;
+            var name;
+
+            if($scope.status == '请选择状态') {
+                status = '';
+            }
+            else {
+                status = $scope.status;
+            }
+
+            if(!$scope.dateBegin&&$scope.dateEnd){
+                Core.Notify.info('请选择开始时间');
+                return;
+            }
+            else if(!$scope.dateEnd&&$scope.dateBegin){
+                Core.Notify.info('请选择结束时间');
+                return;
+            }
+            else if(!$scope.dateBegin&&!$scope.dateEnd){
+                beginTime = 0;
+                endTime = 0;
+            }
+            else if($scope.dateBegin<=$scope.dateEnd) {
+                beginTime = Core.Util.getTimestamp(parseDate($scope.dateBegin));
+                endTime = Core.Util.getTimestamp(parseDate($scope.dateEnd));
+            }
+            else {
+                Core.Notify.info('开始时间不能小于结束时间');
+                return;
+            }
+
+            
+
+            if($scope.name) {
+                name = $scope.name;
+            }
+            else {
+                name = '';
+            }
+
+            if(!status&&!beginTime&&!endTime&&!name) {
+                Core.Notify.info('请选择条件');
+                return;
+            }
+            else {
+                var message = {
+                    name : name,
+                    beginTime: beginTime,
+                    endTime: endTime,
+                    status: status,
+                };
+                searchMessage = message;
+                context.onClickSearch({message:message});
+            }
+        };
+
+        $scope.onClickExport = function onClickExport() {
+            Core.Log.d(context.type);
+            Core.Log.d(context.page);
+            Core.Log.d(context.templateId);
+
+            switch ($scope.status) {
+                case '请选择状态':
+                    context.status = '';
+                    break;
+                case '全部':
+                    context.status = '';
+                    break;
+                case '待审批':
+                    context.status = 1;
+                    break;
+                case '已审批':
+                    context.status = 2;
+                    break;
+                case '审批未通过':
+                    context.status = -1;
+                    break;
+                default:
+                    context.status = '';
+                    break;
+            }
+            
+            if(!searchMessage.beginTime) {
+                searchMessage.beginTime = '';
+            }
+            if(!searchMessage.endTime) {
+                searchMessage.endTime = '';
+            }
+            if(!searchMessage.name) {
+                searchMessage.name = '';
+            }
+            var data = {
+                org_root_id: orgRootId,
+                user_id: userId,
+                type: context.type,
+                status: context.status,
+                page: context.page,
+                template_id : context.templateId,
+                begin_time : searchMessage.beginTime,
+                end_time : searchMessage.endTime,
+                name : searchMessage.name
+            };
+            Core.Log.d(Core.Data.getExportUrl(data));
+            context.exportUrl = Core.Data.getExportUrl(data);
+        };
+
+        function parseDate(input) {
+            var parts = input.match(/(\d+)/g);
+            // new Date(year, month [, date [, hours[, minutes[, seconds[, ms]]]]])
+            return new Date(parts[0], parts[1]-1, parts[2]); // months are 0-based
         }
     }
 })();

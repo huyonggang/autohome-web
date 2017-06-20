@@ -207,7 +207,19 @@
                     flag:""
                 });
             },
-
+            deleteMerchantGoodByGid:function (aid,gid) {
+                return post(Const.NET.API.MERCHANT_GOOD_DELETE, {
+                    aid:aid,
+                    gid:gid
+                });
+            },
+            updateMerInfoNameByMid: function (aid,mid,mname) {
+                    return post(Const.NET.API.MERCHANT_NAME_UPDATE, {
+                        aid:aid,
+                        mid:mid,
+                        mname:mname
+                    });
+                },
 
 
         }

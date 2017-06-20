@@ -661,9 +661,6 @@ ul, li {
     z-index: 300;
     padding: 5px; }
 
-
-
-
 .menu {
   z-index: 100;
   height: 100%; }
@@ -709,6 +706,9 @@ ul, li {
     left: 0;
     background: rgba(0, 0, 0, 0.6);
     z-index: 99; }
+
+
+
 
 .navigation-company-list {
   position: fixed;
@@ -1559,6 +1559,37 @@ ul, li {
     .component-search-bar ._720kb-datepicker-open ._720kb-datepicker-calendar-header {
       background: #138EFA; }
 
+.toast {
+  position: fixed;
+  z-index: 200;
+  top: 50%;
+  left: 50%;
+  margin-left: -80px;
+  margin-top: -35px;
+  width: 160px;
+  height: 70px;
+  background: #F5A623;
+  border-radius: 3px; }
+  .toast .ui-toast {
+    text-align: center; }
+    .toast .ui-toast .ui-icon-toast {
+      height: 28px;
+      width: 28px;
+      margin-top: 10px; }
+    .toast .ui-toast .ui-toast-content {
+      margin: 10px 5px;
+      color: #FFFFFF;
+      font-size: 14px; }
+
+.success {
+  background: #04BE02; }
+
+.alert {
+  background: #F5A623; }
+
+.error {
+  background: #F56969; }
+
 .component-process-menu {
   border-right: 1px solid #F5F5F5;
   position: absolute;
@@ -1734,35 +1765,4 @@ ul, li {
   .component-process-menu .checked-true .process-menu-holder {
     background: #EAEDF4;
     border-radius: 2px; }
-
-.toast {
-  position: fixed;
-  z-index: 200;
-  top: 50%;
-  left: 50%;
-  margin-left: -80px;
-  margin-top: -35px;
-  width: 160px;
-  height: 70px;
-  background: #F5A623;
-  border-radius: 3px; }
-  .toast .ui-toast {
-    text-align: center; }
-    .toast .ui-toast .ui-icon-toast {
-      height: 28px;
-      width: 28px;
-      margin-top: 10px; }
-    .toast .ui-toast .ui-toast-content {
-      margin: 10px 5px;
-      color: #FFFFFF;
-      font-size: 14px; }
-
-.success {
-  background: #04BE02; }
-
-.alert {
-  background: #F5A623; }
-
-.error {
-  background: #F56969; }
 

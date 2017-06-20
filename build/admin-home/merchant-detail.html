@@ -10,6 +10,9 @@
                     <div class="col-sm-10">
                         <p class="form-control-static">{{name}}</p>
                     </div>
+                    <div>
+                        <button class="btn btn-success" data-toggle="modal" data-target="#update" type="submit">修改</button>
+                    </div>
                 </div>
 
                 <div class="form-group">
@@ -53,6 +56,10 @@
     </div>
 
 
+
+
+
+
     <div class="ibox">
         <div class="ibox-title">
             <h5>商品信息</h5>
@@ -66,7 +73,7 @@
                     <th>挂牌价</th>
                     <th>优惠价</th>
                     <th>其他优惠信息</th>
-
+                    <th>操作</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -76,6 +83,9 @@
                     <td>{{item.typeprice}}</td>
                     <td>{{item.gdiscount}}</td>
                     <td>{{item.gremark}}</td>
+                    <td>
+                        <button ng-click="onSelect(item.gid)" class="btn btn-default" type="submit">删除</button>
+                    </td>
                 </tr>
 
                 </tbody>
@@ -83,4 +93,29 @@
         </div>
     </div>
 
+
+
+</div>
+
+<div class="modal inmodal fade" id="update" tabindex="-1" role="dialog"  aria-hidden="true">
+    <div class="modal-dialog modal-sm" style="width: 700px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">名称修改</h4>
+            </div>
+
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="name">用户名</label>
+                    <input ng-model="updateName" class="form-control" id="name" placeholder="请输入用户名">
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+                <button type="button" ng-click="onUpdateName()"  data-dismiss="modal" class="btn btn-primary">修改</button>
+            </div>
+        </div>
+    </div>
 </div>
