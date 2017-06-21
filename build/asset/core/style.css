@@ -578,6 +578,7 @@ ul, li {
   margin-left: 8px; }
 
 
+
 .aside {
   background: #172030;
   width: 60px;
@@ -633,7 +634,6 @@ ul, li {
   .all-aside .logo-holder {
     width: 200px; }
 
-
 .form-error-tip.core-component {
   position: fixed;
   z-index: 100; }
@@ -641,6 +641,9 @@ ul, li {
     display: block; }
   .form-error-tip.core-component .ng-hide {
     display: none; }
+
+
+
 
 .image-show-holder {
   position: fixed;
@@ -706,9 +709,6 @@ ul, li {
     left: 0;
     background: rgba(0, 0, 0, 0.6);
     z-index: 99; }
-
-
-
 
 .navigation-company-list {
   position: fixed;
@@ -1287,6 +1287,18 @@ ul, li {
     animation: right-menu-hide 0.2s;
     animation-fill-mode: forwards; }
 
+.page-holder {
+  display: inline-block;
+  height: 60px;
+  line-height: 60px;
+  margin-right: 20px;
+  float: right; }
+  .page-holder .page, .page-holder .prev, .page-holder .next, .page-holder .total-page {
+    color: #616161;
+    padding: 0px 6px; }
+  .page-holder .green {
+    color: #0A9908; }
+
 .navigation-bar {
   left: 0;
   top: 80px;
@@ -1335,18 +1347,6 @@ ul, li {
   .navigation-bar .active .apv-menu-holder {
     background: #EAEDF4;
     border-radius: 2px; }
-
-.page-holder {
-  display: inline-block;
-  height: 60px;
-  line-height: 60px;
-  margin-right: 20px;
-  float: right; }
-  .page-holder .page, .page-holder .prev, .page-holder .next, .page-holder .total-page {
-    color: #616161;
-    padding: 0px 6px; }
-  .page-holder .green {
-    color: #0A9908; }
 
 .core-directive .contextmenu-node {
   position: fixed;
@@ -1559,37 +1559,6 @@ ul, li {
     .component-search-bar ._720kb-datepicker-open ._720kb-datepicker-calendar-header {
       background: #138EFA; }
 
-.toast {
-  position: fixed;
-  z-index: 200;
-  top: 50%;
-  left: 50%;
-  margin-left: -80px;
-  margin-top: -35px;
-  width: 160px;
-  height: 70px;
-  background: #F5A623;
-  border-radius: 3px; }
-  .toast .ui-toast {
-    text-align: center; }
-    .toast .ui-toast .ui-icon-toast {
-      height: 28px;
-      width: 28px;
-      margin-top: 10px; }
-    .toast .ui-toast .ui-toast-content {
-      margin: 10px 5px;
-      color: #FFFFFF;
-      font-size: 14px; }
-
-.success {
-  background: #04BE02; }
-
-.alert {
-  background: #F5A623; }
-
-.error {
-  background: #F56969; }
-
 .component-process-menu {
   border-right: 1px solid #F5F5F5;
   position: absolute;
@@ -1766,3 +1735,34 @@ ul, li {
     background: #EAEDF4;
     border-radius: 2px; }
 
+
+.toast {
+  position: fixed;
+  z-index: 200;
+  top: 50%;
+  left: 50%;
+  margin-left: -80px;
+  margin-top: -35px;
+  width: 160px;
+  height: 70px;
+  background: #F5A623;
+  border-radius: 3px; }
+  .toast .ui-toast {
+    text-align: center; }
+    .toast .ui-toast .ui-icon-toast {
+      height: 28px;
+      width: 28px;
+      margin-top: 10px; }
+    .toast .ui-toast .ui-toast-content {
+      margin: 10px 5px;
+      color: #FFFFFF;
+      font-size: 14px; }
+
+.success {
+  background: #04BE02; }
+
+.alert {
+  background: #F5A623; }
+
+.error {
+  background: #F56969; }

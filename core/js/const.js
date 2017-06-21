@@ -42,8 +42,8 @@
             },
 
             NET: {
-                IMG_UPLOAD:"http://119.23.79.196/api/util/uploadAvitorAndroid",
-                FILE_UPLOAD:"http://119.23.79.196/api/util/uploadAndroidAPK",
+                IMG_UPLOAD:"http://39.108.1.8/api/util/uploadAvitorAndroid",
+                FILE_UPLOAD:"http://39.108.1.8/api/util/uploadAndroidAPK",
                 IMG_RUL:"http://www.hzautomotive.com/picture/",
                 END_POINT: 'http://39.108.1.8/api/admin',
                 END_POINT_USER: 'http://sw-user-api.yuntick.com/public/1',

@@ -586,8 +586,8 @@
             },
 
             NET: {
-                IMG_UPLOAD:"http://119.23.79.196/api/util/uploadAvitorAndroid",
-                FILE_UPLOAD:"http://119.23.79.196/api/util/uploadAndroidAPK",
+                IMG_UPLOAD:"http://39.108.1.8/api/util/uploadAvitorAndroid",
+                FILE_UPLOAD:"http://39.108.1.8/api/util/uploadAndroidAPK",
                 IMG_RUL:"http://www.hzautomotive.com/picture/",
                 END_POINT: 'http://39.108.1.8/api/admin',
                 END_POINT_USER: 'http://sw-user-api.yuntick.com/public/1',
@@ -3004,6 +3004,127 @@
     }
 
 })();
+/**
+ * Created by AndGod.H on 16/4/14.
+ */
+(function () {
+    angular
+        .module('app.core.component')
+        .component('navigationBar', {
+            templateUrl: 'core/navigation-bar/navigation-bar.html',
+            controller: NavigationBarController,
+            controllerAs: 'context',
+            bindings: {
+            }
+        });
+
+    NavigationBarController.$inject = ['$scope', '$stateParams', '$rootScope', 'Core'];
+
+    function NavigationBarController($scope, $stateParams, $rootScope, Core) {
+        var context = this;
+        $scope.$state = Core.$state;
+        $scope.$stateParams = $stateParams;
+
+        console.log("navigation bar init");
+        getModuleList();
+
+        var NAVIGATION_MENU_LIST = {
+            ADMINISTRATION: 'administration',
+            FINANCE: 'finance',
+            WORK: 'work',
+            FRAMEWORK: 'framework',
+            SETTING: 'setting',
+            MODULE: 'module'
+        };
+
+        Core.on(Core.Const.EVENT.EVENT_ORG_CHANGE,function(event,data){
+            getModuleList();
+        });
+
+        $rootScope.$watch('toStateName', function(newValue, oldValue, scope){
+            console.log("----watch to state name-----");
+            processNavigationBar(newValue);
+        });
+
+        function processNavigationBar(toStateName)
+        {
+            Core.Log.d('看看');
+            Core.Log.d(NAVIGATION_MENU_LIST);
+            for (var i in NAVIGATION_MENU_LIST)
+            {
+                var item = NAVIGATION_MENU_LIST[i];
+
+                if (toStateName && toStateName.indexOf(item) >= 0)
+                {
+                    showNavigationMenuList(item);
+                }
+            }
+        }
+
+        function showNavigationMenuList(type)
+        {
+            var itemsAdmin = [];
+            var itemsFin = [];
+            switch (type)
+            {
+                case NAVIGATION_MENU_LIST.ADMINISTRATION:
+                case NAVIGATION_MENU_LIST.FINANCE:
+                case NAVIGATION_MENU_LIST.MODULE:
+                    itemsAdmin = [
+                        {title: '报告', stateUiSref: 'administration.report', state: 'administration.index', icon: "home/img/icon-report.png"},
+                        {title: "请假", stateUiSref: 'administration.leave', state: 'administration.index', icon: "process-setting/img/icon-process-askforleave.png"},
+                        {title: '外勤', stateUiSref: 'administration.trip', state: 'administration.index', icon: "process-setting/img/icon-process-business-trip.png"},
+                        {title: '物品申领', stateUiSref: 'administration.goods', state: 'administration.index', icon: "process-setting/img/icon-process-goods.png"},
+                        {title: '名片制作', stateUiSref: 'administration.businessCard', state: 'administration.index', icon: "process-setting/img/icon-process-card.png"},
+                        {title: '培训申请', stateUiSref: 'administration.train', state: 'administration.index', icon: "process-setting/img/icon-process-train.png"},
+                        {title: '合同申请', stateUiSref: 'administration.contract', state: 'administration.index', icon: "process-setting/img/icon-process-contract.png"},
+                        {title: '用印', stateUiSref: 'administration.stamp', state: 'administration.index', icon: "process-setting/img/icon-process-borrow-stamp.png"},
+                        {title: '用车', stateUiSref: 'administration.car', state: 'administration.index', icon: "process-setting/img/icon-process-borrow-car.png"}
+                    ];
+                    itemsFin = [
+                        {title: '报销', stateUiSref: 'finance.reimb', state: 'finance.index', icon: "process-setting/img/icon-process-reimb.png"},
+                        {title: '差旅费', stateUiSref: 'finance.tripReimb', state: 'finance.index', icon: "asset/core/component/message-scroll/img/icon-message-trip-reimb.png"},
+                        {title: '付款', stateUiSref: 'finance.pay', state: 'finance.index', icon: "process-setting/img/icon-process-pay.png"},
+                        {title: '备用金', stateUiSref: 'finance.imprest', state: 'finance.index', icon: "process-setting/img/icon-process-imprest.png"}
+                    ];
+                    break;
+                default:
+                    break;
+            }
+
+            $scope.itemsAdmin = itemsAdmin;
+            $scope.itemsFin = itemsFin;
+        }
+
+        function getModuleList() {
+            Core.Api.APV.getApvCustomTemplateList().then(function (response) {
+                Core.Log.d('aaa');
+                Core.Log.d(response);
+                if(response.code == 0) {
+                    $scope.moduleList = response.data.apv_custom_template_list;
+                    if ($scope.moduleList.length != 0) {
+                        Core.Log.d(context.moduleList);
+                        for (var i = 0; i < $scope.moduleList.length; i++) {
+                            parseIcon($scope.moduleList[i]);
+                        }
+                        $scope.moduleList[0].isChecked = true;
+                    }
+                }
+            });
+        }
+
+        function parseIcon(template) {
+            var avatar = template.avatar;
+            if (avatar) {
+                if (avatar.indexOf("default") == 0) {
+                    template.icon = 'process-setting/img/' + Core.Const.IMG[parseInt(avatar.substring(avatar.indexOf(":") + 1, avatar.length)) - 1];
+                }
+            }
+            template.isChecked = false;
+        }
+    }
+
+})();
 (function () {
     angular
         .module('app.core.component')
@@ -3589,127 +3710,6 @@
 
     }
 })();
-/**
- * Created by AndGod.H on 16/4/14.
- */
-(function () {
-    angular
-        .module('app.core.component')
-        .component('navigationBar', {
-            templateUrl: 'core/navigation-bar/navigation-bar.html',
-            controller: NavigationBarController,
-            controllerAs: 'context',
-            bindings: {
-            }
-        });
-
-    NavigationBarController.$inject = ['$scope', '$stateParams', '$rootScope', 'Core'];
-
-    function NavigationBarController($scope, $stateParams, $rootScope, Core) {
-        var context = this;
-        $scope.$state = Core.$state;
-        $scope.$stateParams = $stateParams;
-
-        console.log("navigation bar init");
-        getModuleList();
-
-        var NAVIGATION_MENU_LIST = {
-            ADMINISTRATION: 'administration',
-            FINANCE: 'finance',
-            WORK: 'work',
-            FRAMEWORK: 'framework',
-            SETTING: 'setting',
-            MODULE: 'module'
-        };
-
-        Core.on(Core.Const.EVENT.EVENT_ORG_CHANGE,function(event,data){
-            getModuleList();
-        });
-
-        $rootScope.$watch('toStateName', function(newValue, oldValue, scope){
-            console.log("----watch to state name-----");
-            processNavigationBar(newValue);
-        });
-
-        function processNavigationBar(toStateName)
-        {
-            Core.Log.d('看看');
-            Core.Log.d(NAVIGATION_MENU_LIST);
-            for (var i in NAVIGATION_MENU_LIST)
-            {
-                var item = NAVIGATION_MENU_LIST[i];
-
-                if (toStateName && toStateName.indexOf(item) >= 0)
-                {
-                    showNavigationMenuList(item);
-                }
-            }
-        }
-
-        function showNavigationMenuList(type)
-        {
-            var itemsAdmin = [];
-            var itemsFin = [];
-            switch (type)
-            {
-                case NAVIGATION_MENU_LIST.ADMINISTRATION:
-                case NAVIGATION_MENU_LIST.FINANCE:
-                case NAVIGATION_MENU_LIST.MODULE:
-                    itemsAdmin = [
-                        {title: '报告', stateUiSref: 'administration.report', state: 'administration.index', icon: "home/img/icon-report.png"},
-                        {title: "请假", stateUiSref: 'administration.leave', state: 'administration.index', icon: "process-setting/img/icon-process-askforleave.png"},
-                        {title: '外勤', stateUiSref: 'administration.trip', state: 'administration.index', icon: "process-setting/img/icon-process-business-trip.png"},
-                        {title: '物品申领', stateUiSref: 'administration.goods', state: 'administration.index', icon: "process-setting/img/icon-process-goods.png"},
-                        {title: '名片制作', stateUiSref: 'administration.businessCard', state: 'administration.index', icon: "process-setting/img/icon-process-card.png"},
-                        {title: '培训申请', stateUiSref: 'administration.train', state: 'administration.index', icon: "process-setting/img/icon-process-train.png"},
-                        {title: '合同申请', stateUiSref: 'administration.contract', state: 'administration.index', icon: "process-setting/img/icon-process-contract.png"},
-                        {title: '用印', stateUiSref: 'administration.stamp', state: 'administration.index', icon: "process-setting/img/icon-process-borrow-stamp.png"},
-                        {title: '用车', stateUiSref: 'administration.car', state: 'administration.index', icon: "process-setting/img/icon-process-borrow-car.png"}
-                    ];
-                    itemsFin = [
-                        {title: '报销', stateUiSref: 'finance.reimb', state: 'finance.index', icon: "process-setting/img/icon-process-reimb.png"},
-                        {title: '差旅费', stateUiSref: 'finance.tripReimb', state: 'finance.index', icon: "asset/core/component/message-scroll/img/icon-message-trip-reimb.png"},
-                        {title: '付款', stateUiSref: 'finance.pay', state: 'finance.index', icon: "process-setting/img/icon-process-pay.png"},
-                        {title: '备用金', stateUiSref: 'finance.imprest', state: 'finance.index', icon: "process-setting/img/icon-process-imprest.png"}
-                    ];
-                    break;
-                default:
-                    break;
-            }
-
-            $scope.itemsAdmin = itemsAdmin;
-            $scope.itemsFin = itemsFin;
-        }
-
-        function getModuleList() {
-            Core.Api.APV.getApvCustomTemplateList().then(function (response) {
-                Core.Log.d('aaa');
-                Core.Log.d(response);
-                if(response.code == 0) {
-                    $scope.moduleList = response.data.apv_custom_template_list;
-                    if ($scope.moduleList.length != 0) {
-                        Core.Log.d(context.moduleList);
-                        for (var i = 0; i < $scope.moduleList.length; i++) {
-                            parseIcon($scope.moduleList[i]);
-                        }
-                        $scope.moduleList[0].isChecked = true;
-                    }
-                }
-            });
-        }
-
-        function parseIcon(template) {
-            var avatar = template.avatar;
-            if (avatar) {
-                if (avatar.indexOf("default") == 0) {
-                    template.icon = 'process-setting/img/' + Core.Const.IMG[parseInt(avatar.substring(avatar.indexOf(":") + 1, avatar.length)) - 1];
-                }
-            }
-            template.isChecked = false;
-        }
-    }
-
-})();
 (function () {
     angular
         .module('app.core.component')
@@ -3815,6 +3815,183 @@
                 }
             }
         })
+})();
+(function () {
+    angular
+        .module('app.core.component')
+        .component('searchBar', {
+            templateUrl: 'core/search-bar/search-bar.html',
+            controller: searchBarController,
+            controllerAs: 'context',
+            bindings: {
+                onClickSearch: '&',
+                onClickExport: '&',
+                onClickData: '&',
+                onClickTable: '&',
+                type: '=',
+                page: '=',
+                templateId: '=',
+                onClickGoods: '&'
+            }
+        });
+
+    searchBarController.$inject = ['$scope', 'Core', '$state'];
+
+    function searchBarController($scope, Core, $state) {
+        var context = this;
+        $scope.status='请选择状态';
+        $scope.isShowSearchBar = true;
+        $scope.isShowExport = true;
+        $scope.$state = Core.$state;
+
+        $scope.changeStatus = function (status) {
+            $scope.status = status;
+            $scope.isShow = false;
+        };
+        var searchMessage = {};
+        var orgRootId;
+        var userId;
+
+        init();
+
+        function init() {
+            if ($state.includes('work.journal') || $state.includes('work.index')) {
+                $scope.isShowSearchBar = false;
+                $scope.isShowExport = false;
+            }
+        }
+
+        Core.on(Core.Const.EVENT.KEY_CLEAR_SEARCH_DATA, function (event) {
+            $scope.status = '请选择状态';
+            $scope.dateBegin = '';
+            $scope.dateEnd = '';
+            $scope.name = '';
+        });
+
+        Core.Api.ORG.getDefaultOrgRoot().then(function (data) {
+            orgRootId = data.id;
+        });
+
+        Core.Api.LOCAL.getLocalUser().then(function (data) {
+            userId = data.id;
+        });
+        
+        $scope.onClickSearch = function onClickSearch() {
+            
+            var status;
+            var beginTime;
+            var endTime;
+            var name;
+
+            if($scope.status == '请选择状态') {
+                status = '';
+            }
+            else {
+                status = $scope.status;
+            }
+
+            if(!$scope.dateBegin&&$scope.dateEnd){
+                Core.Notify.info('请选择开始时间');
+                return;
+            }
+            else if(!$scope.dateEnd&&$scope.dateBegin){
+                Core.Notify.info('请选择结束时间');
+                return;
+            }
+            else if(!$scope.dateBegin&&!$scope.dateEnd){
+                beginTime = 0;
+                endTime = 0;
+            }
+            else if($scope.dateBegin<=$scope.dateEnd) {
+                beginTime = Core.Util.getTimestamp(parseDate($scope.dateBegin));
+                endTime = Core.Util.getTimestamp(parseDate($scope.dateEnd));
+            }
+            else {
+                Core.Notify.info('开始时间不能小于结束时间');
+                return;
+            }
+
+            
+
+            if($scope.name) {
+                name = $scope.name;
+            }
+            else {
+                name = '';
+            }
+
+            if(!status&&!beginTime&&!endTime&&!name) {
+                Core.Notify.info('请选择条件');
+                return;
+            }
+            else {
+                var message = {
+                    name : name,
+                    beginTime: beginTime,
+                    endTime: endTime,
+                    status: status,
+                };
+                searchMessage = message;
+                context.onClickSearch({message:message});
+            }
+        };
+
+        $scope.onClickExport = function onClickExport() {
+            Core.Log.d(context.type);
+            Core.Log.d(context.page);
+            Core.Log.d(context.templateId);
+
+            switch ($scope.status) {
+                case '请选择状态':
+                    context.status = '';
+                    break;
+                case '全部':
+                    context.status = '';
+                    break;
+                case '待审批':
+                    context.status = 1;
+                    break;
+                case '已审批':
+                    context.status = 2;
+                    break;
+                case '审批未通过':
+                    context.status = -1;
+                    break;
+                default:
+                    context.status = '';
+                    break;
+            }
+            
+            if(!searchMessage.beginTime) {
+                searchMessage.beginTime = '';
+            }
+            if(!searchMessage.endTime) {
+                searchMessage.endTime = '';
+            }
+            if(!searchMessage.name) {
+                searchMessage.name = '';
+            }
+            var data = {
+                org_root_id: orgRootId,
+                user_id: userId,
+                type: context.type,
+                status: context.status,
+                page: context.page,
+                template_id : context.templateId,
+                begin_time : searchMessage.beginTime,
+                end_time : searchMessage.endTime,
+                name : searchMessage.name
+            };
+            Core.Log.d(Core.Data.getExportUrl(data));
+            context.exportUrl = Core.Data.getExportUrl(data);
+        };
+
+        function parseDate(input) {
+            var parts = input.match(/(\d+)/g);
+            // new Date(year, month [, date [, hours[, minutes[, seconds[, ms]]]]])
+            return new Date(parts[0], parts[1]-1, parts[2]); // months are 0-based
+        }
+    }
 })();
 (function () {
     angular
@@ -4197,183 +4374,6 @@
                     return icon;
                 }
             }
-        }
-    }
-})();
-(function () {
-    angular
-        .module('app.core.component')
-        .component('searchBar', {
-            templateUrl: 'core/search-bar/search-bar.html',
-            controller: searchBarController,
-            controllerAs: 'context',
-            bindings: {
-                onClickSearch: '&',
-                onClickExport: '&',
-                onClickData: '&',
-                onClickTable: '&',
-                type: '=',
-                page: '=',
-                templateId: '=',
-                onClickGoods: '&'
-            }
-        });
-
-    searchBarController.$inject = ['$scope', 'Core', '$state'];
-
-    function searchBarController($scope, Core, $state) {
-        var context = this;
-        $scope.status='请选择状态';
-        $scope.isShowSearchBar = true;
-        $scope.isShowExport = true;
-        $scope.$state = Core.$state;
-
-        $scope.changeStatus = function (status) {
-            $scope.status = status;
-            $scope.isShow = false;
-        };
-        var searchMessage = {};
-        var orgRootId;
-        var userId;
-
-        init();
-
-        function init() {
-            if ($state.includes('work.journal') || $state.includes('work.index')) {
-                $scope.isShowSearchBar = false;
-                $scope.isShowExport = false;
-            }
-        }
-
-        Core.on(Core.Const.EVENT.KEY_CLEAR_SEARCH_DATA, function (event) {
-            $scope.status = '请选择状态';
-            $scope.dateBegin = '';
-            $scope.dateEnd = '';
-            $scope.name = '';
-        });
-
-        Core.Api.ORG.getDefaultOrgRoot().then(function (data) {
-            orgRootId = data.id;
-        });
-
-        Core.Api.LOCAL.getLocalUser().then(function (data) {
-            userId = data.id;
-        });
-        
-        $scope.onClickSearch = function onClickSearch() {
-            
-            var status;
-            var beginTime;
-            var endTime;
-            var name;
-
-            if($scope.status == '请选择状态') {
-                status = '';
-            }
-            else {
-                status = $scope.status;
-            }
-
-            if(!$scope.dateBegin&&$scope.dateEnd){
-                Core.Notify.info('请选择开始时间');
-                return;
-            }
-            else if(!$scope.dateEnd&&$scope.dateBegin){
-                Core.Notify.info('请选择结束时间');
-                return;
-            }
-            else if(!$scope.dateBegin&&!$scope.dateEnd){
-                beginTime = 0;
-                endTime = 0;
-            }
-            else if($scope.dateBegin<=$scope.dateEnd) {
-                beginTime = Core.Util.getTimestamp(parseDate($scope.dateBegin));
-                endTime = Core.Util.getTimestamp(parseDate($scope.dateEnd));
-            }
-            else {
-                Core.Notify.info('开始时间不能小于结束时间');
-                return;
-            }
-
-            
-
-            if($scope.name) {
-                name = $scope.name;
-            }
-            else {
-                name = '';
-            }
-
-            if(!status&&!beginTime&&!endTime&&!name) {
-                Core.Notify.info('请选择条件');
-                return;
-            }
-            else {
-                var message = {
-                    name : name,
-                    beginTime: beginTime,
-                    endTime: endTime,
-                    status: status,
-                };
-                searchMessage = message;
-                context.onClickSearch({message:message});
-            }
-        };
-
-        $scope.onClickExport = function onClickExport() {
-            Core.Log.d(context.type);
-            Core.Log.d(context.page);
-            Core.Log.d(context.templateId);
-
-            switch ($scope.status) {
-                case '请选择状态':
-                    context.status = '';
-                    break;
-                case '全部':
-                    context.status = '';
-                    break;
-                case '待审批':
-                    context.status = 1;
-                    break;
-                case '已审批':
-                    context.status = 2;
-                    break;
-                case '审批未通过':
-                    context.status = -1;
-                    break;
-                default:
-                    context.status = '';
-                    break;
-            }
-            
-            if(!searchMessage.beginTime) {
-                searchMessage.beginTime = '';
-            }
-            if(!searchMessage.endTime) {
-                searchMessage.endTime = '';
-            }
-            if(!searchMessage.name) {
-                searchMessage.name = '';
-            }
-            var data = {
-                org_root_id: orgRootId,
-                user_id: userId,
-                type: context.type,
-                status: context.status,
-                page: context.page,
-                template_id : context.templateId,
-                begin_time : searchMessage.beginTime,
-                end_time : searchMessage.endTime,
-                name : searchMessage.name
-            };
-            Core.Log.d(Core.Data.getExportUrl(data));
-            context.exportUrl = Core.Data.getExportUrl(data);
-        };
-
-        function parseDate(input) {
-            var parts = input.match(/(\d+)/g);
-            // new Date(year, month [, date [, hours[, minutes[, seconds[, ms]]]]])
-            return new Date(parts[0], parts[1]-1, parts[2]); // months are 0-based
         }
     }
 })();
